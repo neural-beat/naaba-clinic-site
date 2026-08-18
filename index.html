@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naaba Akparabilla Medical Centre - Zebilla, Ghana</title>
+    <!-- Chosen Palette: Warm Neutral & Medical Harmony (Fondo Crema Cálido #FAF8F5, Verde Esmeralda #0D9488, Azul Marino Profundo #1E293B, Acentos Ámbar #D97706) -->
+    <!-- Application Structure Plan: La aplicación está diseñada como una plataforma web interactiva integrada de triaje, exploración clínica y portal de salud para pacientes del Naaba Akparabilla Medical Centre con soporte multilingüe dinámico (Español / English). Incluye: 1) Encabezado Hero con triaje rápido, acreditaciones (NHIS/HeFRA) y selector global de idioma; 2) Explorador interactivo de Servicios y Síntomas con filtros; 3) Perfiles interactivos del Liderazgo Médico y publicaciones científicas; 4) Herramientas interactivas (Verificador NHIS y Evaluador de Riesgo Cardiometabólico basado en investigación); 5) Dashboard con gráficos interactivos (Chart.js) traducibles sobre la salud regional y demografía de Bawku West; 6) Portal de Conocimiento con artículos de salud preventiva; 7) Formulario interactivo de reserva de citas con enlace directo a WhatsApp y contacto. -->
+    <!-- Visualization & Content Choices:
+       - Selector de Idiomas -> Toggle dinámico ES/EN -> Cambia textos, placeholders, etiquetas de selects, tooltips y Chart.js en tiempo real -> JS Vanilla.
+       - Datos de Salud Cardiometabólica (Dr. Amoako) -> Comparación de Prevalencias -> Gráfico de Barras Horizontales / Donut (Chart.js en Canvas) -> Filtro interactivo y traducción de ejes -> Chart.js.
+       - Distribución Demográfica de Bawku West -> Proporción Rural vs Urbana -> Gráfico de Donut (Chart.js) -> Hover/Tooltip interactivo multilingüe -> Chart.js.
+       - Evaluador de Riesgo Metabólico -> Calculadora interactiva -> Inputs numéricos + Feedback instantáneo bilingüe -> JS Vanilla.
+       - Buscador de Servicios -> Filtrado por síntomas -> Botones de filtro dinámico -> JS Vanilla.
+       - CONFIRMACIÓN: NO se utilizan gráficos SVG ni Mermaid JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medical: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        },
+                        brandDark: '#1e293b',
+                        warmBg: '#faf8f5',
+                        accentAmber: '#d97706'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            background-color: #faf8f5;
+            color: #334155;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 380px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .lang-btn.active {
+            background-color: #0d9488;
+            color: #ffffff;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Top Emergency & Accreditation Bar -->
+    <div class="bg-brandDark text-white text-xs md:text-sm py-2 px-4 shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-4 flex-wrap justify-center">
+                <span><i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i> <span data-i18n="top_hefra">Certificado HeFRA (Gobierno de Ghana)</span></span>
+                <span class="hidden sm:inline">|</span>
+                <span class="text-emerald-300 font-semibold"><i class="fa-solid fa-id-card mr-1"></i> <span data-i18n="top_nhis">Acreditación NHIS Activa</span></span>
+                <span class="hidden sm:inline">|</span>
+                <span class="text-amber-300"><i class="fa-solid fa-location-dot mr-1"></i> Zebilla South, Bawku West</span>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <!-- Language Selector in Top Bar -->
+                <div class="flex items-center bg-slate-800 rounded-lg p-0.5 border border-slate-700">
+                    <button onclick="setLanguage('es')" id="btnLangEs" class="lang-btn active px-2.5 py-1 rounded-md text-[11px] transition">ES</button>
+                    <button onclick="setLanguage('en')" id="btnLangEn" class="lang-btn text-slate-300 px-2.5 py-1 rounded-md text-[11px] transition">EN</button>
+                </div>
+
+                <div class="flex items-center gap-2 font-bold">
+                    <a href="tel:0243711851" class="hover:text-emerald-300 transition"><i class="fa-solid fa-phone mr-1"></i> 0243-711851</a>
+                    <span>/</span>
+                    <a href="tel:0244761962" class="hover:text-emerald-300 transition">0244-761962</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-xl bg-medical-600 flex items-center justify-center text-white text-2xl font-bold shadow-md">
+                        <i class="fa-solid fa-hospital-user"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg md:text-xl font-bold text-brandDark leading-tight">Naaba Akparabilla</h1>
+                        <p class="text-xs text-medical-700 font-semibold tracking-wide">MEDICAL CENTRE • ZEBILLA</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden lg:flex items-center gap-6 font-medium text-slate-700 text-sm">
+                    <a href="#inicio" data-i18n="nav_home" class="hover:text-medical-600 transition">Inicio</a>
+                    <a href="#servicios" data-i18n="nav_services" class="hover:text-medical-600 transition">Servicios y Triaje</a>
+                    <a href="#equipo" data-i18n="nav_team" class="hover:text-medical-600 transition">Equipo Médico</a>
+                    <a href="#herramientas" data-i18n="nav_tools" class="hover:text-medical-600 transition">Comprobador NHIS</a>
+                    <a href="#estadisticas" data-i18n="nav_stats" class="hover:text-medical-600 transition">Salud Regional</a>
+                    <a href="#portal" data-i18n="nav_portal" class="hover:text-medical-600 transition">Portal de Salud</a>
+                </nav>
+
+                <div class="flex items-center gap-3">
+                    <a href="#reserva" class="bg-medical-600 hover:bg-medical-700 text-white font-semibold px-4 py-2.5 rounded-lg shadow-sm hover:shadow transition text-sm flex items-center gap-2">
+                        <i class="fa-regular fa-calendar-check"></i> <span data-i18n="btn_book">Agendar Cita</span>
+                    </a>
+                    <button id="mobileMenuBtn" class="lg:hidden text-slate-700 text-2xl p-2 focus:outline-none" data-i18n-aria="mobile_menu_aria" aria-label="Abrir Menú">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Dropdown Navigation -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-stone-200 px-4 py-4 space-y-3 text-sm">
+            <div class="flex items-center justify-between pb-2 border-b border-stone-100">
+                <span class="text-xs font-bold text-slate-500 uppercase" data-i18n="mobile_lang_select">Seleccionar Idioma:</span>
+                <div class="flex items-center bg-stone-100 rounded-lg p-0.5 border border-stone-200">
+                    <button onclick="setLanguage('es')" id="btnLangEsMob" class="lang-btn active px-3 py-1 rounded-md text-xs transition">Español</button>
+                    <button onclick="setLanguage('en')" id="btnLangEnMob" class="lang-btn text-slate-600 px-3 py-1 rounded-md text-xs transition">English</button>
+                </div>
+            </div>
+            <a href="#inicio" data-i18n="nav_home" class="block text-slate-700 hover:text-medical-600 font-medium">Inicio</a>
+            <a href="#servicios" data-i18n="nav_services" class="block text-slate-700 hover:text-medical-600 font-medium">Servicios y Triaje</a>
+            <a href="#equipo" data-i18n="nav_team" class="block text-slate-700 hover:text-medical-600 font-medium">Equipo Médico</a>
+            <a href="#herramientas" data-i18n="nav_tools" class="block text-slate-700 hover:text-medical-600 font-medium">Comprobador NHIS y Salud</a>
+            <a href="#estadisticas" data-i18n="nav_stats" class="block text-slate-700 hover:text-medical-600 font-medium">Salud Regional</a>
+            <a href="#portal" data-i18n="nav_portal" class="block text-slate-700 hover:text-medical-600 font-medium">Portal de Conocimiento</a>
+            <a href="#contacto" data-i18n="nav_contact" class="block text-slate-700 hover:text-medical-600 font-medium">Ubicación y Contacto</a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow">
+
+        <!-- Hero Section -->
+        <section id="inicio" class="relative bg-gradient-to-br from-teal-900 via-slate-900 to-slate-800 text-white py-16 md:py-24 px-4 overflow-hidden">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-300 px-3 py-1.5 rounded-full border border-emerald-500/30 text-xs sm:text-sm font-medium">
+                        <i class="fa-solid fa-circle-check"></i> <span data-i18n="hero_badge">Refugio de Atención Médica Segura e Ininterrumpida</span>
+                    </div>
+                    <h2 data-i18n="hero_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                        Atención Médica Especializada y Humana en Zebilla
+                    </h2>
+                    <p data-i18n="hero_desc" class="text-stone-300 text-base md:text-lg leading-relaxed">
+                        El <strong class="text-white">Naaba Akparabilla Medical Centre</strong> ofrece medicina familiar, programas de tratamiento contra la Tuberculosis (Centro DOT oficial), salud materno-infantil y prevención de riesgos metabólicos para la comunidad de Bawku West y la Región Alta Oriental.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                        <a href="#reserva" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold px-6 py-3.5 rounded-xl text-center shadow-lg transition flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> <span data-i18n="cta_whatsapp">Consultar por WhatsApp</span>
+                        </a>
+                        <a href="tel:0243711851" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-xl text-center border border-white/20 backdrop-blur-sm transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-phone"></i> <span data-i18n="cta_call">Llamar Directamente</span>
+                        </a>
+                    </div>
+
+                    <!-- Trust Signals Badge Group -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 border-t border-slate-700/80 text-xs sm:text-sm">
+                        <div class="flex items-center gap-2 text-stone-300">
+                            <i class="fa-solid fa-file-contract text-emerald-400 text-lg"></i>
+                            <span data-i18n="trust_hefra">Licencia HeFRA Gubernamental</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-stone-300">
+                            <i class="fa-solid fa-hand-holding-medical text-emerald-400 text-lg"></i>
+                            <span data-i18n="trust_nhis">Aceptamos NHIS (Sin cobros ilegales)</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-stone-300 col-span-2 sm:col-span-1">
+                            <i class="fa-solid fa-vial-circle-check text-emerald-400 text-lg"></i>
+                            <span data-i18n="trust_dot">Centro DOT de Tuberculosis</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Triaje Quick Widget -->
+                <div class="lg:col-span-5 bg-white text-slate-800 rounded-2xl p-6 shadow-2xl border border-stone-200">
+                    <h3 class="text-xl font-bold text-brandDark mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-stethoscope text-medical-600"></i> <span data-i18n="triage_title">Triaje Rápido de Síntomas</span>
+                    </h3>
+                    <p data-i18n="triage_subtitle" class="text-xs text-slate-500 mb-4">Seleccione su motivo principal de consulta para ver la disponibilidad e indicación inmediata:</p>
+                    
+                    <div class="space-y-3">
+                        <button onclick="quickTriage('general')" class="w-full text-left p-3 rounded-lg border border-stone-200 hover:border-medical-500 hover:bg-medical-50 transition flex justify-between items-center group">
+                            <div>
+                                <span data-i18n="triage_opt1_title" class="font-semibold block text-sm">Fiebre, Malaria o Síntomas Infecciosos</span>
+                                <span data-i18n="triage_opt1_desc" class="text-xs text-slate-500">Evaluación inmediata por Medicina General</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-medical-600"></i>
+                        </button>
+
+                        <button onclick="quickTriage('maternal')" class="w-full text-left p-3 rounded-lg border border-stone-200 hover:border-medical-500 hover:bg-medical-50 transition flex justify-between items-center group">
+                            <div>
+                                <span data-i18n="triage_opt2_title" class="font-semibold block text-sm">Control Prenatal / Salud Materno-Infantil</span>
+                                <span data-i18n="triage_opt2_desc" class="text-xs text-slate-500">Atención prenatal y despistaje de anemia</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-medical-600"></i>
+                        </button>
+
+                        <button onclick="quickTriage('tb')" class="w-full text-left p-3 rounded-lg border border-stone-200 hover:border-medical-500 hover:bg-medical-50 transition flex justify-between items-center group">
+                            <div>
+                                <span data-i18n="triage_opt3_title" class="font-semibold block text-sm">Tos Tosca Continua / Despistaje Tuberculosis</span>
+                                <span data-i18n="triage_opt3_desc" class="text-xs text-slate-500">Programa DOT Gratuito / Subsidio de Estado</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-medical-600"></i>
+                        </button>
+
+                        <button onclick="quickTriage('metabolic')" class="w-full text-left p-3 rounded-lg border border-stone-200 hover:border-medical-500 hover:bg-medical-50 transition flex justify-between items-center group">
+                            <div>
+                                <span data-i18n="triage_opt4_title" class="font-semibold block text-sm">Chequeo de Presión, Glucosa o Peso</span>
+                                <span data-i18n="triage_opt4_desc" class="text-xs text-slate-500">Evaluación Cardiometabólica Especializada</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-medical-600"></i>
+                        </button>
+                    </div>
+
+                    <div id="triageResult" class="mt-4 p-3 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-lg text-xs hidden">
+                        <!-- Dynamic Result JS Injection -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Services & Interactive Filters -->
+        <section id="servicios" class="py-16 px-4 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <h2 data-i18n="services_subtitle" class="text-xs font-bold text-medical-600 uppercase tracking-widest mb-2">Cartera de Servicios</h2>
+                <h3 data-i18n="services_title" class="text-3xl font-extrabold text-brandDark">Especialidades Clínicas y Asistencia Integral</h3>
+                <p data-i18n="services_desc" class="text-slate-600 mt-2 text-sm md:text-base">
+                    Esta sección describe la oferta de salud del centro en Zebilla South. Puede filtrar los servicios para explorar la cobertura, horarios e indicaciones para pacientes.
+                </p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <button onclick="filterServices('all', event)" data-i18n="filter_all" class="service-tab-btn active bg-medical-600 text-white px-4 py-2 rounded-full text-sm font-medium transition shadow-sm">Todos los Servicios</button>
+                <button onclick="filterServices('medicina-general', event)" data-i18n="filter_general" class="service-tab-btn bg-white border border-stone-300 text-slate-700 px-4 py-2 rounded-full text-sm font-medium hover:border-medical-500 transition">Medicina General</button>
+                <button onclick="filterServices('tb-dot', event)" data-i18n="filter_tb" class="service-tab-btn bg-white border border-stone-300 text-slate-700 px-4 py-2 rounded-full text-sm font-medium hover:border-medical-500 transition">Centro DOT (Tuberculosis)</button>
+                <button onclick="filterServices('materno-infantil', event)" data-i18n="filter_maternal" class="service-tab-btn bg-white border border-stone-300 text-slate-700 px-4 py-2 rounded-full text-sm font-medium hover:border-medical-500 transition">Materno e Infantil</button>
+                <button onclick="filterServices('metabolica', event)" data-i18n="filter_metabolic" class="service-tab-btn bg-white border border-stone-300 text-slate-700 px-4 py-2 rounded-full text-sm font-medium hover:border-medical-500 transition">Salud Metabólica y Crónica</button>
+            </div>
+
+            <!-- Service Cards Grid -->
+            <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Service 1 -->
+                <div class="service-card bg-white p-6 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition" data-category="medicina-general">
+                    <div class="w-12 h-12 rounded-lg bg-teal-100 text-teal-700 flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-notes-medical"></i>
+                    </div>
+                    <span data-i18n="card_nhis_badge" class="text-xs font-semibold px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-md">Cobertura NHIS</span>
+                    <h4 data-i18n="s1_title" class="text-xl font-bold text-brandDark mt-2">Consulta de Medicina General</h4>
+                    <p data-i18n="s1_desc" class="text-slate-600 text-sm mt-2">
+                        Diagnóstico y tratamiento de enfermedades agudas endémicas como malaria severa, infecciones respiratorias, fiebre tifoidea y trastornos digestivos.
+                    </p>
+                    <ul class="text-xs text-slate-500 mt-4 space-y-1">
+                        <li><i class="fa-solid fa-check text-emerald-600 mr-1"></i> <span data-i18n="s1_b1">Triaje rápido continuo</span></li>
+                        <li><i class="fa-solid fa-check text-emerald-600 mr-1"></i> <span data-i18n="s1_b2">Prescripción según formulario NHIS</span></li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card bg-white p-6 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition" data-category="tb-dot">
+                    <div class="w-12 h-12 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-lungs"></i>
+                    </div>
+                    <span data-i18n="card_gov_badge" class="text-xs font-semibold px-2.5 py-1 bg-amber-100 text-amber-800 rounded-md">Programa Nacional de Salud</span>
+                    <h4 data-i18n="s2_title" class="text-xl font-bold text-brandDark mt-2">Centro DOT para Tuberculosis</h4>
+                    <p data-i18n="s2_desc" class="text-slate-600 text-sm mt-2">
+                        Unidad autorizada en Bawku West para el despistaje, diagnóstico baciloscópico y tratamiento supervisado (DOT) contra la Tuberculosis con confidencialidad absoluta.
+                    </p>
+                    <ul class="text-xs text-slate-500 mt-4 space-y-1">
+                        <li><i class="fa-solid fa-check text-amber-600 mr-1"></i> <span data-i18n="s2_b1">Medicamentos altamente subsidiados/gratuitos</span></li>
+                        <li><i class="fa-solid fa-check text-amber-600 mr-1"></i> <span data-i18n="s2_b2">Seguimiento comunitario y familiar</span></li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card bg-white p-6 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition" data-category="materno-infantil">
+                    <div class="w-12 h-12 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-person-pregnant"></i>
+                    </div>
+                    <span data-i18n="card_nhis_badge" class="text-xs font-semibold px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-md">Cobertura NHIS</span>
+                    <h4 data-i18n="s3_title" class="text-xl font-bold text-brandDark mt-2">Atención Prenatal y Pediatría</h4>
+                    <p data-i18n="s3_desc" class="text-slate-600 text-sm mt-2">
+                        Supervisión integral del embarazo, control del crecimiento infantil, prevención y manejo de la anemia gestacional y evaluación de malformaciones tempranas.
+                    </p>
+                    <ul class="text-xs text-slate-500 mt-4 space-y-1">
+                        <li><i class="fa-solid fa-check text-emerald-600 mr-1"></i> <span data-i18n="s3_b1">Evaluación nutricional preparto</span></li>
+                        <li><i class="fa-solid fa-check text-emerald-600 mr-1"></i> <span data-i18n="s3_b2">Despistaje pediátrico especializado</span></li>
+                    </ul>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card bg-white p-6 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition" data-category="metabolica">
+                    <div class="w-12 h-12 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <span data-i18n="card_check_badge" class="text-xs font-semibold px-2.5 py-1 bg-indigo-100 text-indigo-800 rounded-md">Chequeo Preventivo</span>
+                    <h4 data-i18n="s4_title" class="text-xl font-bold text-brandDark mt-2">Salud Cardiometabólica e Hipertensión</h4>
+                    <p data-i18n="s4_desc" class="text-slate-600 text-sm mt-2">
+                        Evaluación del riesgo cardiovascular, perfil lipídico, función hepática (ratios AST/ALT) y control integral de diabetes tipo 2 y obesidad abdominal.
+                    </p>
+                    <ul class="text-xs text-slate-500 mt-4 space-y-1">
+                        <li><i class="fa-solid fa-check text-indigo-600 mr-1"></i> <span data-i18n="s4_b1">Control de presión arterial y glucosa</span></li>
+                        <li><i class="fa-solid fa-check text-indigo-600 mr-1"></i> <span data-i18n="s4_b2">Asesoría dietética y de estilo de vida</span></li>
+                    </ul>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card bg-white p-6 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition" data-category="medicina-general">
+                    <div class="w-12 h-12 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-syringe"></i>
+                    </div>
+                    <span data-i18n="card_nhis_badge" class="text-xs font-semibold px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-md">Cobertura NHIS</span>
+                    <h4 data-i18n="s5_title" class="text-xl font-bold text-brandDark mt-2">Prevención y Módulo de Hepatitis B</h4>
+                    <p data-i18n="s5_desc" class="text-slate-600 text-sm mt-2">
+                        Detección serológica, vacunación y asesoría preventiva sobre el Virus de la Hepatitis B (VHB) para mitigar el riesgo de complicaciones hepáticas a largo plazo.
+                    </p>
+                    <ul class="text-xs text-slate-500 mt-4 space-y-1">
+                        <li><i class="fa-solid fa-check text-blue-600 mr-1"></i> <span data-i18n="s5_b1">Basado en investigaciones locales UDS</span></li>
+                        <li><i class="fa-solid fa-check text-blue-600 mr-1"></i> <span data-i18n="s5_b2">Orientación para grupos de riesgo</span></li>
+                    </ul>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card bg-white p-6 rounded-xl border border-stone-200 shadow-sm hover:shadow-md transition" data-category="metabolica">
+                    <div class="w-12 h-12 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-xl font-bold mb-4">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+                    <span data-i18n="card_occ_badge" class="text-xs font-semibold px-2.5 py-1 bg-purple-100 text-purple-800 rounded-md">Salud Ocupacional</span>
+                    <h4 data-i18n="s6_title" class="text-xl font-bold text-brandDark mt-2">Evaluación de Estrés Ocupacional</h4>
+                    <p data-i18n="s6_desc" class="text-slate-600 text-sm mt-2">
+                        Exámenes para personal docente, funcionarios gubernamentales y trabajadores expuestos a alto estrés laboral e hipertensión asociada.
+                    </p>
+                    <ul class="text-xs text-slate-500 mt-4 space-y-1">
+                        <li><i class="fa-solid fa-check text-purple-600 mr-1"></i> <span data-i18n="s6_b1">Certificados de aptitud médica</span></li>
+                        <li><i class="fa-solid fa-check text-purple-600 mr-1"></i> <span data-i18n="s6_b2">Plan nutricional laboral</span></li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Medical Leadership & Academic Capital Section -->
+        <section id="equipo" class="bg-stone-100 py-16 px-4 border-y border-stone-200">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 data-i18n="team_subtitle" class="text-xs font-bold text-medical-600 uppercase tracking-widest mb-2">Liderazgo Médico e Investigación</h2>
+                    <h3 data-i18n="team_title" class="text-3xl font-extrabold text-brandDark">Excelencia Académica al Servicio de Zebilla</h3>
+                    <p data-i18n="team_desc" class="text-slate-600 mt-2 text-sm md:text-base">
+                        Esta sección destaca a los profesionales médicos responsables de la dirección clínica y consultiva del centro. Su labor investigativa garantiza tratamientos basados en la evidencia científica adaptados al norte de Ghana.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                    <!-- Doctor Card 1: Dr. Celia Yamile Rodriguez -->
+                    <div class="bg-white rounded-2xl p-6 md:p-8 shadow-md border border-stone-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-start justify-between gap-4 mb-4">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-16 h-16 rounded-full bg-teal-600 text-white flex items-center justify-center text-2xl font-bold shadow">
+                                        <i class="fa-solid fa-user-md"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold text-brandDark">Dra. Celia Yamile Rodriguez</h4>
+                                        <p data-i18n="doc1_role" class="text-xs font-semibold text-medical-600">PRACTITIONER IN-CHARGE / DIRECTORA MÉDICA</p>
+                                        <p data-i18n="doc1_spec" class="text-xs text-slate-500">Especialista en Medicina Familiar y Salud Pública</p>
+                                    </div>
+                                </div>
+                                <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full font-bold">HeFRA Reg.</span>
+                            </div>
+
+                            <p data-i18n="doc1_bio" class="text-slate-600 text-sm leading-relaxed mb-4">
+                                Con vasta trayectoria clínica en la Región Alta Oriental, la Dra. Rodriguez vincula la práctica médica en Zebilla con el Tamale Teaching Hospital y el Departamento de Medicina Familiar de la University for Development Studies (UDS).
+                            </p>
+
+                            <!-- Academic Research Highlights Collapsible -->
+                            <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 text-xs space-y-2 mb-6">
+                                <p data-i18n="research_title" class="font-bold text-brandDark flex items-center gap-2">
+                                    <i class="fa-solid fa-graduation-cap text-medical-600"></i> Investigaciones Clave Publicadas:
+                                </p>
+                                <ul class="list-disc list-inside text-slate-600 space-y-1.5">
+                                    <li><strong data-i18n="doc1_r1_t">Hepatitis B en el Norte de Ghana (2025):</strong> <span data-i18n="doc1_r1_d">Estudio sobre concienciación y prevención del VHB para prevenir el carcinoma hepatocelular.</span></li>
+                                    <li><strong data-i18n="doc1_r2_t">Salud Pediátrica Quirúrgica:</strong> <span data-i18n="doc1_r2_d">Manejo longitudinal de malformaciones anorrectales pediátricas en la región norte.</span></li>
+                                    <li><strong data-i18n="doc1_r3_t">Salud Materna:</strong> <span data-i18n="doc1_r3_d">Factores de riesgo asociados a la anemia en mujeres gestantes en clínicas prenatales.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-200">
+                            <span data-i18n="doc1_schedule" class="text-xs text-slate-500"><i class="fa-solid fa-stethoscope text-medical-600 mr-1"></i> Atiende en Medicina Familiar y Prenatal</span>
+                            <a href="#reserva" onclick="preselectDoctor('Dra. Celia Yamile Rodriguez')" data-i18n="doc1_btn" class="bg-medical-600 hover:bg-medical-700 text-white font-semibold text-xs px-4 py-2 rounded-lg transition">Agendar con Dra. Rodriguez</a>
+                        </div>
+                    </div>
+
+                    <!-- Doctor Card 2: Dr. Moses Ofosu Amoako -->
+                    <div class="bg-white rounded-2xl p-6 md:p-8 shadow-md border border-stone-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-start justify-between gap-4 mb-4">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-16 h-16 rounded-full bg-slate-800 text-white flex items-center justify-center text-2xl font-bold shadow">
+                                        <i class="fa-solid fa-user-doctor"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold text-brandDark">Dr. Moses Ofosu Amoako</h4>
+                                        <p data-i18n="doc2_role" class="text-xs font-semibold text-medical-600">MÉDICO CONSULTOR Y ESPECIALISTA</p>
+                                        <p data-i18n="doc2_spec" class="text-xs text-slate-500">Especialista en Medicina Ocupacional y Metabólica</p>
+                                    </div>
+                                </div>
+                                <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full font-bold">HeFRA Reg.</span>
+                            </div>
+
+                            <p data-i18n="doc2_bio" class="text-slate-600 text-sm leading-relaxed mb-4">
+                                Vinculado académicamente a la Universidad Kwame Nkrumah de Ciencia y Tecnología (KNUST) y al Komfo Anokye Teaching Hospital, el Dr. Amoako aporta liderazgo científico en la prevención de síndromes metabólicos y enfermedades crónicas.
+                            </p>
+
+                            <!-- Academic Research Highlights Collapsible -->
+                            <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 text-xs space-y-2 mb-6">
+                                <p data-i18n="research_title" class="font-bold text-brandDark flex items-center gap-2">
+                                    <i class="fa-solid fa-microscope text-medical-600"></i> Investigaciones Clave Publicadas:
+                                </p>
+                                <ul class="list-disc list-inside text-slate-600 space-y-1.5">
+                                    <li><strong data-i18n="doc2_r1_t">Riesgo Cardiometabólico (JHPN):</strong> <span data-i18n="doc2_r1_d">Análisis de dieta occidentalizada, obesidad abdominal y marcadores de estrés.</span></li>
+                                    <li><strong data-i18n="doc2_r2_t">Biomarcadores Hepáticos (AST/ALT):</strong> <span data-i18n="doc2_r2_d">Relación entre patrones alimentarios, acumulación lipídica y función del hígado.</span></li>
+                                    <li><strong data-i18n="doc2_r3_t">Inseguridad Alimentaria:</strong> <span data-i18n="doc2_r3_d">Impacto de factores nutricionales en la anemia y presión en adultos jóvenes.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-200">
+                            <span data-i18n="doc2_schedule" class="text-xs text-slate-500"><i class="fa-solid fa-heart-pulse text-indigo-600 mr-1"></i> Consulta Crónica y Ocupacional</span>
+                            <a href="#reserva" onclick="preselectDoctor('Dr. Moses Ofosu Amoako')" data-i18n="doc2_btn" class="bg-brandDark hover:bg-slate-800 text-white font-semibold text-xs px-4 py-2 rounded-lg transition">Agendar con Dr. Amoako</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Patient Tools: NHIS Checker & Cardiometabolic Calculator -->
+        <section id="herramientas" class="py-16 px-4 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 data-i18n="tools_subtitle" class="text-xs font-bold text-medical-600 uppercase tracking-widest mb-2">Herramientas Interactivas para el Paciente</h2>
+                <h3 data-i18n="tools_title" class="text-3xl font-extrabold text-brandDark">Transparencia de Tarifas e Indicadores de Salud</h3>
+                <p data-i18n="tools_desc" class="text-slate-600 mt-2 text-sm md:text-base">
+                    Utilice estas herramientas desarrolladas para simplificar su visita. Verifique la cobertura de su seguro NHIS o evalúe su perfil metabólico preliminar.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                <!-- Tool 1: NHIS Coverage & Zero Copay Checker -->
+                <div class="bg-white p-6 md:p-8 rounded-2xl border border-stone-200 shadow-sm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-id-card"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="nhis_tool_title" class="text-lg font-bold text-brandDark">Comprobador de Cobertura NHIS</h4>
+                            <p data-i18n="nhis_tool_subtitle" class="text-xs text-slate-500">Compromiso de cero cobros ilegales adicionales</p>
+                        </div>
+                    </div>
+
+                    <p data-i18n="nhis_tool_desc" class="text-xs text-slate-600 mb-4">
+                        Seleccione el servicio que necesita para verificar su cobertura bajo el National Health Insurance Scheme de Ghana en el centro:
+                    </p>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label data-i18n="nhis_label_service" class="block text-xs font-bold text-slate-700 mb-1">Servicio / Procedimiento Médicos</label>
+                            <select id="nhisSelect" onchange="checkNhisCoverage()" class="w-full p-2.5 border border-stone-300 rounded-lg text-sm focus:ring-2 focus:ring-medical-500 focus:outline-none">
+                                <option value="" data-i18n="nhis_opt_select">-- Seleccionar Servicio --</option>
+                                <option value="general" data-i18n="nhis_opt_1">Consulta Médica General</option>
+                                <option value="malaria" data-i18n="nhis_opt_2">Prueba y Tratamiento de Malaria</option>
+                                <option value="prenatal" data-i18n="nhis_opt_3">Atención Prenatal Examen de Rutina</option>
+                                <option value="tb" data-i18n="nhis_opt_4">Diagnóstico y Medicación de Tuberculosis (DOT)</option>
+                                <option value="hipertension" data-i18n="nhis_opt_5">Control y Seguimiento de Hipertensión</option>
+                            </select>
+                        </div>
+
+                        <div id="nhisResult" class="p-4 bg-stone-50 rounded-xl border border-stone-200 text-xs text-slate-700 hidden">
+                            <!-- Dynamic Content -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tool 2: Cardiometabolic Risk Assessment (Based on Dr. Amoako's Research) -->
+                <div class="bg-white p-6 md:p-8 rounded-2xl border border-stone-200 shadow-sm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+                        <div>
+                            <h4 data-i18n="calc_tool_title" class="text-lg font-bold text-brandDark">Evaluador de Riesgo Metabólico</h4>
+                            <p data-i18n="calc_tool_subtitle" class="text-xs text-slate-500">Basado en hallazgos de investigación del Dr. Amoako</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                        <div>
+                            <label data-i18n="calc_label_gender" class="block font-bold text-slate-700 mb-1">Género</label>
+                            <select id="calcGender" class="w-full p-2.5 border border-stone-300 rounded-lg focus:ring-2 focus:ring-medical-500">
+                                <option value="hombre" data-i18n="calc_gender_m">Hombre</option>
+                                <option value="mujer" data-i18n="calc_gender_f">Mujer</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label data-i18n="calc_label_waist" class="block font-bold text-slate-700 mb-1">Perímetro de Cintura (cm)</label>
+                            <input type="number" id="calcWaist" data-i18n-placeholder="calc_waist_placeholder" placeholder="ej. 92" class="w-full p-2.5 border border-stone-300 rounded-lg focus:ring-2 focus:ring-medical-500">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label data-i18n="calc_label_stress" class="block font-bold text-slate-700 mb-1">¿Sufre de tensión arterial elevada o estrés laboral prolongado?</label>
+                            <select id="calcPressure" class="w-full p-2.5 border border-stone-300 rounded-lg focus:ring-2 focus:ring-medical-500">
+                                <option value="no" data-i18n="calc_stress_no">No / Tensión Normal</option>
+                                <option value="si" data-i18n="calc_stress_yes">Sí / Diagnosticado o Sospecha</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button onclick="calculateMetabolicRisk()" data-i18n="calc_btn" class="w-full mt-4 bg-brandDark hover:bg-slate-800 text-white font-bold py-2.5 rounded-lg text-xs transition">
+                        Calcular Evaluación Preliminar
+                    </button>
+
+                    <div id="calcResult" class="mt-4 p-4 bg-stone-50 rounded-xl border border-stone-200 text-xs hidden">
+                        <!-- Dynamic Assessment Injection -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Data Visualizations Section (Chart.js) -->
+        <section id="estadisticas" class="bg-stone-100 py-16 px-4 border-y border-stone-200">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <h2 data-i18n="stats_subtitle" class="text-xs font-bold text-medical-600 uppercase tracking-widest mb-2">Datos y Contexto de Salud</h2>
+                    <h3 data-i18n="stats_title" class="text-3xl font-extrabold text-brandDark">Panorámica Demográfica y Epidemiológica</h3>
+                    <p data-i18n="stats_desc" class="text-slate-600 mt-2 text-sm md:text-base">
+                        Esta sección presenta datos visuales cuantitativos derivados de los análisis demográficos del distrito de Bawku West y de las investigaciones científicas publicadas por el liderazgo del centro.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+
+                    <!-- Chart 1: Cardiometabolic Indicators -->
+                    <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <h4 data-i18n="c1_title" class="text-lg font-bold text-brandDark mb-1">Prevalencia Cardiometabólica en el Norte de Ghana</h4>
+                            <p data-i18n="c1_desc" class="text-xs text-slate-500 mb-4">Datos extraídos de publicaciones de investigación del Dr. Amoako y colaboradores.</p>
+                            
+                            <!-- Chart Canvas Container -->
+                            <div class="chart-container">
+                                <canvas id="metabolicChart"></canvas>
+                            </div>
+                        </div>
+                        <p data-i18n="c1_note" class="text-xs text-slate-500 mt-4 italic bg-stone-50 p-2.5 rounded-lg border border-stone-200">
+                            Nota: La alta frecuencia de obesidad abdominal (57.1%) fundamenta la necesidad de los chequeos preventivos en la clínica.
+                        </p>
+                    </div>
+
+                    <!-- Chart 2: Bawku West Demographics -->
+                    <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <h4 data-i18n="c2_title" class="text-lg font-bold text-brandDark mb-1">Distribución Demográfica de Bawku West</h4>
+                            <p data-i18n="c2_desc" class="text-xs text-slate-500 mb-4">Población total: 144,189 habitantes (Censo Oficial - 2,714 km²).</p>
+
+                            <!-- Chart Canvas Container -->
+                            <div class="chart-container">
+                                <canvas id="demographicsChart"></canvas>
+                            </div>
+                        </div>
+                        <p data-i18n="c2_note" class="text-xs text-slate-500 mt-4 italic bg-stone-50 p-2.5 rounded-lg border border-stone-200">
+                            El 84.9% de residentes en zonas rurales requiere que la web actúe como un canal claro de verificación de servicios antes del viaje a Zebilla.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Knowledge Portal / Health Blog (Evidence-Based Articles) -->
+        <section id="portal" class="py-16 px-4 max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 data-i18n="blog_subtitle" class="text-xs font-bold text-medical-600 uppercase tracking-widest mb-2">Portal de Conocimiento Comunitario</h2>
+                <h3 data-i18n="blog_title" class="text-3xl font-extrabold text-brandDark">Artículos Educativos Basados en Evidencia</h3>
+                <p data-i18n="blog_desc" class="text-slate-600 mt-2 text-sm md:text-base">
+                    Guias preventivas preparadas por nuestro personal médico traduciendo la literatura científica a recomendaciones comunitarias sencillas.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Article 1 -->
+                <article class="bg-white rounded-xl border border-stone-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div class="p-6">
+                        <span data-i18n="a1_tag" class="text-xs font-bold text-teal-700 bg-teal-100 px-2.5 py-1 rounded-md">Salud Hepática</span>
+                        <h4 data-i18n="a1_title" class="text-lg font-bold text-brandDark mt-3">Prevención de la Hepatitis B en la Región Oriental</h4>
+                        <p data-i18n="a1_desc" class="text-slate-600 text-xs mt-2 leading-relaxed">
+                            Basado en el estudio de la Dra. Rodriguez (2025). Conozca cómo el virus afecta al hígado, las vías de transmisión y la importancia de la vacunación temprana.
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 pt-0">
+                        <button onclick="openBlogModal('hepB')" data-i18n="read_article_btn" class="text-xs font-bold text-medical-600 hover:text-medical-800 flex items-center gap-1">
+                            Leer Artículo Completo <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="bg-white rounded-xl border border-stone-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div class="p-6">
+                        <span data-i18n="a2_tag" class="text-xs font-bold text-indigo-700 bg-indigo-100 px-2.5 py-1 rounded-md">Salud Cardiovascular</span>
+                        <h4 data-i18n="a2_title" class="text-lg font-bold text-brandDark mt-3">Hipertensión, Estrés Laboral y Dieta</h4>
+                        <p data-i18n="a2_desc" class="text-slate-600 text-xs mt-2 leading-relaxed">
+                            Derivado de los hallazgos del Dr. Amoako. Explicación de cómo los patrones alimentarios occidentalizados y el estrés diario incrementan la presión arterial.
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 pt-0">
+                        <button onclick="openBlogModal('hipertension')" data-i18n="read_article_btn" class="text-xs font-bold text-medical-600 hover:text-medical-800 flex items-center gap-1">
+                            Leer Artículo Completo <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="bg-white rounded-xl border border-stone-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div class="p-6">
+                        <span data-i18n="a3_tag" class="text-xs font-bold text-rose-700 bg-rose-100 px-2.5 py-1 rounded-md">Salud Materna</span>
+                        <h4 data-i18n="a3_title" class="text-lg font-bold text-brandDark mt-3">Combatiendo la Anemia en el Embarazo</h4>
+                        <p data-i18n="a3_desc" class="text-slate-600 text-xs mt-2 leading-relaxed">
+                            Guía para madres sobre la suplementación de hierro, los alimentos locales ricos en nutrientes y el seguimiento prenata oportuno en el centro.
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 pt-0">
+                        <button onclick="openBlogModal('anemia')" data-i18n="read_article_btn" class="text-xs font-bold text-medical-600 hover:text-medical-800 flex items-center gap-1">
+                            Leer Artículo Completo <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Appointment Booking & Contact Section -->
+        <section id="reserva" class="bg-stone-900 text-white py-16 px-4">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+                <!-- Form Side -->
+                <div class="lg:col-span-7 bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 shadow-xl">
+                    <h3 class="text-2xl font-bold text-white mb-2 flex items-center gap-2">
+                        <i class="fa-regular fa-calendar-check text-emerald-400"></i> <span data-i18n="booking_title">Solicitud de Cita Médica</span>
+                    </h3>
+                    <p data-i18n="booking_subtitle" class="text-slate-300 text-xs mb-6">
+                        Complete sus datos. Su solicitud será procesada y el equipo enviará la confirmación vía llamada o mensaje de WhatsApp.
+                    </p>
+
+                    <form id="bookingForm" onsubmit="handleBooking(event)" class="space-y-4 text-xs">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label data-i18n="form_label_name" class="block font-medium text-slate-300 mb-1">Nombre Completo del Paciente *</label>
+                                <input type="text" id="patientName" required data-i18n-placeholder="form_name_placeholder" placeholder="ej. Kwesi Mensah" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label data-i18n="form_label_phone" class="block font-medium text-slate-300 mb-1">Teléfono de Contacto *</label>
+                                <input type="tel" id="patientPhone" required data-i18n-placeholder="form_phone_placeholder" placeholder="ej. 024XXXXXXX" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label data-i18n="form_label_doctor" class="block font-medium text-slate-300 mb-1">Especialista Preferido</label>
+                                <select id="doctorSelect" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                                    <option value="Cualquier Especialista Disponible" data-i18n="doc_opt_any">Cualquier Especialista Disponible</option>
+                                    <option value="Dra. Celia Yamile Rodriguez" data-i18n="doc_opt_celia">Dra. Celia Yamile Rodriguez (Med. Familiar / Prenatal)</option>
+                                    <option value="Dr. Moses Ofosu Amoako" data-i18n="doc_opt_moses">Dr. Moses Ofosu Amoako (Salud Metabólica / Crónica)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label data-i18n="form_label_nhis" class="block font-medium text-slate-300 mb-1">¿Posee Seguro NHIS Activo? *</label>
+                                <select id="nhisStatus" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                                    <option value="Sí - NHIS Activo" data-i18n="nhis_opt_yes">Sí - Carnet NHIS Activo</option>
+                                    <option value="No / Pago Particular" data-i18n="nhis_opt_no">No / Pago Particular</option>
+                                    <option value="En Proceso de Renovación" data-i18n="nhis_opt_renew">En Proceso de Renovación</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label data-i18n="form_label_notes" class="block font-medium text-slate-300 mb-1">Motivo Principal de Consulta o Síntomas</label>
+                            <textarea id="patientNotes" rows="3" data-i18n-placeholder="form_notes_placeholder" placeholder="Describa brevemente la razón de su visita..." class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-3.5 rounded-xl text-sm transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> <span data-i18n="form_btn_submit">Confirmar y Enviar Solicitud</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info Side -->
+                <div id="contacto" class="lg:col-span-5 space-y-6">
+                    <div>
+                        <h3 data-i18n="contact_title" class="text-2xl font-bold text-white mb-2">Información Institucional</h3>
+                        <p data-i18n="contact_subtitle" class="text-slate-400 text-xs">
+                            Ubicación estratégica en Zebilla South para la atención del distrito de Bawku West y zonas aledañas.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 text-xs text-slate-300">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold flex-shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <p data-i18n="c_addr_title" class="font-bold text-white">Dirección Física</p>
+                                <p data-i18n="c_addr_val">Zebilla South, Distrito Bawku West, Región Alta Oriental (U.E.R.), Ghana</p>
+                                <p class="text-slate-400 text-[11px]">Coordenadas GPS: 10.971890, -0.516560</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold flex-shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p data-i18n="c_post_title" class="font-bold text-white">Dirección Postal Oficial</p>
+                                <p>P.O. Box 22, Bawku-West district, Zebilla, U.E.R.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold flex-shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <p data-i18n="c_phone_title" class="font-bold text-white">Líneas Telefónicas Directas</p>
+                                <p><span data-i18n="c_phone_line1">Recepción 1</span>: 0243-711851</p>
+                                <p><span data-i18n="c_phone_line2">Recepción 2</span>: 0244-761962</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold flex-shrink-0">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <div>
+                                <p data-i18n="c_status_title" class="font-bold text-white">Estatus Regulatorio y Seguro</p>
+                                <p data-i18n="c_status_hefra">Licencia de Clínica Primaria HeFRA de Ghana</p>
+                                <p data-i18n="c_status_nhis" class="text-emerald-400 font-semibold">Proveedor Acreditado del NHIS</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location Callout Box -->
+                    <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-slate-300 space-y-2">
+                        <p data-i18n="c_safe_title" class="font-bold text-white flex items-center gap-1.5">
+                            <i class="fa-solid fa-shield-cat text-emerald-400"></i> Entorno Seguro e Ininterrumpido
+                        </p>
+                        <p data-i18n="c_safe_desc" class="leading-relaxed">
+                            Al estar ubicados en Zebilla South, nuestras operaciones se benefician de estabilidad continua, funcionando como punto de referencia sanitario confiable frente a disrupciones de otras áreas de la región.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-brandDark text-slate-400 text-xs py-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded bg-medical-600 text-white flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-hospital-user"></i>
+                </div>
+                <span class="text-white font-bold">Naaba Akparabilla Medical Centre</span>
+                <span data-i18n="footer_rights">© 2026. Todos los derechos reservados.</span>
+            </div>
+            <div class="flex items-center gap-4 text-[11px]">
+                <a href="#inicio" data-i18n="nav_home" class="hover:text-white transition">Inicio</a>
+                <span>•</span>
+                <a href="#herramientas" data-i18n="footer_nhis_policy" class="hover:text-white transition">Política NHIS</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Article Reader Modal -->
+    <div id="blogModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 md:p-8 max-h-[85vh] overflow-y-auto relative shadow-2xl">
+            <button onclick="closeBlogModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl font-bold">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="blogModalContent">
+                <!-- Dynamic Article Content Injected Here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Confirmation Modal -->
+    <div id="bookingModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 text-center space-y-4 shadow-2xl">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 data-i18n="modal_book_title" class="text-xl font-bold text-brandDark">¡Solicitud Generada con Éxito!</h3>
+            <p class="text-xs text-slate-600 leading-relaxed" id="bookingModalText">
+                Su cita ha sido registrada temporalmente. Para confirmación inmediata con recepción vía WhatsApp, haga clic en el botón a continuación.
+            </p>
+            <div class="pt-2 space-y-2">
+                <a id="whatsappConfirmBtn" href="#" target="_blank" class="block w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-3 rounded-xl text-xs transition">
+                    <i class="fa-brands fa-whatsapp text-lg mr-1"></i> <span data-i18n="modal_book_wa">Confirmar por WhatsApp</span>
+                </a>
+                <button onclick="closeBookingModal()" data-i18n="modal_close" class="block w-full bg-stone-200 hover:bg-stone-300 text-slate-800 font-semibold py-2.5 rounded-xl text-xs transition">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC & MULTILINGUAL i18n SYSTEM -->
+    <script>
+        // Language Dictionary Data (ES / EN)
+        const i18n = {
+            es: {
+                top_hefra: "Certificado HeFRA (Gobierno de Ghana)",
+                top_nhis: "Acreditación NHIS Activa",
+                nav_home: "Inicio",
+                nav_services: "Servicios y Triaje",
+                nav_team: "Equipo Médico",
+                nav_tools: "Comprobador NHIS",
+                nav_stats: "Salud Regional",
+                nav_portal: "Portal de Salud",
+                nav_contact: "Contacto",
+                btn_book: "Agendar Cita",
+                mobile_lang_select: "Seleccionar Idioma:",
+
+                hero_badge: "Refugio de Atención Médica Segura e Ininterrumpida",
+                hero_title: "Atención Médica Especializada y Humana en Zebilla",
+                hero_desc: "El Naaba Akparabilla Medical Centre ofrece medicina familiar, programas de tratamiento contra la Tuberculosis (Centro DOT oficial), salud materno-infantil y prevención de riesgos metabólicos para la comunidad de Bawku West y la Región Alta Oriental.",
+                cta_whatsapp: "Consultar por WhatsApp",
+                cta_call: "Llamar Directamente",
+                trust_hefra: "Licencia HeFRA Gubernamental",
+                trust_nhis: "Aceptamos NHIS (Sin cobros ilegales)",
+                trust_dot: "Centro DOT de Tuberculosis",
+
+                triage_title: "Triaje Rápido de Síntomas",
+                triage_subtitle: "Seleccione su motivo principal de consulta para ver la disponibilidad e indicación inmediata:",
+                triage_opt1_title: "Fiebre, Malaria o Síntomas Infecciosos",
+                triage_opt1_desc: "Evaluación inmediata por Medicina General",
+                triage_opt2_title: "Control Prenatal / Salud Materno-Infantil",
+                triage_opt2_desc: "Atención prenatal y despistaje de anemia",
+                triage_opt3_title: "Tos Tosca Continua / Despistaje Tuberculosis",
+                triage_opt3_desc: "Programa DOT Gratuito / Subsidio de Estado",
+                triage_opt4_title: "Chequeo de Presión, Glucosa o Peso",
+                triage_opt4_desc: "Evaluación Cardiometabólica Especializada",
+
+                services_subtitle: "Cartera de Servicios",
+                services_title: "Especialidades Clínicas y Asistencia Integral",
+                services_desc: "Esta sección describe la oferta de salud del centro en Zebilla South. Puede filtrar los servicios para explorar la cobertura, horarios e indicaciones para pacientes.",
+                filter_all: "Todos los Servicios",
+                filter_general: "Medicina General",
+                filter_tb: "Centro DOT (Tuberculosis)",
+                filter_maternal: "Materno e Infantil",
+                filter_metabolic: "Salud Metabólica y Crónica",
+
+                card_nhis_badge: "Cobertura NHIS",
+                card_gov_badge: "Programa Nacional de Salud",
+                card_check_badge: "Chequeo Preventivo",
+                card_occ_badge: "Salud Ocupacional",
+
+                s1_title: "Consulta de Medicina General",
+                s1_desc: "Diagnóstico y tratamiento de enfermedades agudas endémicas como malaria severa, infecciones respiratorias, fiebre tifoidea y trastornos digestivos.",
+                s1_b1: "Triaje rápido continuo",
+                s1_b2: "Prescripción según formulario NHIS",
+
+                s2_title: "Centro DOT para Tuberculosis",
+                s2_desc: "Unidad autorizada en Bawku West para el despistaje, diagnóstico baciloscópico y tratamiento supervisado (DOT) contra la Tuberculosis con confidencialidad absoluta.",
+                s2_b1: "Medicamentos altamente subsidiados/gratuitos",
+                s2_b2: "Seguimiento comunitario y familiar",
+
+                s3_title: "Atención Prenatal y Pediatría",
+                s3_desc: "Supervisión integral del embarazo, control del crecimiento infantil, prevención y manejo de la anemia gestacional y evaluación de malformaciones tempranas.",
+                s3_b1: "Evaluación nutricional preparto",
+                s3_b2: "Despistaje pediátrico especializado",
+
+                s4_title: "Salud Cardiometabólica e Hipertensión",
+                s4_desc: "Evaluación del riesgo cardiovascular, perfil lipídico, función hepática (ratios AST/ALT) y control integral de diabetes tipo 2 y obesidad abdominal.",
+                s4_b1: "Control de presión arterial y glucosa",
+                s4_b2: "Asesoría dietética y de estilo de vida",
+
+                s5_title: "Prevención y Módulo de Hepatitis B",
+                s5_desc: "Detección serológica, vacunación y asesoría preventiva sobre el Virus de la Hepatitis B (VHB) para mitigar el riesgo de complicaciones hepáticas a largo plazo.",
+                s5_b1: "Basado en investigaciones locales UDS",
+                s5_b2: "Orientación para grupos de riesgo",
+
+                s6_title: "Evaluación de Estrés Ocupacional",
+                s6_desc: "Exámenes para personal docente, funcionarios gubernamentales y trabajadores expuestos a alto estrés laboral e hipertensión asociada.",
+                s6_b1: "Certificados de aptitud médica",
+                s6_b2: "Plan nutricional laboral",
+
+                team_subtitle: "Liderazgo Médico e Investigación",
+                team_title: "Excelencia Académica al Servicio de Zebilla",
+                team_desc: "Esta sección destaca a los profesionales médicos responsables de la dirección clínica y consultiva del centro. Su labor investigativa garantiza tratamientos basados en la evidencia científica adaptados al norte de Ghana.",
+                doc1_role: "PRACTITIONER IN-CHARGE / DIRECTORA MÉDICA",
+                doc1_spec: "Especialista en Medicina Familiar y Salud Pública",
+                doc1_bio: "Con vasta trayectoria clínica en la Región Alta Oriental, la Dra. Rodriguez vincula la práctica médica en Zebilla con el Tamale Teaching Hospital y el Departamento de Medicina Familiar de la University for Development Studies (UDS).",
+                doc1_schedule: "Atiende en Medicina Familiar y Prenatal",
+                doc1_btn: "Agendar con Dra. Rodriguez",
+
+                doc2_role: "MÉDICO CONSULTOR Y ESPECIALISTA",
+                doc2_spec: "Especialista en Medicina Ocupacional y Metabólica",
+                doc2_bio: "Vinculado académicamente a la Universidad Kwame Nkrumah de Ciencia y Tecnología (KNUST) y al Komfo Anokye Teaching Hospital, el Dr. Amoako aporta liderazgo científico en la prevención de síndromes metabólicos y enfermedades crónicas.",
+                doc2_schedule: "Consulta Crónica y Ocupacional",
+                doc2_btn: "Agendar con Dr. Amoako",
+
+                research_title: "Investigaciones Clave Publicadas:",
+                doc1_r1_t: "Hepatitis B en el Norte de Ghana (2025):",
+                doc1_r1_d: "Estudio sobre concienciación y prevención del VHB para prevenir el carcinoma hepatocelular.",
+                doc1_r2_t: "Salud Pediátrica Quirúrgica:",
+                doc1_r2_d: "Manejo longitudinal de malformaciones anorrectales pediátricas en la región norte.",
+                doc1_r3_t: "Salud Materna:",
+                doc1_r3_d: "Factores de riesgo asociados a la anemia en mujeres gestantes en clínicas prenatales.",
+
+                doc2_r1_t: "Riesgo Cardiometabólico (JHPN):",
+                doc2_r1_d: "Análisis de dieta occidentalizada, obesidad abdominal y marcadores de estrés.",
+                doc2_r2_t: "Biomarcadores Hepáticos (AST/ALT):",
+                doc2_r2_d: "Relación entre patrones alimentarios, acumulación lipídica y función del hígado.",
+                doc2_r3_t: "Inseguridad Alimentaria:",
+                doc2_r3_d: "Impacto de factores nutricionales en la anemia y presión en adultos jóvenes.",
+
+                tools_subtitle: "Herramientas Interactivas para el Paciente",
+                tools_title: "Transparencia de Tarifas e Indicadores de Salud",
+                tools_desc: "Utilice estas herramientas desarrolladas para simplificar su visita. Verifique la cobertura de su seguro NHIS o evalúe su perfil metabólico preliminar.",
+
+                nhis_tool_title: "Comprobador de Cobertura NHIS",
+                nhis_tool_subtitle: "Compromiso de cero cobros ilegales adicionales",
+                nhis_tool_desc: "Seleccione el servicio que necesita para verificar su cobertura bajo el National Health Insurance Scheme de Ghana en el centro:",
+                nhis_label_service: "Servicio / Procedimiento Médicos",
+                nhis_opt_select: "-- Seleccionar Servicio --",
+                nhis_opt_1: "Consulta Médica General",
+                nhis_opt_2: "Prueba y Tratamiento de Malaria",
+                nhis_opt_3: "Atención Prenatal Examen de Rutina",
+                nhis_opt_4: "Diagnóstico y Medicación de Tuberculosis (DOT)",
+                nhis_opt_5: "Control y Seguimiento de Hipertensión",
+
+                calc_tool_title: "Evaluador de Riesgo Metabólico",
+                calc_tool_subtitle: "Basado en hallazgos de investigación del Dr. Amoako",
+                calc_label_gender: "Género",
+                calc_gender_m: "Hombre",
+                calc_gender_f: "Mujer",
+                calc_label_waist: "Perímetro de Cintura (cm)",
+                calc_label_stress: "¿Sufre de tensión arterial elevada o estrés laboral prolongado?",
+                calc_stress_no: "No / Tensión Normal",
+                calc_stress_yes: "Sí / Diagnosticado o Sospecha",
+                calc_btn: "Calcular Evaluación Preliminar",
+
+                stats_subtitle: "Datos y Contexto de Salud",
+                stats_title: "Panorámica Demográfica y Epidemiológica",
+                stats_desc: "Esta sección presenta datos visuales cuantitativos derivados de los análisis demográficos del distrito de Bawku West y de las investigaciones científicas publicadas por el liderazgo del centro.",
+                c1_title: "Prevalencia Cardiometabólica en el Norte de Ghana",
+                c1_desc: "Datos extraídos de publicaciones de investigación del Dr. Amoako y colaboradores.",
+                c1_note: "Nota: La alta frecuencia de obesidad abdominal (57.1%) fundamenta la necesidad de los chequeos preventivos en la clínica.",
+                c2_title: "Distribución Demográfica de Bawku West",
+                c2_desc: "Población total: 144,189 habitantes (Censo Oficial - 2,714 km²).",
+                c2_note: "El 84.9% de residentes en zonas rurales requiere que la web actúe como un canal claro de verificación de servicios antes del viaje a Zebilla.",
+
+                blog_subtitle: "Portal de Conocimiento Comunitario",
+                blog_title: "Artículos Educativos Basados en Evidencia",
+                blog_desc: "Guias preventivas preparadas por nuestro personal médico traduciendo la literatura científica a recomendaciones comunitarias sencillas.",
+                a1_tag: "Salud Hepática",
+                a1_title: "Prevención de la Hepatitis B en la Región Oriental",
+                a1_desc: "Basado en el estudio de la Dra. Rodriguez (2025). Conozca cómo el virus afecta al hígado, las vías de transmisión y la importancia de la vacunación temprana.",
+                a2_tag: "Salud Cardiovascular",
+                a2_title: "Hipertensión, Estrés Laboral y Dieta",
+                a2_desc: "Derivado de los hallazgos del Dr. Amoako. Explicación de cómo los patrones alimentarios occidentalizados y el estrés diario incrementan la presión arterial.",
+                a3_tag: "Salud Materna",
+                a3_title: "Combatiendo la Anemia en el Embarazo",
+                a3_desc: "Guía para madres sobre la suplementación de hierro, los alimentos locales ricos en nutrientes y el seguimiento prenata oportuno en el centro.",
+                read_article_btn: "Leer Artículo Completo",
+
+                booking_title: "Solicitud de Cita Médica",
+                booking_subtitle: "Complete sus datos. Su solicitud será procesada y el equipo enviará la confirmación vía llamada o mensaje de WhatsApp.",
+                form_label_name: "Nombre Completo del Paciente *",
+                form_label_phone: "Teléfono de Contacto *",
+                form_label_doctor: "Especialista Preferido",
+                doc_opt_any: "Cualquier Especialista Disponible",
+                doc_opt_celia: "Dra. Celia Yamile Rodriguez (Med. Familiar / Prenatal)",
+                doc_opt_moses: "Dr. Moses Ofosu Amoako (Salud Metabólica / Crónica)",
+                form_label_nhis: "¿Posee Seguro NHIS Activo? *",
+                nhis_opt_yes: "Sí - Carnet NHIS Activo",
+                nhis_opt_no: "No / Pago Particular",
+                nhis_opt_renew: "En Proceso de Renovación",
+                form_label_notes: "Motivo Principal de Consulta o Síntomas",
+                form_btn_submit: "Confirmar y Enviar Solicitud",
+
+                contact_title: "Información Institucional",
+                contact_subtitle: "Ubicación estratégica en Zebilla South para la atención del distrito de Bawku West y zonas aledañas.",
+                c_addr_title: "Dirección Física",
+                c_addr_val: "Zebilla South, Distrito Bawku West, Región Alta Oriental (U.E.R.), Ghana",
+                c_post_title: "Dirección Postal Oficial",
+                c_phone_title: "Líneas Telefónicas Directas",
+                c_phone_line1: "Recepción 1",
+                c_phone_line2: "Recepción 2",
+                c_status_title: "Estatus Regulatorio y Seguro",
+                c_status_hefra: "Licencia de Clínica Primaria HeFRA de Ghana",
+                c_status_nhis: "Proveedor Acreditado del NHIS",
+                c_safe_title: "Entorno Seguro e Ininterrumpido",
+                c_safe_desc: "Al estar ubicados en Zebilla South, nuestras operaciones se benefician de estabilidad continua, funcionando como punto de referencia sanitario confiable frente a disrupciones de otras áreas de la región.",
+
+                footer_rights: "© 2026. Todos los derechos reservados.",
+                footer_nhis_policy: "Política NHIS",
+                modal_book_title: "¡Solicitud Generada con Éxito!",
+                modal_book_wa: "Confirmar por WhatsApp",
+                modal_close: "Cerrar",
+
+                mobile_menu_aria: "Abrir Menú",
+                calc_waist_placeholder: "ej. 92",
+                form_name_placeholder: "ej. Kwesi Mensah",
+                form_phone_placeholder: "ej. 024XXXXXXX",
+                form_notes_placeholder: "Describa brevemente la razón de su visita..."
+            },
+            en: {
+                top_hefra: "HeFRA Certified (Government of Ghana)",
+                top_nhis: "Active NHIS Accreditation",
+                nav_home: "Home",
+                nav_services: "Services & Triage",
+                nav_team: "Medical Team",
+                nav_tools: "NHIS Checker",
+                nav_stats: "Regional Health",
+                nav_portal: "Health Portal",
+                nav_contact: "Contact",
+                btn_book: "Book Appointment",
+                mobile_lang_select: "Select Language:",
+
+                hero_badge: "Safe & Uninterrupted Healthcare Sanctuary",
+                hero_title: "Specialized & Compassionate Healthcare in Zebilla",
+                hero_desc: "Naaba Akparabilla Medical Centre provides Family Medicine, Tuberculosis care (Official DOT Center), Maternal-Child Health, and Metabolic Risk Prevention for the Bawku West community and the Upper East Region.",
+                cta_whatsapp: "Enquire via WhatsApp",
+                cta_call: "Call Directly",
+                trust_hefra: "Governmental HeFRA Licence",
+                trust_nhis: "NHIS Accepted (Zero illegal co-pays)",
+                trust_dot: "Official TB DOT Centre",
+
+                triage_title: "Quick Symptom Triage",
+                triage_subtitle: "Select your main reason for visit for immediate guidance and availability:",
+                triage_opt1_title: "Fever, Malaria or Infectious Symptoms",
+                triage_opt1_desc: "Immediate evaluation by General Practitioner",
+                triage_opt2_title: "Antenatal Care / Maternal-Child Health",
+                triage_opt2_desc: "Prenatal care and anaemia screening",
+                triage_opt3_title: "Continuous Cough / Tuberculosis Screening",
+                triage_opt3_desc: "Free DOT Programme / State Subsidized",
+                triage_opt4_title: "Blood Pressure, Glucose or Weight Checkup",
+                triage_opt4_desc: "Specialized Cardiometabolic Assessment",
+
+                services_subtitle: "Services Portfolio",
+                services_title: "Clinical Specialties & Comprehensive Care",
+                services_desc: "This section details the medical offerings at the Zebilla South facility. Filter services to explore coverage, opening hours, and patient guidelines.",
+                filter_all: "All Services",
+                filter_general: "General Medicine",
+                filter_tb: "DOT Centre (Tuberculosis)",
+                filter_maternal: "Maternal & Child Health",
+                filter_metabolic: "Metabolic & Chronic Health",
+
+                card_nhis_badge: "NHIS Covered",
+                card_gov_badge: "National Health Programme",
+                card_check_badge: "Preventive Checkup",
+                card_occ_badge: "Occupational Health",
+
+                s1_title: "General Medicine Consultation",
+                s1_desc: "Diagnosis and treatment of endemic acute illnesses including severe malaria, respiratory infections, typhoid fever, and digestive disorders.",
+                s1_b1: "Continuous rapid triage",
+                s1_b2: "Prescription under NHIS formulary",
+
+                s2_title: "Tuberculosis DOT Centre",
+                s2_desc: "Authorized unit in Bawku West for TB screening, sputum microscopy, and Directly Observed Therapy (DOT) with absolute confidentiality.",
+                s2_b1: "Highly subsidized/free medications",
+                s2_b2: "Community and family follow-up",
+
+                s3_title: "Antenatal & Paediatric Care",
+                s3_desc: "Comprehensive pregnancy monitoring, child growth checks, gestational anaemia prevention, and early malformation screening.",
+                s3_b1: "Pre-birth nutritional assessment",
+                s3_b2: "Specialized paediatric screening",
+
+                s4_title: "Cardiometabolic & Hypertension Health",
+                s4_desc: "Cardiovascular risk evaluation, lipid profiling, liver function (AST/ALT ratios), and integrated management of type 2 diabetes and abdominal obesity.",
+                s4_b1: "Blood pressure & glucose monitoring",
+                s4_b2: "Dietary and lifestyle counseling",
+
+                s5_title: "Hepatitis B Prevention & Clinic",
+                s5_desc: "Serological screening, vaccination, and preventive advisory on Hepatitis B Virus (HBV) to mitigate long-term liver complications.",
+                s5_b1: "Grounded in local UDS research",
+                s5_b2: "Targeted guidance for high-risk groups",
+
+                s6_title: "Occupational Stress Assessment",
+                s6_desc: "Health screening for teaching staff, civil servants, and workers exposed to high workplace stress and associated hypertension.",
+                s6_b1: "Medical fitness certificates",
+                s6_b2: "Workplace nutritional planning",
+
+                team_subtitle: "Medical Leadership & Research",
+                team_title: "Academic Excellence Serving Zebilla",
+                team_desc: "This section highlights the medical practitioners leading clinical care at the centre. Their research guarantees evidence-based treatments adapted to Northern Ghana.",
+                doc1_role: "PRACTITIONER IN-CHARGE / MEDICAL DIRECTOR",
+                doc1_spec: "Specialist in Family Medicine & Public Health",
+                doc1_bio: "With extensive clinical experience in the Upper East Region, Dr. Rodriguez links clinical practice in Zebilla with Tamale Teaching Hospital and the Department of Family Medicine at the University for Development Studies (UDS).",
+                doc1_schedule: "Attends Family Medicine & Antenatal Clinic",
+                doc1_btn: "Book with Dr. Rodriguez",
+
+                doc2_role: "CONSULTANT PHYSICIAN & SPECIALIST",
+                doc2_spec: "Specialist in Occupational & Metabolic Medicine",
+                doc2_bio: "Academically affiliated with Kwame Nkrumah University of Science and Technology (KNUST) and Komfo Anokye Teaching Hospital, Dr. Amoako leads scientific efforts in metabolic syndrome and chronic disease prevention.",
+                doc2_schedule: "Chronic & Occupational Care",
+                doc2_btn: "Book with Dr. Amoako",
+
+                research_title: "Key Published Research:",
+                doc1_r1_t: "Hepatitis B in Northern Ghana (2025):",
+                doc1_r1_d: "Study on HBV awareness and prevention strategies to reduce hepatocellular carcinoma risk.",
+                doc1_r2_t: "Paediatric Surgical Health:",
+                doc1_r2_d: "Longitudinal management of paediatric anorectal malformations in the northern zone.",
+                doc1_r3_t: "Maternal Health:",
+                doc1_r3_d: "Risk factors associated with anaemia among pregnant women attending antenatal clinics.",
+
+                doc2_r1_t: "Cardiometabolic Risk (JHPN):",
+                doc2_r1_d: "Analysis of westernized diet, abdominal obesity, and stress biomarkers.",
+                doc2_r2_t: "Hepatic Biomarkers (AST/ALT):",
+                doc2_r2_d: "Association between dietary patterns, lipid accumulation, and liver function.",
+                doc2_r3_t: "Food Insecurity:",
+                doc2_r3_d: "Impact of nutritional factors on blood pressure and anaemia in young adults.",
+
+                tools_subtitle: "Interactive Patient Tools",
+                tools_title: "Tariff Transparency & Health Indicators",
+                tools_desc: "Use these tools to streamline your visit. Verify your NHIS insurance coverage or calculate a preliminary metabolic health score.",
+
+                nhis_tool_title: "NHIS Coverage Checker",
+                nhis_tool_subtitle: "Pledge of zero extra illegal charges",
+                nhis_tool_desc: "Select the required service to verify your coverage under Ghana's National Health Insurance Scheme at our facility:",
+                nhis_label_service: "Medical Service / Procedure",
+                nhis_opt_select: "-- Select Service --",
+                nhis_opt_1: "General Outpatient Consultation",
+                nhis_opt_2: "Malaria Testing & Treatment",
+                nhis_opt_3: "Routine Antenatal Examination",
+                nhis_opt_4: "Tuberculosis Diagnosis & Medication (DOT)",
+                nhis_opt_5: "Hypertension Monitoring & Management",
+
+                calc_tool_title: "Metabolic Risk Evaluator",
+                calc_tool_subtitle: "Based on research findings by Dr. Amoako",
+                calc_label_gender: "Gender",
+                calc_gender_m: "Male",
+                calc_gender_f: "Female",
+                calc_label_waist: "Waist Circumference (cm)",
+                calc_label_stress: "Do you suffer from high blood pressure or prolonged occupational stress?",
+                calc_stress_no: "No / Normal Pressure",
+                calc_stress_yes: "Yes / Diagnosed or Suspected",
+                calc_btn: "Calculate Preliminary Assessment",
+
+                stats_subtitle: "Health Context & Data",
+                stats_title: "Demographic & Epidemiological Overview",
+                stats_desc: "This section presents quantitative data from Bawku West demographic analyses and published peer-reviewed medical research from our medical leadership.",
+                c1_title: "Cardiometabolic Prevalence in Northern Ghana",
+                c1_desc: "Data extracted from published studies by Dr. Amoako and collaborators.",
+                c1_note: "Note: The high frequency of abdominal obesity (57.1%) underscores the need for routine preventive checkups at the clinic.",
+                c2_title: "Demographic Distribution of Bawku West",
+                c2_desc: "Total Population: 144,189 residents (Official Census - 2,714 km²).",
+                c2_note: "84.9% of residents live in rural areas, making our website a crucial service verification portal before traveling to Zebilla.",
+
+                blog_subtitle: "Community Knowledge Portal",
+                blog_title: "Evidence-Based Health Articles",
+                blog_desc: "Preventive health guides prepared by our medical team translating complex medical literature into actionable community advice.",
+                a1_tag: "Liver Health",
+                a1_title: "Hepatitis B Prevention in Upper East Region",
+                a1_desc: "Based on research by Dr. Rodriguez (2025). Learn how the virus affects liver health, transmission routes, and the importance of early vaccination.",
+                a2_tag: "Cardiovascular Health",
+                a2_title: "Hypertension, Occupational Stress & Diet",
+                a2_desc: "Derived from Dr. Amoako's published findings. Explaining how westernized dietary habits and daily stress increase blood pressure.",
+                a3_tag: "Maternal Health",
+                a3_title: "Combating Anaemia in Pregnancy",
+                a3_desc: "A mother's guide to iron supplementation, nutrient-dense local foods, and timely antenatal checkups at the medical centre.",
+                read_article_btn: "Read Full Article",
+
+                booking_title: "Medical Appointment Request",
+                booking_subtitle: "Fill in your details. Your request will be processed, and our reception team will confirm via phone or WhatsApp message.",
+                form_label_name: "Full Patient Name *",
+                form_label_phone: "Contact Telephone *",
+                form_label_doctor: "Preferred Specialist",
+                doc_opt_any: "Any Available Specialist",
+                doc_opt_celia: "Dr. Celia Yamile Rodriguez (Family Medicine / Antenatal)",
+                doc_opt_moses: "Dr. Moses Ofosu Amoako (Metabolic / Chronic Health)",
+                form_label_nhis: "Active NHIS Card? *",
+                nhis_opt_yes: "Yes - Active NHIS Card",
+                nhis_opt_no: "No / Private Payment",
+                nhis_opt_renew: "In Renewal Process",
+                form_label_notes: "Primary Reason for Visit or Symptoms",
+                form_btn_submit: "Confirm & Send Request",
+
+                contact_title: "Institutional Information",
+                contact_subtitle: "Strategically located in Zebilla South to serve Bawku West District and surrounding communities.",
+                c_addr_title: "Physical Location",
+                c_addr_val: "Zebilla South, Bawku West District, Upper East Region (U.E.R.), Ghana",
+                c_post_title: "Official Postal Address",
+                c_phone_title: "Direct Telephone Lines",
+                c_phone_line1: "Reception 1",
+                c_phone_line2: "Reception 2",
+                c_status_title: "Regulatory & Insurance Status",
+                c_status_hefra: "Ghana Primary Health Clinic HeFRA Licence",
+                c_status_nhis: "Accredited NHIS Service Provider",
+                c_safe_title: "Safe & Uninterrupted Environment",
+                c_safe_desc: "Located in Zebilla South, our facility benefits from continuous stability, serving as a reliable healthcare sanctuary for the entire region.",
+
+                footer_rights: "© 2026. All rights reserved.",
+                footer_nhis_policy: "NHIS Policy",
+                modal_book_title: "Request Generated Successfully!",
+                modal_book_wa: "Confirm on WhatsApp",
+                modal_close: "Close",
+
+                mobile_menu_aria: "Open Menu",
+                calc_waist_placeholder: "e.g. 92",
+                form_name_placeholder: "e.g. Kwesi Mensah",
+                form_phone_placeholder: "e.g. 024XXXXXXX",
+                form_notes_placeholder: "Briefly describe the reason for your visit..."
+            }
+        };
+
+        let currentLang = 'es';
+        let metabolicChartInstance = null;
+        let demographicsChartInstance = null;
+        let lastTriageType = null;
+        let lastBlogType = null;
+
+        // Switch Language Function
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+
+            // Update Active Buttons UI
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active', 'bg-medical-600', 'text-white'));
+            
+            if (lang === 'es') {
+                document.getElementById('btnLangEs').classList.add('active');
+                document.getElementById('btnLangEn').classList.remove('active');
+                document.getElementById('btnLangEsMob').classList.add('active');
+                document.getElementById('btnLangEnMob').classList.remove('active');
+            } else {
+                document.getElementById('btnLangEn').classList.add('active');
+                document.getElementById('btnLangEs').classList.remove('active');
+                document.getElementById('btnLangEnMob').classList.add('active');
+                document.getElementById('btnLangEsMob').classList.remove('active');
+            }
+
+            // Translate Text Elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(elem => {
+                const key = elem.getAttribute('data-i18n');
+                if (i18n[lang][key]) {
+                    elem.innerText = i18n[lang][key];
+                }
+            });
+
+            // Translate placeholders and aria-labels
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(elem => {
+                const key = elem.getAttribute('data-i18n-placeholder');
+                if (i18n[lang][key]) {
+                    elem.setAttribute('placeholder', i18n[lang][key]);
+                }
+            });
+            document.querySelectorAll('[data-i18n-aria]').forEach(elem => {
+                const key = elem.getAttribute('data-i18n-aria');
+                if (i18n[lang][key]) {
+                    elem.setAttribute('aria-label', i18n[lang][key]);
+                }
+            });
+
+            // Re-render NHIS checker & Risk calculator if active
+            checkNhisCoverage();
+            if (!document.getElementById('calcResult').classList.contains('hidden')) {
+                calculateMetabolicRisk();
+            }
+            if (lastTriageType) {
+                quickTriage(lastTriageType);
+            }
+            if (lastBlogType && !document.getElementById('blogModal').classList.contains('hidden')) {
+                openBlogModal(lastBlogType);
+            }
+
+            // Re-render Charts with Translated Labels
+            updateChartsLanguage();
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Quick Triage Handler
+        function quickTriage(type) {
+            const res = document.getElementById('triageResult');
+            res.classList.remove('hidden');
+            lastTriageType = type;
+            
+            if (currentLang === 'es') {
+                if (type === 'general') {
+                    res.innerHTML = `<strong><i class="fa-solid fa-stethoscope"></i> Indicación:</strong> Preséntese en admisión general. Diagnóstico de malaria y tratamiento agudo cubierto según protocolo NHIS. Atendido por el equipo de medicina familiar.`;
+                } else if (type === 'maternal') {
+                    res.innerHTML = `<strong><i class="fa-solid fa-person-pregnant"></i> Indicación:</strong> Cita en la clínica de Atención Prenatal. Incluye revisión de presión arterial, suplementación de hierro y despistaje preventivo liderado por la Dra. Celia Rodriguez.`;
+                } else if (type === 'tb') {
+                    res.innerHTML = `<strong><i class="fa-solid fa-lungs"></i> Indicación:</strong> Diríjase a la Unidad DOT para Tuberculosis. Las pruebas de esputo y los esquemas de tratamiento cuentan con subsidio oficial del Estado. Confidencialidad garantizada.`;
+                } else if (type === 'metabolic') {
+                    res.innerHTML = `<strong><i class="fa-solid fa-heart-pulse"></i> Indicación:</strong> Agende una evaluación cardiometabólica. Se recomienda ayuno previo para toma de perfil lipídico y glucosa bajo orientación supervisada por el Dr. Moses Amoako.`;
+                }
+            } else {
+                if (type === 'general') {
+                    res.innerHTML = `<strong><i class="fa-solid fa-stethoscope"></i> Guidance:</strong> Report to general admissions. Malaria diagnosis and acute treatment are fully covered under NHIS protocol. Attended by the family medicine team.`;
+                } else if (type === 'maternal') {
+                    res.innerHTML = `<strong><i class="fa-solid fa-person-pregnant"></i> Guidance:</strong> Visit our Antenatal Clinic. Includes blood pressure checks, iron supplementation, and preventive screening led by Dr. Celia Rodriguez.`;
+                } else if (type === 'tb') {
+                    res.innerHTML = `<strong><i class="fa-solid fa-lungs"></i> Guidance:</strong> Proceed directly to the TB DOT Unit. Sputum microscopy tests and medications are state-subsidized and confidential.`;
+                } else if (type === 'metabolic') {
+                    res.innerHTML = `<strong><i class="fa-solid fa-heart-pulse"></i> Guidance:</strong> Schedule a cardiometabolic assessment. Fasting prior to your visit is recommended for lipid and glucose profile checks supervised by Dr. Moses Amoako.`;
+                }
+            }
+        }
+
+        // Service Filter Tabs
+        function filterServices(category, evt) {
+            const cards = document.querySelectorAll('.service-card');
+            const btns = document.querySelectorAll('.service-tab-btn');
+
+            btns.forEach(btn => {
+                btn.classList.remove('bg-medical-600', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-700', 'border', 'border-stone-300');
+            });
+
+            evt.target.classList.remove('bg-white', 'text-slate-700', 'border', 'border-stone-300');
+            evt.target.classList.add('bg-medical-600', 'text-white');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // Preselect Doctor in Booking Form
+        function preselectDoctor(doctorName) {
+            document.getElementById('doctorSelect').value = doctorName;
+        }
+
+        // NHIS Checker Logic
+        function checkNhisCoverage() {
+            const val = document.getElementById('nhisSelect').value;
+            const res = document.getElementById('nhisResult');
+            
+            if (!val) {
+                res.classList.add('hidden');
+                return;
+            }
+
+            res.classList.remove('hidden');
+            
+            if (currentLang === 'es') {
+                if (val === 'general') {
+                    res.innerHTML = `<p class="font-bold text-emerald-800"><i class="fa-solid fa-circle-check"></i> Cobertura Total Activa (NHIS)</p>
+                    <p class="mt-1">La consulta general de triaje y prescripción de fármacos básicos del cuadro nacional están cubiertos. El centro respeta la política de 0 cobros ilegales adicionales.</p>`;
+                } else if (val === 'malaria') {
+                    res.innerHTML = `<p class="font-bold text-emerald-800"><i class="fa-solid fa-circle-check"></i> Cobertura Total Activa (NHIS)</p>
+                    <p class="mt-1">Pruebas rápidas (RDT), microscopía y tratamiento antimalárico oficial sin coste adicional de bolsillo.</p>`;
+                } else if (val === 'prenatal') {
+                    res.innerHTML = `<p class="font-bold text-emerald-800"><i class="fa-solid fa-circle-check"></i> Cobertura Gratuita Prioritaria</p>
+                    <p class="mt-1">Las visitas prenatales de rutina y chequeos de bienestar materno están respaldados por el esquema de exención materna del NHIS.</p>`;
+                } else if (val === 'tb') {
+                    res.innerHTML = `<p class="font-bold text-amber-800"><i class="fa-solid fa-circle-check"></i> Programa de Subsidio Nacional DOT</p>
+                    <p class="mt-1">El diagnóstico y tratamiento estandarizado de Tuberculosis en nuestro Centro DOT oficial no requiere desembolso por parte del paciente.</p>`;
+                } else if (val === 'hipertension') {
+                    res.innerHTML = `<p class="font-bold text-emerald-800"><i class="fa-solid fa-circle-check"></i> Cobertura Parcial / Total NHIS</p>
+                    <p class="mt-1">Consultas y medicación antihipertensiva estándar cubiertas según disponibilidad del formulario. Se informará con transparencia si se requieren pruebas de laboratorio avanzadas.</p>`;
+                }
+            } else {
+                if (val === 'general') {
+                    res.innerHTML = `<p class="font-bold text-emerald-800"><i class="fa-solid fa-circle-check"></i> Full Active Coverage (NHIS)</p>
+                    <p class="mt-1">General consultation triage and essential medicines under the national formulary are covered. Strict zero co-pay policy applies.</p>`;
+                } else if (val === 'malaria') {
+                    res.innerHTML = `<p class="font-bold text-emerald-800"><i class="fa-solid fa-circle-check"></i> Full Active Coverage (NHIS)</p>
+                    <p class="mt-1">Rapid Diagnostic Tests (RDTs), microscopy, and official ACT antimalarial medications are free at point of care.</p>`;
+                } else if (val === 'prenatal') {
+                    res.innerHTML = `<p class="font-bold text-emerald-800"><i class="fa-solid fa-circle-check"></i> Free Exempt Coverage</p>
+                    <p class="mt-1">Routine antenatal visits and maternal health checks are covered under the NHIS Free Maternal Care Scheme.</p>`;
+                } else if (val === 'tb') {
+                    res.innerHTML = `<p class="font-bold text-amber-800"><i class="fa-solid fa-circle-check"></i> National DOT Subsidized Programme</p>
+                    <p class="mt-1">Tuberculosis testing and standard treatment regimen at our official DOT Centre carry zero out-of-pocket costs.</p>`;
+                } else if (val === 'hipertension') {
+                    res.innerHTML = `<p class="font-bold text-emerald-800"><i class="fa-solid fa-circle-check"></i> NHIS Standard Coverage</p>
+                    <p class="mt-1">Consultations and standard antihypertensive medications covered under the national scheme. Full transparent disclosure if advanced lab tests are needed.</p>`;
+                }
+            }
+        }
+
+        // Cardiometabolic Risk Calculator (Based on Dr. Amoako's Study)
+        function calculateMetabolicRisk() {
+            const gender = document.getElementById('calcGender').value;
+            const waist = parseFloat(document.getElementById('calcWaist').value);
+            const pressure = document.getElementById('calcPressure').value;
+            const res = document.getElementById('calcResult');
+
+            if (isNaN(waist) || waist <= 0) {
+                alert(currentLang === 'es' ? 'Por favor introduzca un valor de cintura válido en centímetros.' : 'Please enter a valid waist circumference in centimetres.');
+                return;
+            }
+
+            res.classList.remove('hidden');
+
+            let isAbdominalObesity = false;
+            if (gender === 'hombre' && waist >= 94) isAbdominalObesity = true;
+            if (gender === 'mujer' && waist >= 80) isAbdominalObesity = true;
+
+            if (isAbdominalObesity || pressure === 'si') {
+                res.className = 'mt-4 p-4 rounded-xl border text-xs bg-amber-50 border-amber-200 text-amber-900';
+                if (currentLang === 'es') {
+                    res.innerHTML = `<p class="font-bold text-sm mb-1"><i class="fa-solid fa-triangle-exclamation"></i> Indicadores de Atención Cardiometabólica Detectados</p>
+                    <p>Su medición indica posible presencia de obesidad abdominal o tensión elevada (condición presente en el 57.1% de pacientes evaluados en estudios regionales del Dr. Amoako). Le recomendamos agendar un chequeo preventivo para medir perfil hepático (AST/ALT), lípidos y glucosa en sangre.</p>`;
+                } else {
+                    res.innerHTML = `<p class="font-bold text-sm mb-1"><i class="fa-solid fa-triangle-exclamation"></i> Cardiometabolic Attention Indicators Detected</p>
+                    <p>Your measurements indicate abdominal obesity or elevated blood pressure (observed in 57.1% of patients in regional studies led by Dr. Amoako). We recommend booking a preventive checkup for liver enzyme ratios (AST/ALT), lipid profile, and blood glucose testing.</p>`;
+                }
+            } else {
+                res.className = 'mt-4 p-4 rounded-xl border text-xs bg-emerald-50 border-emerald-200 text-emerald-900';
+                if (currentLang === 'es') {
+                    res.innerHTML = `<p class="font-bold text-sm mb-1"><i class="fa-solid fa-circle-check"></i> Indicadores en Rango de Normalidad</p>
+                    <p>Su perímetro de cintura se encuentra dentro de los parámetros recomendados de bajo riesgo metabólico. Mantenga una alimentación equilibrada con baja ingesta de ultraprocesados y realice actividad física regular.</p>`;
+                } else {
+                    res.innerHTML = `<p class="font-bold text-sm mb-1"><i class="fa-solid fa-circle-check"></i> Measurements Within Normal Range</p>
+                    <p>Your waist circumference falls within recommended healthy parameters for lower metabolic risk. Maintain a balanced diet low in ultra-processed foods and engage in regular physical activity.</p>`;
+                }
+            }
+        }
+
+        // Blog Modals
+        function openBlogModal(type) {
+            const modal = document.getElementById('blogModal');
+            const container = document.getElementById('blogModalContent');
+            modal.classList.remove('hidden');
+            lastBlogType = type;
+
+            if (type === 'hepB') {
+                if (currentLang === 'es') {
+                    container.innerHTML = `
+                        <span class="text-xs font-bold text-teal-700 bg-teal-100 px-2.5 py-1 rounded-md">Investigación Médica</span>
+                        <h3 class="text-2xl font-bold text-brandDark mt-3 mb-2">Hepatitis B en el Norte de Ghana: Protección y Diagnóstico Oportuno</h3>
+                        <p class="text-xs text-slate-500 mb-4">Basado en la investigación de la Dra. Celia Yamile Rodriguez et al. (2025)</p>
+                        <div class="text-xs text-slate-700 space-y-3 leading-relaxed">
+                            <p>El Virus de la Hepatitis B (VHB) representa uno de los desafíos de salud pública más significativos en nuestra región. En investigaciones realizadas entre estudiantes y comunidades de la UDS, se constató que si bien el 94.25% comprende que el VHB puede causar cirrosis y carcinoma hepatocelular, persisten brechas en las prácticas de detección y vacunación.</p>
+                            <p><strong>¿Cómo Proteger a su Familia en Zebilla?</strong></p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li><strong>Tamizaje Serológico:</strong> Una simple prueba de sangre en la clínica determina si es portador o requiere vacunación.</li>
+                                <li><strong>Esquema de Vacunación:</strong> La vacuna es altamente efectiva para prevenir la infección.</li>
+                                <li><strong>Prevención Familiar:</strong> Es fundamental el control prenatal para evitar la transmisión de madre a hijo durante el parto.</li>
+                            </ul>
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = `
+                        <span class="text-xs font-bold text-teal-700 bg-teal-100 px-2.5 py-1 rounded-md">Medical Research</span>
+                        <h3 class="text-2xl font-bold text-brandDark mt-3 mb-2">Hepatitis B in Northern Ghana: Early Diagnosis & Protection</h3>
+                        <p class="text-xs text-slate-500 mb-4">Based on published research by Dr. Celia Yamile Rodriguez et al. (2025)</p>
+                        <div class="text-xs text-slate-700 space-y-3 leading-relaxed">
+                            <p>Hepatitis B Virus (HBV) remains a major public health challenge in Northern Ghana. Studies conducted across university and regional populations show that while 94.25% understand HBV causes cirrhosis and liver cancer, significant gaps remain in screening and complete vaccination coverage.</p>
+                            <p><strong>Protecting Your Family in Zebilla:</strong></p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li><strong>Serological Screening:</strong> A rapid blood test at Naaba Akparabilla Medical Centre confirms your status.</li>
+                                <li><strong>Vaccination Routine:</strong> Highly effective immunization for non-infected individuals.</li>
+                                <li><strong>Mother-to-Child Prevention:</strong> Essential antenatal screening to prevent vertical transmission during delivery.</li>
+                            </ul>
+                        </div>
+                    `;
+                }
+            } else if (type === 'hipertension') {
+                if (currentLang === 'es') {
+                    container.innerHTML = `
+                        <span class="text-xs font-bold text-indigo-700 bg-indigo-100 px-2.5 py-1 rounded-md">Salud Ocupacional</span>
+                        <h3 class="text-2xl font-bold text-brandDark mt-3 mb-2">Hipertensión y Síndrome Metabólico: El Vínculo con el Estrés</h3>
+                        <p class="text-xs text-slate-500 mb-4">Basado en las publicaciones científicas del Dr. Moses Ofosu Amoako</p>
+                        <div class="text-xs text-slate-700 space-y-3 leading-relaxed">
+                            <p>Los estudios publicados en el <em>Journal of Health Population and Nutrition</em> revelan una prevalencia del 11.0% de síndrome metabólico, con un 29.7% de hipertensión arterial y un 57.1% de adiposidad abdominal en trabajadores expuestos a estrés.</p>
+                            <p><strong>Factores Clave identificados:</strong></p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li><strong>Adopción de Dieta Occidental:</strong> Sustituir alimentos frescos por procesados eleva marcadores de alteración hepática (AST/ALT).</li>
+                                <li><strong>Estrés Laboral Sostenido:</strong> Mantiene el cortisol elevado, rigidizando arterias y aumentando la presión arterial.</li>
+                            </ul>
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = `
+                        <span class="text-xs font-bold text-indigo-700 bg-indigo-100 px-2.5 py-1 rounded-md">Occupational Health</span>
+                        <h3 class="text-2xl font-bold text-brandDark mt-3 mb-2">Hypertension & Metabolic Syndrome: The Stress Connection</h3>
+                        <p class="text-xs text-slate-500 mb-4">Based on peer-reviewed research by Dr. Moses Ofosu Amoako</p>
+                        <div class="text-xs text-slate-700 space-y-3 leading-relaxed">
+                            <p>Research in the <em>Journal of Health Population and Nutrition</em> highlights an 11.0% prevalence of metabolic syndrome, 29.7% hypertension rate, and 57.1% abdominal adiposity among working populations in Ghana.</p>
+                            <p><strong>Key Contributing Factors:</strong></p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li><strong>Westernized Dietary Habits:</strong> Higher intake of processed foods alters liver enzyme ratios (AST/ALT).</li>
+                                <li><strong>Occupational Stress:</strong> Chronically elevated cortisol levels contribute to arterial stiffness and hypertension.</li>
+                            </ul>
+                        </div>
+                    `;
+                }
+            } else if (type === 'anemia') {
+                if (currentLang === 'es') {
+                    container.innerHTML = `
+                        <span class="text-xs font-bold text-rose-700 bg-rose-100 px-2.5 py-1 rounded-md">Salud Prenatal</span>
+                        <h3 class="text-2xl font-bold text-brandDark mt-3 mb-2">Combatiendo la Anemia Durante el Embarazo</h3>
+                        <p class="text-xs text-slate-500 mb-4">Orientación clínica prenatal del departamento de Medicina Familiar</p>
+                        <div class="text-xs text-slate-700 space-y-3 leading-relaxed">
+                            <p>La anemia gestacional es una de las causas principales de bajo peso al nacer en la Región Alta Oriental. La detección temprana durante las primeras semanas de gestación es crucial.</p>
+                            <p><strong>Recomendaciones Clínicas:</strong></p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Asistir a controles prenatales periódicos desde el primer trimestre.</li>
+                                <li>Consumir suplementos de hierro y ácido fólico provistos en la clínica.</li>
+                                <li>Integrar alimentos locales ricos en hierro biodisponible acompañados de vitamina C.</li>
+                            </ul>
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = `
+                        <span class="text-xs font-bold text-rose-700 bg-rose-100 px-2.5 py-1 rounded-md">Prenatal Health</span>
+                        <h3 class="text-2xl font-bold text-brandDark mt-3 mb-2">Combating Gestational Anaemia in Upper East Region</h3>
+                        <p class="text-xs text-slate-500 mb-4">Clinical antenatal guidance from our Family Medicine department</p>
+                        <div class="text-xs text-slate-700 space-y-3 leading-relaxed">
+                            <p>Gestational anaemia remains a primary cause of low birth weight and perinatal complications. Early detection during initial antenatal visits is critical for mother and child safety.</p>
+                            <p><strong>Key Clinical Guidelines:</strong></p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Attend regular antenatal care starting in the first trimester.</li>
+                                <li>Take prescribed iron and folic acid supplements supplied at our clinic.</li>
+                                <li>Incorporate nutrient-dense local iron sources paired with Vitamin C.</li>
+                            </ul>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        function closeBlogModal() {
+            document.getElementById('blogModal').classList.add('hidden');
+            lastBlogType = null;
+        }
+
+        // Booking Form Handling
+        function handleBooking(e) {
+            e.preventDefault();
+            const name = document.getElementById('patientName').value;
+            const phone = document.getElementById('patientPhone').value;
+            const doctor = document.getElementById('doctorSelect').value;
+            const nhis = document.getElementById('nhisStatus').value;
+            const notes = document.getElementById('patientNotes').value;
+
+            const textMsg = `Hello, I would like to book an appointment at Naaba Akparabilla Medical Centre.\n*Patient:* ${name}\n*Phone:* ${phone}\n*Doctor:* ${doctor}\n*NHIS Status:* ${nhis}\n*Reason:* ${notes}`;
+
+            const whatsappUrl = `https://wa.me/233243711851?text=${encodeURIComponent(textMsg)}`;
+
+            document.getElementById('whatsappConfirmBtn').href = whatsappUrl;
+            
+            if (currentLang === 'es') {
+                document.getElementById('bookingModalText').innerText = `Gracias ${name}. Su solicitud para ${doctor} ha sido registrada. Haga clic para abrir WhatsApp y enviar la confirmación a la recepción del centro (0243-711851).`;
+            } else {
+                document.getElementById('bookingModalText').innerText = `Thank you ${name}. Your appointment request for ${doctor} is prepared. Click below to confirm via WhatsApp with our reception (0243-711851).`;
+            }
+
+            document.getElementById('bookingModal').classList.remove('hidden');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+        }
+
+        // Update Chart Labels on Language Switch
+        function updateChartsLanguage() {
+            if (!metabolicChartInstance || !demographicsChartInstance) return;
+
+            if (currentLang === 'es') {
+                metabolicChartInstance.data.labels = [
+                    ['Obesidad', 'Abdominal'],
+                    ['Hipertensión', 'Arterial'],
+                    ['Síndrome', 'Metabólico']
+                ];
+                metabolicChartInstance.data.datasets[0].label = 'Prevalencia (%)';
+
+                demographicsChartInstance.data.labels = ['Población Rural (84.9%)', 'Población Urbana (15.1%)'];
+            } else {
+                metabolicChartInstance.data.labels = [
+                    ['Abdominal', 'Obesity'],
+                    ['Arterial', 'Hypertension'],
+                    ['Metabolic', 'Syndrome']
+                ];
+                metabolicChartInstance.data.datasets[0].label = 'Prevalence (%)';
+
+                demographicsChartInstance.data.labels = ['Rural Population (84.9%)', 'Urban Population (15.1%)'];
+            }
+
+            metabolicChartInstance.update();
+            demographicsChartInstance.update();
+        }
+
+        // Initialize Chart.js Data Visualizations
+        window.addEventListener('DOMContentLoaded', () => {
+            // Chart 1: Metabolic Indicators
+            const ctx1 = document.getElementById('metabolicChart').getContext('2d');
+            metabolicChartInstance = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        ['Obesidad', 'Abdominal'],
+                        ['Hipertensión', 'Arterial'],
+                        ['Síndrome', 'Metabólico']
+                    ],
+                    datasets: [{
+                        label: 'Prevalencia (%)',
+                        data: [57.1, 29.7, 11.0],
+                        backgroundColor: [
+                            'rgba(13, 148, 136, 0.85)',
+                            'rgba(30, 41, 59, 0.85)',
+                            'rgba(217, 119, 6, 0.85)'
+                        ],
+                        borderColor: [
+                            '#0d9488',
+                            '#1e293b',
+                            '#d97706'
+                        ],
+                        borderWidth: 1.5,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ' ' + context.dataset.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 70,
+                            ticks: {
+                                callback: function(value) { return value + '%'; }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Bawku West Demographics
+            const ctx2 = document.getElementById('demographicsChart').getContext('2d');
+            demographicsChartInstance = new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Población Rural (84.9%)', 'Población Urbana (15.1%)'],
+                    datasets: [{
+                        data: [84.9, 15.1],
+                        backgroundColor: [
+                            'rgba(13, 148, 136, 0.85)',
+                            'rgba(217, 119, 6, 0.85)'
+                        ],
+                        hoverOffset: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { boxWidth: 12, font: { size: 11 } }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ' ' + context.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
