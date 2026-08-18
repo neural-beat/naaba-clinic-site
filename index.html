@@ -692,7 +692,7 @@
                         <i class="fa-regular fa-calendar-check text-emerald-400"></i> <span data-i18n="booking_title">Solicitud de Cita Médica</span>
                     </h3>
                     <p data-i18n="booking_subtitle" class="text-slate-300 text-sm mb-6">
-                        Complete sus datos. Su solicitud será procesada y el equipo enviará la confirmación vía llamada o mensaje de WhatsApp.
+                        Complete sus datos. Su solicitud quedará registrada y nuestro equipo se pondrá en contacto pronto.
                     </p>
 
                     <form id="bookingForm" onsubmit="handleBooking(event)" class="space-y-4 text-sm">
@@ -702,8 +702,19 @@
                                 <input type="text" id="patientName" required data-i18n-placeholder="form_name_placeholder" placeholder="ej. Kwesi Mensah" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                             </div>
                             <div>
+                                <label data-i18n="form_label_age" class="block font-medium text-slate-300 mb-1">Edad *</label>
+                                <input type="number" id="patientAge" required min="0" max="120" data-i18n-placeholder="form_age_placeholder" placeholder="ej. 34" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
                                 <label data-i18n="form_label_phone" class="block font-medium text-slate-300 mb-1">Teléfono de Contacto *</label>
                                 <input type="tel" id="patientPhone" required data-i18n-placeholder="form_phone_placeholder" placeholder="ej. 024XXXXXXX" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label data-i18n="form_label_email" class="block font-medium text-slate-300 mb-1">Correo Electrónico *</label>
+                                <input type="email" id="patientEmail" required data-i18n-placeholder="form_email_placeholder" placeholder="ej. kwesi@ejemplo.com" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                             </div>
                         </div>
 
@@ -711,29 +722,42 @@
                             <div>
                                 <label data-i18n="form_label_doctor" class="block font-medium text-slate-300 mb-1">Especialista Preferido</label>
                                 <select id="doctorSelect" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
-                                    <option value="Cualquier Especialista Disponible" data-i18n="doc_opt_any">Cualquier Especialista Disponible</option>
-                                    <option value="Dra. Celia Yamile Rodriguez" data-i18n="doc_opt_celia">Dra. Celia Yamile Rodriguez (Med. Familiar / Prenatal)</option>
-                                    <option value="Dr. Moses Ofosu Amoako" data-i18n="doc_opt_moses">Dr. Moses Ofosu Amoako (Salud Metabólica / Crónica)</option>
+                                    <option value="Cualquier Especialista Disponible" data-en="Any Available Specialist" data-i18n="doc_opt_any">Cualquier Especialista Disponible</option>
+                                    <option value="Dra. Celia Yamile Rodriguez" data-en="Dr. Celia Yamile Rodriguez (Family Medicine / Antenatal)" data-i18n="doc_opt_celia">Dra. Celia Yamile Rodriguez (Med. Familiar / Prenatal)</option>
+                                    <option value="Dr. Moses Ofosu Amoako" data-en="Dr. Moses Ofosu Amoako (Metabolic / Chronic Health)" data-i18n="doc_opt_moses">Dr. Moses Ofosu Amoako (Salud Metabólica / Crónica)</option>
                                 </select>
                             </div>
                             <div>
                                 <label data-i18n="form_label_nhis" class="block font-medium text-slate-300 mb-1">¿Posee Seguro NHIS Activo? *</label>
                                 <select id="nhisStatus" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
-                                    <option value="Sí - NHIS Activo" data-i18n="nhis_opt_yes">Sí - Carnet NHIS Activo</option>
-                                    <option value="No / Pago Particular" data-i18n="nhis_opt_no">No / Pago Particular</option>
-                                    <option value="En Proceso de Renovación" data-i18n="nhis_opt_renew">En Proceso de Renovación</option>
+                                    <option value="Sí - NHIS Activo" data-en="Yes - Active NHIS" data-i18n="nhis_opt_yes">Sí - Carnet NHIS Activo</option>
+                                    <option value="No / Pago Particular" data-en="No - Private Payment" data-i18n="nhis_opt_no">No / Pago Particular</option>
+                                    <option value="En Proceso de Renovación" data-en="Renewal in Progress" data-i18n="nhis_opt_renew">En Proceso de Renovación</option>
                                 </select>
                             </div>
                         </div>
 
                         <div>
                             <label data-i18n="form_label_notes" class="block font-medium text-slate-300 mb-1">Motivo Principal de Consulta o Síntomas</label>
-                            <textarea id="patientNotes" rows="3" data-i18n-placeholder="form_notes_placeholder" placeholder="Describa brevemente la razón de su visita..." class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none"></textarea>
+                            <textarea id="patientNotes" rows="3" required data-i18n-placeholder="form_notes_placeholder" placeholder="Describa brevemente la razón de su visita..." class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none"></textarea>
                         </div>
 
                         <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-3.5 rounded-xl text-sm transition flex items-center justify-center gap-2">
                             <i class="fa-solid fa-paper-plane"></i> <span data-i18n="form_btn_submit">Confirmar y Enviar Solicitud</span>
                         </button>
+                    </form>
+
+                    <!-- Hidden target + form: relays the booking to the clinic's private
+                         Google Sheet without ever showing Google's own UI to the patient -->
+                    <iframe name="bookingTargetFrame" class="hidden" title="booking-submit-target"></iframe>
+                    <form id="bookingRelayForm" action="https://docs.google.com/forms/d/e/1FAIpQLSdGJcaEeJuc7WEVfkyO7O8G2kORpwl5gU2xZ2-2k6RlGbWNBg/formResponse" method="POST" target="bookingTargetFrame" class="hidden">
+                        <input type="text" name="entry.1417984826" id="relayName">
+                        <input type="text" name="entry.330290930" id="relayAge">
+                        <input type="text" name="entry.622256896" id="relayPhone">
+                        <input type="text" name="entry.772699531" id="relayEmail">
+                        <input type="text" name="entry.1777388316" id="relayDoctor">
+                        <input type="text" name="entry.287828294" id="relayNhis">
+                        <input type="text" name="entry.1580991641" id="relayNotes">
                     </form>
                 </div>
 
@@ -851,6 +875,24 @@
         <span data-i18n="floating_review_btn" class="hidden sm:inline text-sm whitespace-nowrap">Dejar una Reseña</span>
     </a>
 
+    <!-- Booking Confirmation Modal -->
+    <div id="bookingModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 text-center space-y-4 shadow-2xl">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 data-i18n="modal_book_title" class="text-xl font-bold text-brandDark">¡Solicitud Generada con Éxito!</h3>
+            <p class="text-sm text-slate-600 leading-relaxed" id="bookingModalText">
+                Su cita ha sido registrada.
+            </p>
+            <div class="pt-2">
+                <button onclick="closeBookingModal()" data-i18n="modal_close" class="block w-full bg-medical-600 hover:bg-medical-700 text-white font-semibold py-2.5 rounded-xl text-sm transition">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Article Reader Modal -->
     <div id="blogModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-2xl max-w-2xl w-full p-6 md:p-8 max-h-[85vh] overflow-y-auto relative shadow-2xl">
@@ -863,26 +905,6 @@
         </div>
     </div>
 
-    <!-- Booking Confirmation Modal -->
-    <div id="bookingModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 text-center space-y-4 shadow-2xl">
-            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto">
-                <i class="fa-solid fa-circle-check"></i>
-            </div>
-            <h3 data-i18n="modal_book_title" class="text-xl font-bold text-brandDark">¡Solicitud Generada con Éxito!</h3>
-            <p class="text-sm text-slate-600 leading-relaxed" id="bookingModalText">
-                Su cita ha sido registrada temporalmente. Para confirmación inmediata con recepción vía WhatsApp, haga clic en el botón a continuación.
-            </p>
-            <div class="pt-2 space-y-2">
-                <a id="emailConfirmBtn" href="#" class="block w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-3 rounded-xl text-sm transition">
-                    <i class="fa-solid fa-envelope text-lg mr-1"></i> <span data-i18n="modal_book_email">Enviar Correo</span>
-                </a>
-                <button onclick="closeBookingModal()" data-i18n="modal_close" class="block w-full bg-stone-200 hover:bg-stone-300 text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition">
-                    Cerrar
-                </button>
-            </div>
-        </div>
-    </div>
 
     <!-- JAVASCRIPT LOGIC & MULTILINGUAL i18n SYSTEM -->
     <script>
@@ -1047,9 +1069,13 @@
                 read_article_btn: "Leer Artículo Completo",
 
                 booking_title: "Solicitud de Cita Médica",
-                booking_subtitle: "Complete sus datos. Su solicitud será procesada y el equipo enviará la confirmación vía llamada o mensaje de WhatsApp.",
+                booking_subtitle: "Complete sus datos. Su solicitud quedará registrada y nuestro equipo se pondrá en contacto con usted pronto.",
                 form_label_name: "Nombre Completo del Paciente *",
+                form_label_age: "Edad *",
+                form_age_placeholder: "ej. 34",
                 form_label_phone: "Teléfono de Contacto *",
+                form_label_email: "Correo Electrónico *",
+                form_email_placeholder: "ej. kwesi@ejemplo.com",
                 form_label_doctor: "Especialista Preferido",
                 doc_opt_any: "Cualquier Especialista Disponible",
                 doc_opt_celia: "Dra. Celia Yamile Rodriguez (Med. Familiar / Prenatal)",
@@ -1079,7 +1105,6 @@
                 footer_rights: "© 2026. Todos los derechos reservados.",
                 footer_nhis_policy: "Política NHIS",
                 modal_book_title: "¡Solicitud Generada con Éxito!",
-                modal_book_email: "Enviar Correo",
                 modal_close: "Cerrar",
 
                 mobile_menu_aria: "Abrir Menú",
@@ -1258,9 +1283,13 @@
                 read_article_btn: "Read Full Article",
 
                 booking_title: "Medical Appointment Request",
-                booking_subtitle: "Fill in your details. Your request will be processed, and our reception team will confirm via phone or WhatsApp message.",
+                booking_subtitle: "Fill in your details. Your request will be recorded, and our team will get in touch with you shortly.",
                 form_label_name: "Full Patient Name *",
+                form_label_age: "Age *",
+                form_age_placeholder: "e.g. 34",
                 form_label_phone: "Contact Telephone *",
+                form_label_email: "Email Address *",
+                form_email_placeholder: "e.g. kwesi@example.com",
                 form_label_doctor: "Preferred Specialist",
                 doc_opt_any: "Any Available Specialist",
                 doc_opt_celia: "Dr. Celia Yamile Rodriguez (Family Medicine / Antenatal)",
@@ -1290,7 +1319,6 @@
                 footer_rights: "© 2026. All rights reserved.",
                 footer_nhis_policy: "NHIS Policy",
                 modal_book_title: "Request Generated Successfully!",
-                modal_book_email: "Send Email",
                 modal_close: "Close",
 
                 mobile_menu_aria: "Open Menu",
@@ -1496,6 +1524,46 @@
             if (chevron) chevron.classList.toggle('rotate-180', willOpen);
         }
 
+        // Booking Form Handling — the visible form matches the site's own design;
+        // submitting it silently relays the data into the clinic's private Google
+        // Sheet via a hidden form targeting a hidden iframe (no redirect, no Google
+        // UI ever shown to the patient). Staff can sort the Sheet by doctor, NHIS
+        // status, age, etc. There is no automatic confirmation email in this mode.
+        function handleBooking(e) {
+            e.preventDefault();
+            const name = document.getElementById('patientName').value;
+            const age = document.getElementById('patientAge').value;
+            const phone = document.getElementById('patientPhone').value;
+            const email = document.getElementById('patientEmail').value;
+            const doctorSelectEl = document.getElementById('doctorSelect');
+            const nhisSelectEl = document.getElementById('nhisStatus');
+            const doctor = doctorSelectEl.selectedOptions[0].getAttribute('data-en');
+            const nhis = nhisSelectEl.selectedOptions[0].getAttribute('data-en');
+            const notes = document.getElementById('patientNotes').value;
+
+            document.getElementById('relayName').value = name;
+            document.getElementById('relayAge').value = age;
+            document.getElementById('relayPhone').value = phone;
+            document.getElementById('relayEmail').value = email;
+            document.getElementById('relayDoctor').value = doctor;
+            document.getElementById('relayNhis').value = nhis;
+            document.getElementById('relayNotes').value = notes;
+            document.getElementById('bookingRelayForm').submit();
+
+            if (currentLang === 'es') {
+                document.getElementById('bookingModalText').innerText = `Gracias ${name}. Su solicitud para ${doctor} ha sido registrada. Nuestro equipo se pondrá en contacto con usted pronto.`;
+            } else {
+                document.getElementById('bookingModalText').innerText = `Thank you ${name}. Your request for ${doctor} has been recorded. Our team will get in touch with you shortly.`;
+            }
+
+            document.getElementById('bookingModal').classList.remove('hidden');
+            document.getElementById('bookingForm').reset();
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+        }
+
         // Preselect Doctor in Booking Form
         function preselectDoctor(doctorName) {
             document.getElementById('doctorSelect').value = doctorName;
@@ -1696,39 +1764,6 @@
         function closeBlogModal() {
             document.getElementById('blogModal').classList.add('hidden');
             lastBlogType = null;
-        }
-
-        // Booking Form Handling
-        // Clinic inbox for form submissions (built at runtime, kept out of the raw HTML).
-        const clinicEmail = ['jeanmichelworks', 'gmail.com'].join('@');
-
-        function handleBooking(e) {
-            e.preventDefault();
-            const name = document.getElementById('patientName').value;
-            const phone = document.getElementById('patientPhone').value;
-            const doctorSelectEl = document.getElementById('doctorSelect');
-            const nhisSelectEl = document.getElementById('nhisStatus');
-            const doctor = doctorSelectEl.selectedOptions[0].textContent;
-            const nhis = nhisSelectEl.selectedOptions[0].textContent;
-            const notes = document.getElementById('patientNotes').value;
-
-            const subject = `Solicitud de cita - ${name}`;
-            const body = `Nueva solicitud de cita desde la web:\n\nPaciente: ${name}\nTeléfono: ${phone}\nEspecialista: ${doctor}\nNHIS: ${nhis}\nMotivo: ${notes}`;
-            const mailtoUrl = `mailto:${clinicEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-            document.getElementById('emailConfirmBtn').href = mailtoUrl;
-
-            if (currentLang === 'es') {
-                document.getElementById('bookingModalText').innerText = `Gracias ${name}. Su solicitud para ${doctor} está lista. Haga clic para abrir su correo y enviarla a la recepción del centro.`;
-            } else {
-                document.getElementById('bookingModalText').innerText = `Thank you ${name}. Your appointment request for ${doctor} is ready. Click below to open your email and send it to our reception.`;
-            }
-
-            document.getElementById('bookingModal').classList.remove('hidden');
-        }
-
-        function closeBookingModal() {
-            document.getElementById('bookingModal').classList.add('hidden');
         }
 
         // Patient Reviews (anonymous: rating + message only, no personal data).
