@@ -73,38 +73,11 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- Top Emergency & Accreditation Bar -->
-    <div class="bg-brandDark text-white text-sm md:text-sm py-2 px-4 shadow-sm">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
-            <div class="flex items-center gap-4 flex-wrap justify-center">
-                <span><i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i> <span data-i18n="top_hefra">Certificado HeFRA (Gobierno de Ghana)</span></span>
-                <span class="hidden sm:inline">|</span>
-                <span class="text-emerald-300 font-semibold"><i class="fa-solid fa-id-card mr-1"></i> <span data-i18n="top_nhis">Acreditación NHIS Activa</span></span>
-                <span class="hidden sm:inline">|</span>
-                <span class="text-amber-300"><i class="fa-solid fa-location-dot mr-1"></i> Zebilla South, Bawku West</span>
-            </div>
-            
-            <div class="flex items-center gap-4">
-                <!-- Language Selector in Top Bar -->
-                <div class="flex items-center bg-slate-800 rounded-lg p-0.5 border border-slate-700">
-                    <button onclick="setLanguage('es')" id="btnLangEs" class="lang-btn active px-2.5 py-1 rounded-md text-sm transition">ES</button>
-                    <button onclick="setLanguage('en')" id="btnLangEn" class="lang-btn text-slate-300 px-2.5 py-1 rounded-md text-sm transition">EN</button>
-                </div>
-
-                <div class="flex items-center gap-2 font-bold">
-                    <a href="tel:0243711851" class="hover:text-emerald-300 transition"><i class="fa-solid fa-phone mr-1"></i> 0243-711851</a>
-                    <span>/</span>
-                    <a href="tel:0244761962" class="hover:text-emerald-300 transition">0244-761962</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Main Navigation Header -->
     <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <div class="flex items-center gap-3">
+                <a href="#inicio" class="flex items-center gap-3">
                     <div class="w-12 h-12 rounded-xl bg-medical-600 flex items-center justify-center text-white text-2xl font-bold shadow-md">
                         <i class="fa-solid fa-hospital-user"></i>
                     </div>
@@ -112,7 +85,7 @@
                         <h1 class="text-lg md:text-xl font-bold text-brandDark leading-tight">Naaba Akparabilla</h1>
                         <p class="text-sm text-medical-700 font-semibold tracking-wide">MEDICAL CENTRE • ZEBILLA</p>
                     </div>
-                </div>
+                </a>
 
                 <!-- Desktop Nav Links -->
                 <nav class="hidden lg:flex items-center gap-6 font-medium text-slate-700 text-sm">
@@ -125,6 +98,12 @@
                 </nav>
 
                 <div class="flex items-center gap-3">
+                    <!-- Language Selector -->
+                    <div class="flex items-center bg-stone-100 rounded-lg p-0.5 border border-stone-200">
+                        <button onclick="setLanguage('es')" id="btnLangEs" class="lang-btn active px-2.5 py-1 rounded-md text-sm transition">ES</button>
+                        <button onclick="setLanguage('en')" id="btnLangEn" class="lang-btn text-slate-600 px-2.5 py-1 rounded-md text-sm transition">EN</button>
+                    </div>
+
                     <a href="#reserva" class="bg-medical-600 hover:bg-medical-700 text-white font-semibold px-4 py-2.5 rounded-lg shadow-sm hover:shadow transition text-sm flex items-center gap-2">
                         <i class="fa-regular fa-calendar-check"></i> <span data-i18n="btn_book">Agendar Cita</span>
                     </a>
@@ -134,16 +113,9 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Mobile Dropdown Navigation -->
         <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-stone-200 px-4 py-4 space-y-3 text-sm">
-            <div class="flex items-center justify-between pb-2 border-b border-stone-100">
-                <span class="text-sm font-bold text-slate-500 uppercase" data-i18n="mobile_lang_select">Seleccionar Idioma:</span>
-                <div class="flex items-center bg-stone-100 rounded-lg p-0.5 border border-stone-200">
-                    <button onclick="setLanguage('es')" id="btnLangEsMob" class="lang-btn active px-3 py-1 rounded-md text-sm transition">Español</button>
-                    <button onclick="setLanguage('en')" id="btnLangEnMob" class="lang-btn text-slate-600 px-3 py-1 rounded-md text-sm transition">English</button>
-                </div>
-            </div>
             <a href="#inicio" data-i18n="nav_home" class="block text-slate-700 hover:text-medical-600 font-medium">Inicio</a>
             <a href="#servicios" data-i18n="nav_services" class="block text-slate-700 hover:text-medical-600 font-medium">Servicios y Triaje</a>
             <a href="#equipo" data-i18n="nav_team" class="block text-slate-700 hover:text-medical-600 font-medium">Equipo Médico</a>
@@ -244,6 +216,103 @@
                     </div>
                 </div>
             </div>
+
+        <!-- Medical Leadership & Academic Capital Section -->
+        <div id="equipo" class="bg-stone-100 py-12 px-4 md:px-8 mt-12 rounded-2xl">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 data-i18n="team_subtitle" class="text-sm font-bold text-medical-600 uppercase tracking-widest mb-2">Liderazgo Médico e Investigación</h2>
+                    <h3 data-i18n="team_title" class="text-3xl font-extrabold text-brandDark">Excelencia Académica al Servicio de Zebilla</h3>
+                    <p data-i18n="team_desc" class="text-slate-600 mt-2 text-sm md:text-base">
+                        Esta sección destaca a los profesionales médicos responsables de la dirección clínica y consultiva del centro. Su labor investigativa garantiza tratamientos basados en la evidencia científica adaptados al norte de Ghana.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                    <!-- Doctor Card 1: Dr. Celia Yamile Rodriguez -->
+                    <div class="bg-white rounded-2xl p-6 md:p-8 shadow-md border border-stone-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-start justify-between gap-4 mb-4">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-16 h-16 rounded-full bg-teal-600 text-white flex items-center justify-center text-2xl font-bold shadow">
+                                        <i class="fa-solid fa-user-md"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold text-brandDark">Dra. Celia Yamile Rodriguez</h4>
+                                        <p data-i18n="doc1_role" class="text-sm font-semibold text-medical-600">PRACTITIONER IN-CHARGE / DIRECTORA MÉDICA</p>
+                                        <p data-i18n="doc1_spec" class="text-sm text-slate-500">Especialista en Medicina Familiar y Salud Pública</p>
+                                    </div>
+                                </div>
+                                <span class="bg-emerald-100 text-emerald-800 text-sm px-2.5 py-1 rounded-full font-bold">HeFRA Reg.</span>
+                            </div>
+
+                            <p data-i18n="doc1_bio" class="text-slate-600 text-sm leading-relaxed mb-4">
+                                Con vasta trayectoria clínica en la Región Alta Oriental, la Dra. Rodriguez vincula la práctica médica en Zebilla con el Tamale Teaching Hospital y el Departamento de Medicina Familiar de la University for Development Studies (UDS).
+                            </p>
+
+                            <!-- Academic Research Highlights Collapsible -->
+                            <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 text-sm space-y-2 mb-6">
+                                <p data-i18n="research_title" class="font-bold text-brandDark flex items-center gap-2">
+                                    <i class="fa-solid fa-graduation-cap text-medical-600"></i> Investigaciones Clave Publicadas:
+                                </p>
+                                <ul class="list-disc list-inside text-slate-600 space-y-1.5">
+                                    <li><strong data-i18n="doc1_r1_t">Hepatitis B en el Norte de Ghana (2025):</strong> <span data-i18n="doc1_r1_d">Estudio sobre concienciación y prevención del VHB para prevenir el carcinoma hepatocelular.</span></li>
+                                    <li><strong data-i18n="doc1_r2_t">Salud Pediátrica Quirúrgica:</strong> <span data-i18n="doc1_r2_d">Manejo longitudinal de malformaciones anorrectales pediátricas en la región norte.</span></li>
+                                    <li><strong data-i18n="doc1_r3_t">Salud Materna:</strong> <span data-i18n="doc1_r3_d">Factores de riesgo asociados a la anemia en mujeres gestantes en clínicas prenatales.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-200">
+                            <span data-i18n="doc1_schedule" class="text-sm text-slate-500"><i class="fa-solid fa-stethoscope text-medical-600 mr-1"></i> Atiende en Medicina Familiar y Prenatal</span>
+                            <a href="#reserva" onclick="preselectDoctor('Dra. Celia Yamile Rodriguez')" data-i18n="doc1_btn" class="bg-medical-600 hover:bg-medical-700 text-white font-semibold text-sm px-4 py-2 rounded-lg transition">Agendar con Dra. Rodriguez</a>
+                        </div>
+                    </div>
+
+                    <!-- Doctor Card 2: Dr. Moses Ofosu Amoako -->
+                    <div class="bg-white rounded-2xl p-6 md:p-8 shadow-md border border-stone-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-start justify-between gap-4 mb-4">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-16 h-16 rounded-full bg-slate-800 text-white flex items-center justify-center text-2xl font-bold shadow">
+                                        <i class="fa-solid fa-user-doctor"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold text-brandDark">Dr. Moses Ofosu Amoako</h4>
+                                        <p data-i18n="doc2_role" class="text-sm font-semibold text-medical-600">MÉDICO CONSULTOR Y ESPECIALISTA</p>
+                                        <p data-i18n="doc2_spec" class="text-sm text-slate-500">Especialista en Medicina Ocupacional y Metabólica</p>
+                                    </div>
+                                </div>
+                                <span class="bg-emerald-100 text-emerald-800 text-sm px-2.5 py-1 rounded-full font-bold">HeFRA Reg.</span>
+                            </div>
+
+                            <p data-i18n="doc2_bio" class="text-slate-600 text-sm leading-relaxed mb-4">
+                                Vinculado académicamente a la Universidad Kwame Nkrumah de Ciencia y Tecnología (KNUST) y al Komfo Anokye Teaching Hospital, el Dr. Amoako aporta liderazgo científico en la prevención de síndromes metabólicos y enfermedades crónicas.
+                            </p>
+
+                            <!-- Academic Research Highlights Collapsible -->
+                            <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 text-sm space-y-2 mb-6">
+                                <p data-i18n="research_title" class="font-bold text-brandDark flex items-center gap-2">
+                                    <i class="fa-solid fa-microscope text-medical-600"></i> Investigaciones Clave Publicadas:
+                                </p>
+                                <ul class="list-disc list-inside text-slate-600 space-y-1.5">
+                                    <li><strong data-i18n="doc2_r1_t">Riesgo Cardiometabólico (JHPN):</strong> <span data-i18n="doc2_r1_d">Análisis de dieta occidentalizada, obesidad abdominal y marcadores de estrés.</span></li>
+                                    <li><strong data-i18n="doc2_r2_t">Biomarcadores Hepáticos (AST/ALT):</strong> <span data-i18n="doc2_r2_d">Relación entre patrones alimentarios, acumulación lipídica y función del hígado.</span></li>
+                                    <li><strong data-i18n="doc2_r3_t">Inseguridad Alimentaria:</strong> <span data-i18n="doc2_r3_d">Impacto de factores nutricionales en la anemia y presión en adultos jóvenes.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-200">
+                            <span data-i18n="doc2_schedule" class="text-sm text-slate-500"><i class="fa-solid fa-heart-pulse text-indigo-600 mr-1"></i> Consulta Crónica y Ocupacional</span>
+                            <a href="#reserva" onclick="preselectDoctor('Dr. Moses Ofosu Amoako')" data-i18n="doc2_btn" class="bg-brandDark hover:bg-slate-800 text-white font-semibold text-sm px-4 py-2 rounded-lg transition">Agendar con Dr. Amoako</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         </section>
 
         <!-- Dynamic Services & Interactive Filters -->
@@ -364,103 +433,6 @@
                     </ul>
                 </div>
 
-            </div>
-        </section>
-
-        <!-- Medical Leadership & Academic Capital Section -->
-        <section id="equipo" class="hidden bg-stone-100 py-16 px-4 border-y border-stone-200">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center max-w-3xl mx-auto mb-12">
-                    <h2 data-i18n="team_subtitle" class="text-sm font-bold text-medical-600 uppercase tracking-widest mb-2">Liderazgo Médico e Investigación</h2>
-                    <h3 data-i18n="team_title" class="text-3xl font-extrabold text-brandDark">Excelencia Académica al Servicio de Zebilla</h3>
-                    <p data-i18n="team_desc" class="text-slate-600 mt-2 text-sm md:text-base">
-                        Esta sección destaca a los profesionales médicos responsables de la dirección clínica y consultiva del centro. Su labor investigativa garantiza tratamientos basados en la evidencia científica adaptados al norte de Ghana.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
-                    <!-- Doctor Card 1: Dr. Celia Yamile Rodriguez -->
-                    <div class="bg-white rounded-2xl p-6 md:p-8 shadow-md border border-stone-200 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-start justify-between gap-4 mb-4">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-16 h-16 rounded-full bg-teal-600 text-white flex items-center justify-center text-2xl font-bold shadow">
-                                        <i class="fa-solid fa-user-md"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-xl font-bold text-brandDark">Dra. Celia Yamile Rodriguez</h4>
-                                        <p data-i18n="doc1_role" class="text-sm font-semibold text-medical-600">PRACTITIONER IN-CHARGE / DIRECTORA MÉDICA</p>
-                                        <p data-i18n="doc1_spec" class="text-sm text-slate-500">Especialista en Medicina Familiar y Salud Pública</p>
-                                    </div>
-                                </div>
-                                <span class="bg-emerald-100 text-emerald-800 text-sm px-2.5 py-1 rounded-full font-bold">HeFRA Reg.</span>
-                            </div>
-
-                            <p data-i18n="doc1_bio" class="text-slate-600 text-sm leading-relaxed mb-4">
-                                Con vasta trayectoria clínica en la Región Alta Oriental, la Dra. Rodriguez vincula la práctica médica en Zebilla con el Tamale Teaching Hospital y el Departamento de Medicina Familiar de la University for Development Studies (UDS).
-                            </p>
-
-                            <!-- Academic Research Highlights Collapsible -->
-                            <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 text-sm space-y-2 mb-6">
-                                <p data-i18n="research_title" class="font-bold text-brandDark flex items-center gap-2">
-                                    <i class="fa-solid fa-graduation-cap text-medical-600"></i> Investigaciones Clave Publicadas:
-                                </p>
-                                <ul class="list-disc list-inside text-slate-600 space-y-1.5">
-                                    <li><strong data-i18n="doc1_r1_t">Hepatitis B en el Norte de Ghana (2025):</strong> <span data-i18n="doc1_r1_d">Estudio sobre concienciación y prevención del VHB para prevenir el carcinoma hepatocelular.</span></li>
-                                    <li><strong data-i18n="doc1_r2_t">Salud Pediátrica Quirúrgica:</strong> <span data-i18n="doc1_r2_d">Manejo longitudinal de malformaciones anorrectales pediátricas en la región norte.</span></li>
-                                    <li><strong data-i18n="doc1_r3_t">Salud Materna:</strong> <span data-i18n="doc1_r3_d">Factores de riesgo asociados a la anemia en mujeres gestantes en clínicas prenatales.</span></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center justify-between pt-4 border-t border-stone-200">
-                            <span data-i18n="doc1_schedule" class="text-sm text-slate-500"><i class="fa-solid fa-stethoscope text-medical-600 mr-1"></i> Atiende en Medicina Familiar y Prenatal</span>
-                            <a href="#reserva" onclick="preselectDoctor('Dra. Celia Yamile Rodriguez')" data-i18n="doc1_btn" class="bg-medical-600 hover:bg-medical-700 text-white font-semibold text-sm px-4 py-2 rounded-lg transition">Agendar con Dra. Rodriguez</a>
-                        </div>
-                    </div>
-
-                    <!-- Doctor Card 2: Dr. Moses Ofosu Amoako -->
-                    <div class="bg-white rounded-2xl p-6 md:p-8 shadow-md border border-stone-200 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-start justify-between gap-4 mb-4">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-16 h-16 rounded-full bg-slate-800 text-white flex items-center justify-center text-2xl font-bold shadow">
-                                        <i class="fa-solid fa-user-doctor"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-xl font-bold text-brandDark">Dr. Moses Ofosu Amoako</h4>
-                                        <p data-i18n="doc2_role" class="text-sm font-semibold text-medical-600">MÉDICO CONSULTOR Y ESPECIALISTA</p>
-                                        <p data-i18n="doc2_spec" class="text-sm text-slate-500">Especialista en Medicina Ocupacional y Metabólica</p>
-                                    </div>
-                                </div>
-                                <span class="bg-emerald-100 text-emerald-800 text-sm px-2.5 py-1 rounded-full font-bold">HeFRA Reg.</span>
-                            </div>
-
-                            <p data-i18n="doc2_bio" class="text-slate-600 text-sm leading-relaxed mb-4">
-                                Vinculado académicamente a la Universidad Kwame Nkrumah de Ciencia y Tecnología (KNUST) y al Komfo Anokye Teaching Hospital, el Dr. Amoako aporta liderazgo científico en la prevención de síndromes metabólicos y enfermedades crónicas.
-                            </p>
-
-                            <!-- Academic Research Highlights Collapsible -->
-                            <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 text-sm space-y-2 mb-6">
-                                <p data-i18n="research_title" class="font-bold text-brandDark flex items-center gap-2">
-                                    <i class="fa-solid fa-microscope text-medical-600"></i> Investigaciones Clave Publicadas:
-                                </p>
-                                <ul class="list-disc list-inside text-slate-600 space-y-1.5">
-                                    <li><strong data-i18n="doc2_r1_t">Riesgo Cardiometabólico (JHPN):</strong> <span data-i18n="doc2_r1_d">Análisis de dieta occidentalizada, obesidad abdominal y marcadores de estrés.</span></li>
-                                    <li><strong data-i18n="doc2_r2_t">Biomarcadores Hepáticos (AST/ALT):</strong> <span data-i18n="doc2_r2_d">Relación entre patrones alimentarios, acumulación lipídica y función del hígado.</span></li>
-                                    <li><strong data-i18n="doc2_r3_t">Inseguridad Alimentaria:</strong> <span data-i18n="doc2_r3_d">Impacto de factores nutricionales en la anemia y presión en adultos jóvenes.</span></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center justify-between pt-4 border-t border-stone-200">
-                            <span data-i18n="doc2_schedule" class="text-sm text-slate-500"><i class="fa-solid fa-heart-pulse text-indigo-600 mr-1"></i> Consulta Crónica y Ocupacional</span>
-                            <a href="#reserva" onclick="preselectDoctor('Dr. Moses Ofosu Amoako')" data-i18n="doc2_btn" class="bg-brandDark hover:bg-slate-800 text-white font-semibold text-sm px-4 py-2 rounded-lg transition">Agendar con Dr. Amoako</a>
-                        </div>
-                    </div>
-
-                </div>
             </div>
         </section>
 
@@ -792,6 +764,25 @@
         </section>
 
     </main>
+
+    <!-- Accreditation & Contact Info Bar -->
+    <div class="bg-brandDark text-white text-sm md:text-sm py-2 px-4 shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-4 flex-wrap justify-center">
+                <span><i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i> <span data-i18n="top_hefra">Certificado HeFRA (Gobierno de Ghana)</span></span>
+                <span class="hidden sm:inline">|</span>
+                <span class="text-emerald-300 font-semibold"><i class="fa-solid fa-id-card mr-1"></i> <span data-i18n="top_nhis">Acreditación NHIS Activa</span></span>
+                <span class="hidden sm:inline">|</span>
+                <span class="text-amber-300"><i class="fa-solid fa-location-dot mr-1"></i> Zebilla South, Bawku West</span>
+            </div>
+
+            <div class="flex items-center gap-2 font-bold">
+                <a href="tel:0243711851" class="hover:text-emerald-300 transition"><i class="fa-solid fa-phone mr-1"></i> 0243-711851</a>
+                <span>/</span>
+                <a href="tel:0244761962" class="hover:text-emerald-300 transition">0244-761962</a>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer Section -->
     <footer class="bg-brandDark text-slate-400 text-sm py-8 border-t border-slate-800">
@@ -1267,13 +1258,9 @@
             if (lang === 'es') {
                 document.getElementById('btnLangEs').classList.add('active');
                 document.getElementById('btnLangEn').classList.remove('active');
-                document.getElementById('btnLangEsMob').classList.add('active');
-                document.getElementById('btnLangEnMob').classList.remove('active');
             } else {
                 document.getElementById('btnLangEn').classList.add('active');
                 document.getElementById('btnLangEs').classList.remove('active');
-                document.getElementById('btnLangEnMob').classList.add('active');
-                document.getElementById('btnLangEsMob').classList.remove('active');
             }
 
             // Translate Text Elements with data-i18n attribute
@@ -1325,8 +1312,9 @@
         });
 
         // Section Navigation: only one section visible at a time, shown on tap
-        const SECTION_IDS = ['inicio', 'servicios', 'equipo', 'herramientas', 'estadisticas', 'portal', 'reserva'];
-        const ANCHOR_TO_SECTION = { contacto: 'reserva' };
+        const SECTION_IDS = ['inicio', 'servicios', 'herramientas', 'estadisticas', 'portal', 'reserva'];
+        const ANCHOR_TO_SECTION = { contacto: 'reserva', equipo: 'inicio' };
+        const SCROLL_WITHIN_SECTION = ['contacto', 'equipo'];
 
         function showSection(anchorId) {
             const sectionId = SECTION_IDS.includes(anchorId) ? anchorId : (ANCHOR_TO_SECTION[anchorId] || 'inicio');
@@ -1351,10 +1339,10 @@
                 });
             }
 
-            if (anchorId === 'contacto') {
+            if (SCROLL_WITHIN_SECTION.includes(anchorId)) {
                 setTimeout(() => {
-                    const contactBlock = document.getElementById('contacto');
-                    if (contactBlock) contactBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    const block = document.getElementById(anchorId);
+                    if (block) block.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 60);
             }
         }
