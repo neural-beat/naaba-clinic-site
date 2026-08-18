@@ -740,7 +740,7 @@
                             <div>
                                 <p data-i18n="c_addr_title" class="font-bold text-white">Dirección Física</p>
                                 <p data-i18n="c_addr_val">Zebilla South, Distrito Bawku West, Región Alta Oriental (U.E.R.), Ghana</p>
-                                <p class="text-slate-400 text-[11px]">Coordenadas GPS: 10.971890, -0.516560</p>
+                                <p class="text-slate-400 text-[11px]"><span data-i18n="c_gps_label">Coordenadas GPS</span>: 10.971890, -0.516560</p>
                             </div>
                         </div>
 
@@ -1025,6 +1025,7 @@
                 c_addr_title: "Dirección Física",
                 c_addr_val: "Zebilla South, Distrito Bawku West, Región Alta Oriental (U.E.R.), Ghana",
                 c_post_title: "Dirección Postal Oficial",
+                c_gps_label: "Coordenadas GPS",
                 c_phone_title: "Líneas Telefónicas Directas",
                 c_phone_line1: "Recepción 1",
                 c_phone_line2: "Recepción 2",
@@ -1223,6 +1224,7 @@
                 c_addr_title: "Physical Location",
                 c_addr_val: "Zebilla South, Bawku West District, Upper East Region (U.E.R.), Ghana",
                 c_post_title: "Official Postal Address",
+                c_gps_label: "GPS Coordinates",
                 c_phone_title: "Direct Telephone Lines",
                 c_phone_line1: "Reception 1",
                 c_phone_line2: "Reception 2",
@@ -1578,8 +1580,10 @@
             e.preventDefault();
             const name = document.getElementById('patientName').value;
             const phone = document.getElementById('patientPhone').value;
-            const doctor = document.getElementById('doctorSelect').value;
-            const nhis = document.getElementById('nhisStatus').value;
+            const doctorSelectEl = document.getElementById('doctorSelect');
+            const nhisSelectEl = document.getElementById('nhisStatus');
+            const doctor = doctorSelectEl.selectedOptions[0].textContent;
+            const nhis = nhisSelectEl.selectedOptions[0].textContent;
             const notes = document.getElementById('patientNotes').value;
 
             const textMsg = `Hello, I would like to book an appointment at Naaba Akparabilla Medical Centre.\n*Patient:* ${name}\n*Phone:* ${phone}\n*Doctor:* ${doctor}\n*NHIS Status:* ${nhis}\n*Reason:* ${notes}`;
