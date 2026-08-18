@@ -47,6 +47,13 @@
             color: #ffffff;
             font-weight: 700;
         }
+        .hero-carousel-track {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .hero-carousel-track::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -117,9 +124,9 @@
                         <i class="fa-solid fa-circle-check"></i> <span data-i18n="hero_badge">Refugio de Atención Médica Segura e Ininterrumpida</span>
                     </div>
                     <!-- Hero Carousel -->
-                    <div id="heroCarouselWrapper" class="relative min-h-[220px] sm:min-h-[170px] overflow-hidden">
-                        <div id="heroCarouselTrack" class="flex transition-transform duration-700 ease-out">
-                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('')">
+                    <div id="heroCarouselWrapper" class="relative min-h-[220px] sm:min-h-[170px]">
+                        <div id="heroCarouselTrack" class="hero-carousel-track flex overflow-x-auto snap-x snap-mandatory scroll-smooth">
+                            <div class="hero-slide w-full shrink-0 snap-start cursor-pointer flex items-center gap-6" onclick="heroSlideClick('')">
                                 <div class="flex-1 min-w-0">
                                     <h2 data-i18n="hero_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
                                         Atención Médica Especializada y Humana en Zebilla
@@ -132,7 +139,7 @@
                                     <i class="fa-solid fa-hospital-user"></i>
                                 </div>
                             </div>
-                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('triageWidget')">
+                            <div class="hero-slide w-full shrink-0 snap-start cursor-pointer flex items-center gap-6" onclick="heroSlideClick('triageWidget')">
                                 <div class="flex-1 min-w-0">
                                     <h2 data-i18n="hero_slide_triage_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
                                         Triaje Rápido de Síntomas en Segundos
@@ -145,7 +152,7 @@
                                     <i class="fa-solid fa-stethoscope"></i>
                                 </div>
                             </div>
-                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('servicios')">
+                            <div class="hero-slide w-full shrink-0 snap-start cursor-pointer flex items-center gap-6" onclick="heroSlideClick('servicios')">
                                 <div class="flex-1 min-w-0">
                                     <h2 data-i18n="hero_slide_services_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
                                         Explore Nuestros Servicios
@@ -158,7 +165,7 @@
                                     <i class="fa-solid fa-notes-medical"></i>
                                 </div>
                             </div>
-                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('equipo')">
+                            <div class="hero-slide w-full shrink-0 snap-start cursor-pointer flex items-center gap-6" onclick="heroSlideClick('equipo')">
                                 <div class="flex-1 min-w-0">
                                     <h2 data-i18n="hero_slide_team_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
                                         Conozca a Nuestro Equipo Médico
@@ -171,7 +178,7 @@
                                     <i class="fa-solid fa-user-doctor"></i>
                                 </div>
                             </div>
-                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('estadisticas')">
+                            <div class="hero-slide w-full shrink-0 snap-start cursor-pointer flex items-center gap-6" onclick="heroSlideClick('estadisticas')">
                                 <div class="flex-1 min-w-0">
                                     <h2 data-i18n="hero_slide_stats_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
                                         Datos de Salud Regional
@@ -184,7 +191,7 @@
                                     <i class="fa-solid fa-chart-simple"></i>
                                 </div>
                             </div>
-                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('herramientas')">
+                            <div class="hero-slide w-full shrink-0 snap-start cursor-pointer flex items-center gap-6" onclick="heroSlideClick('herramientas')">
                                 <div class="flex-1 min-w-0">
                                     <h2 data-i18n="hero_slide_nhis_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
                                         Verifique su Cobertura NHIS
@@ -197,7 +204,7 @@
                                     <i class="fa-solid fa-id-card"></i>
                                 </div>
                             </div>
-                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('portal')">
+                            <div class="hero-slide w-full shrink-0 snap-start cursor-pointer flex items-center gap-6" onclick="heroSlideClick('portal')">
                                 <div class="flex-1 min-w-0">
                                     <h2 data-i18n="hero_slide_portal_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
                                         Portal de Conocimiento
@@ -210,7 +217,7 @@
                                     <i class="fa-solid fa-book-medical"></i>
                                 </div>
                             </div>
-                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('resenas')">
+                            <div class="hero-slide w-full shrink-0 snap-start cursor-pointer flex items-center gap-6" onclick="heroSlideClick('resenas')">
                                 <div class="flex-1 min-w-0">
                                     <h2 data-i18n="hero_slide_reviews_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
                                         Opiniones de Pacientes
@@ -223,7 +230,7 @@
                                     <i class="fa-solid fa-star"></i>
                                 </div>
                             </div>
-                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('contacto')">
+                            <div class="hero-slide w-full shrink-0 snap-start cursor-pointer flex items-center gap-6" onclick="heroSlideClick('contacto')">
                                 <div class="flex-1 min-w-0">
                                     <h2 data-i18n="hero_slide_contact_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
                                         Visítenos o Contáctenos
@@ -1642,10 +1649,16 @@
             });
         }
 
-        // Hero Carousel — auto-advances, swipeable, clickable, dot indicators
+        // Hero Carousel — uses the browser's own native horizontal scroll with
+        // scroll-snap for movement (auto-advance, swipe, drag) instead of hand-rolled
+        // pointer-drag math. Native scroll is what iOS/Android carousels use
+        // internally: the platform handles touch physics, momentum and tap-vs-drag
+        // detection reliably across devices, which a custom transform/pointer
+        // implementation could not match consistently on real phones.
         let heroSlideIndex = 0;
         let heroAutoTimer = null;
-        let heroSuppressClick = false;
+        let heroScrollSyncTimer = null;
+        let heroIgnoreScrollSync = false;
 
         function renderHeroDots() {
             const dots = document.getElementById('heroCarouselDots');
@@ -1664,22 +1677,14 @@
             }
         }
 
-        function sizeHeroSlides() {
-            const wrapper = document.getElementById('heroCarouselWrapper');
-            const track = document.getElementById('heroCarouselTrack');
-            if (!wrapper || !track || !track.children.length) return;
-            const slideWidth = wrapper.clientWidth;
-            [...track.children].forEach(slide => { slide.style.width = slideWidth + 'px'; });
-            track.style.transform = `translateX(-${heroSlideIndex * slideWidth}px)`;
-        }
-
         function goToHeroSlide(index, userInitiated) {
-            const wrapper = document.getElementById('heroCarouselWrapper');
             const track = document.getElementById('heroCarouselTrack');
-            if (!wrapper || !track || !track.children.length) return;
+            if (!track || !track.children.length) return;
             const count = track.children.length;
             heroSlideIndex = (index + count) % count;
-            track.style.transform = `translateX(-${heroSlideIndex * wrapper.clientWidth}px)`;
+            heroIgnoreScrollSync = true;
+            track.scrollTo({ left: heroSlideIndex * track.clientWidth, behavior: 'smooth' });
+            setTimeout(() => { heroIgnoreScrollSync = false; }, 700);
             renderHeroDots();
             if (userInitiated) startHeroAutoAdvance();
         }
@@ -1694,7 +1699,6 @@
         }
 
         function heroSlideClick(target) {
-            if (heroSuppressClick) return;
             if (target === 'triageWidget') {
                 document.getElementById('triageWidget')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 return;
@@ -1704,62 +1708,30 @@
         }
 
         function initHeroCarousel() {
-            const wrapper = document.getElementById('heroCarouselWrapper');
             const track = document.getElementById('heroCarouselTrack');
-            if (!wrapper || !track) return;
-            sizeHeroSlides();
+            if (!track) return;
             renderHeroDots();
             startHeroAutoAdvance();
-            window.addEventListener('resize', sizeHeroSlides);
 
-            // Pointer Events unify touch, mouse and pen — drag follows the
-            // finger/cursor in real time, then snaps to the nearest slide.
-            let dragging = false;
-            let startX = 0;
-            let delta = 0;
+            // Keep the dots in sync when the visitor swipes/drags the native
+            // scroller themselves, and restart the auto-advance timer.
+            track.addEventListener('scroll', () => {
+                if (heroIgnoreScrollSync) return;
+                clearTimeout(heroScrollSyncTimer);
+                heroScrollSyncTimer = setTimeout(() => {
+                    const width = track.clientWidth || 1;
+                    const newIndex = Math.round(track.scrollLeft / width);
+                    if (newIndex !== heroSlideIndex) {
+                        heroSlideIndex = newIndex;
+                        renderHeroDots();
+                    }
+                    startHeroAutoAdvance();
+                }, 120);
+            }, { passive: true });
 
-            // Listeners go on `document` while dragging (not pointer capture) so the
-            // click event still lands naturally on whatever text/icon is under the
-            // cursor — pointer capture would force every click onto the wrapper.
-            function onPointerDown(e) {
-                dragging = true;
-                startX = e.clientX;
-                delta = 0;
-                track.style.transition = 'none';
-                wrapper.style.cursor = 'grabbing';
-                document.addEventListener('pointermove', onPointerMove);
-                document.addEventListener('pointerup', endDrag);
-                document.addEventListener('pointercancel', endDrag);
-            }
-
-            function onPointerMove(e) {
-                if (!dragging) return;
-                delta = e.clientX - startX;
-                const base = -heroSlideIndex * wrapper.clientWidth;
-                track.style.transform = `translateX(${base + delta}px)`;
-            }
-
-            function endDrag() {
-                if (!dragging) return;
-                dragging = false;
-                wrapper.style.cursor = 'grab';
-                track.style.transition = '';
-                document.removeEventListener('pointermove', onPointerMove);
-                document.removeEventListener('pointerup', endDrag);
-                document.removeEventListener('pointercancel', endDrag);
-                heroSuppressClick = Math.abs(delta) > 40;
-                if (Math.abs(delta) > 40) {
-                    goToHeroSlide(heroSlideIndex + (delta < 0 ? 1 : -1), true);
-                } else {
-                    goToHeroSlide(heroSlideIndex, false);
-                }
-                setTimeout(() => { heroSuppressClick = false; }, 300);
-                delta = 0;
-            }
-
-            wrapper.style.cursor = 'grab';
-            wrapper.style.touchAction = 'pan-y';
-            wrapper.addEventListener('pointerdown', onPointerDown);
+            window.addEventListener('resize', () => {
+                track.scrollTo({ left: heroSlideIndex * track.clientWidth, behavior: 'auto' });
+            });
         }
 
         // Doctor Card Accordion
