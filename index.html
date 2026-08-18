@@ -1740,13 +1740,18 @@
             let startX = 0;
             let delta = 0;
 
+            // Listeners go on `document` while dragging (not pointer capture) so the
+            // click event still lands naturally on whatever text/icon is under the
+            // cursor — pointer capture would force every click onto the wrapper.
             function onPointerDown(e) {
                 dragging = true;
                 startX = e.clientX;
                 delta = 0;
                 track.style.transition = 'none';
                 wrapper.style.cursor = 'grabbing';
-                if (wrapper.setPointerCapture) wrapper.setPointerCapture(e.pointerId);
+                document.addEventListener('pointermove', onPointerMove);
+                document.addEventListener('pointerup', endDrag);
+                document.addEventListener('pointercancel', endDrag);
             }
 
             function onPointerMove(e) {
@@ -1761,7 +1766,10 @@
                 dragging = false;
                 wrapper.style.cursor = 'grab';
                 track.style.transition = '';
-                heroSuppressClick = Math.abs(delta) > 10;
+                document.removeEventListener('pointermove', onPointerMove);
+                document.removeEventListener('pointerup', endDrag);
+                document.removeEventListener('pointercancel', endDrag);
+                heroSuppressClick = Math.abs(delta) > 40;
                 if (Math.abs(delta) > 40) {
                     goToHeroSlide(heroSlideIndex + (delta < 0 ? 1 : -1), true);
                 } else {
@@ -1774,10 +1782,6 @@
             wrapper.style.cursor = 'grab';
             wrapper.style.touchAction = 'pan-y';
             wrapper.addEventListener('pointerdown', onPointerDown);
-            wrapper.addEventListener('pointermove', onPointerMove);
-            wrapper.addEventListener('pointerup', endDrag);
-            wrapper.addEventListener('pointercancel', endDrag);
-            wrapper.addEventListener('pointerleave', () => { if (dragging) endDrag(); });
         }
 
         // Doctor Card Accordion
