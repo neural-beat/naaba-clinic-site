@@ -76,19 +76,19 @@
     <!-- Main Navigation Header -->
     <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <a href="#inicio" class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-xl bg-medical-600 flex items-center justify-center text-white text-2xl font-bold shadow-md">
+            <div class="flex justify-between items-center gap-2 py-2.5 min-h-[64px]">
+                <a href="#inicio" class="flex items-center gap-2 sm:gap-3 min-w-0">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-medical-600 flex items-center justify-center text-white text-lg sm:text-2xl font-bold shadow-md shrink-0">
                         <i class="fa-solid fa-hospital-user"></i>
                     </div>
-                    <div>
-                        <h1 class="text-lg md:text-xl font-bold text-brandDark leading-tight">Naaba Akparabilla</h1>
-                        <p class="text-sm text-medical-700 font-semibold tracking-wide">MEDICAL CENTRE • ZEBILLA</p>
+                    <div class="min-w-0">
+                        <h1 class="text-sm sm:text-lg md:text-xl font-bold text-brandDark leading-tight truncate">Naaba Akparabilla</h1>
+                        <p class="hidden sm:block text-sm text-medical-700 font-semibold tracking-wide truncate">MEDICAL CENTRE • ZEBILLA</p>
                     </div>
                 </a>
 
                 <!-- Desktop Nav Links -->
-                <nav class="hidden lg:flex items-center gap-6 font-medium text-slate-700 text-sm">
+                <nav class="hidden lg:flex items-center gap-6 font-medium text-slate-700 text-sm shrink-0">
                     <a href="#inicio" data-i18n="nav_home" class="hover:text-medical-600 transition">Inicio</a>
                     <a href="#servicios" data-i18n="nav_services" class="hover:text-medical-600 transition">Servicios y Triaje</a>
                     <a href="#equipo" data-i18n="nav_team" class="hover:text-medical-600 transition">Equipo Médico</a>
@@ -97,17 +97,17 @@
                     <a href="#portal" data-i18n="nav_portal" class="hover:text-medical-600 transition">Portal de Salud</a>
                 </nav>
 
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
                     <!-- Language Selector -->
-                    <div class="flex items-center bg-stone-100 rounded-lg p-0.5 border border-stone-200">
-                        <button onclick="setLanguage('es')" id="btnLangEs" class="lang-btn active px-2.5 py-1 rounded-md text-sm transition">ES</button>
-                        <button onclick="setLanguage('en')" id="btnLangEn" class="lang-btn text-slate-600 px-2.5 py-1 rounded-md text-sm transition">EN</button>
+                    <div class="flex items-center bg-stone-100 rounded-lg p-0.5 border border-stone-200 shrink-0">
+                        <button onclick="setLanguage('es')" id="btnLangEs" class="lang-btn active px-1.5 sm:px-2.5 py-1 rounded-md text-xs sm:text-sm transition">ES</button>
+                        <button onclick="setLanguage('en')" id="btnLangEn" class="lang-btn text-slate-600 px-1.5 sm:px-2.5 py-1 rounded-md text-xs sm:text-sm transition">EN</button>
                     </div>
 
-                    <a href="#reserva" class="bg-medical-600 hover:bg-medical-700 text-white font-semibold px-4 py-2.5 rounded-lg shadow-sm hover:shadow transition text-sm flex items-center gap-2">
-                        <i class="fa-regular fa-calendar-check"></i> <span data-i18n="btn_book">Agendar Cita</span>
+                    <a href="#reserva" class="bg-medical-600 hover:bg-medical-700 text-white font-semibold w-9 h-9 sm:w-auto sm:px-4 sm:py-2.5 rounded-lg shadow-sm hover:shadow transition text-sm flex items-center justify-center gap-2 shrink-0" data-i18n-aria="btn_book" aria-label="Agendar Cita">
+                        <i class="fa-regular fa-calendar-check"></i> <span data-i18n="btn_book" class="hidden sm:inline">Agendar Cita</span>
                     </a>
-                    <button id="mobileMenuBtn" class="lg:hidden text-slate-700 text-2xl p-2 focus:outline-none" data-i18n-aria="mobile_menu_aria" aria-label="Abrir Menú">
+                    <button id="mobileMenuBtn" class="lg:hidden text-slate-700 text-xl p-1.5 focus:outline-none shrink-0" data-i18n-aria="mobile_menu_aria" aria-label="Abrir Menú">
                         <i class="fa-solid fa-bars"></i>
                     </button>
                 </div>
@@ -145,7 +145,7 @@
 
                     <!-- CTAs -->
                     <div class="flex flex-col sm:flex-row gap-4 pt-2">
-                        <a href="#reserva" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold px-6 py-3.5 rounded-xl text-center shadow-lg transition flex items-center justify-center gap-2">
+                        <a href="https://wa.me/233243711851?text=Hello%2C%20I%20would%20like%20more%20information%20about%20Naaba%20Akparabilla%20Medical%20Centre." target="_blank" rel="noopener" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold px-6 py-3.5 rounded-xl text-center shadow-lg transition flex items-center justify-center gap-2">
                             <i class="fa-brands fa-whatsapp text-lg"></i> <span data-i18n="cta_whatsapp">Consultar por WhatsApp</span>
                         </a>
                         <a href="tel:0243711851" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-xl text-center border border-white/20 backdrop-blur-sm transition flex items-center justify-center gap-2">
@@ -231,20 +231,24 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
                     <!-- Doctor Card 1: Dr. Celia Yamile Rodriguez -->
-                    <div class="bg-white rounded-2xl p-6 md:p-8 shadow-md border border-stone-200 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-start justify-between gap-4 mb-4">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-16 h-16 rounded-full bg-teal-600 text-white flex items-center justify-center text-2xl font-bold shadow">
-                                        <i class="fa-solid fa-user-md"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-xl font-bold text-brandDark">Dra. Celia Yamile Rodriguez</h4>
-                                        <p data-i18n="doc1_role" class="text-sm font-semibold text-medical-600">PRACTITIONER IN-CHARGE / DIRECTORA MÉDICA</p>
-                                        <p data-i18n="doc1_spec" class="text-sm text-slate-500">Especialista en Medicina Familiar y Salud Pública</p>
-                                    </div>
+                    <div class="bg-white rounded-2xl shadow-md border border-stone-200 overflow-hidden">
+                        <button type="button" onclick="toggleDoctorCard(this)" class="w-full flex items-center justify-between gap-4 p-6 md:p-8 text-left">
+                            <div class="flex items-center gap-4 min-w-0">
+                                <div class="w-16 h-16 rounded-full bg-teal-600 text-white flex items-center justify-center text-2xl font-bold shadow shrink-0">
+                                    <i class="fa-solid fa-user-md"></i>
                                 </div>
-                                <span class="bg-emerald-100 text-emerald-800 text-sm px-2.5 py-1 rounded-full font-bold">HeFRA Reg.</span>
+                                <div class="min-w-0">
+                                    <h4 class="text-xl font-bold text-brandDark">Dra. Celia Yamile Rodriguez</h4>
+                                    <p data-i18n="doc1_spec" class="text-sm text-slate-500">Especialista en Medicina Familiar y Salud Pública</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-down text-slate-400 transition-transform shrink-0 doctor-chevron"></i>
+                        </button>
+
+                        <div class="doctor-details hidden px-6 md:px-8 pb-6 md:pb-8">
+                            <div class="flex items-center justify-between gap-4 mb-4">
+                                <p data-i18n="doc1_role" class="text-sm font-semibold text-medical-600">PRACTITIONER IN-CHARGE / DIRECTORA MÉDICA</p>
+                                <span class="bg-emerald-100 text-emerald-800 text-sm px-2.5 py-1 rounded-full font-bold shrink-0">HeFRA Reg.</span>
                             </div>
 
                             <p data-i18n="doc1_bio" class="text-slate-600 text-sm leading-relaxed mb-4">
@@ -262,29 +266,33 @@
                                     <li><strong data-i18n="doc1_r3_t">Salud Materna:</strong> <span data-i18n="doc1_r3_d">Factores de riesgo asociados a la anemia en mujeres gestantes en clínicas prenatales.</span></li>
                                 </ul>
                             </div>
-                        </div>
 
-                        <div class="flex items-center justify-between pt-4 border-t border-stone-200">
-                            <span data-i18n="doc1_schedule" class="text-sm text-slate-500"><i class="fa-solid fa-stethoscope text-medical-600 mr-1"></i> Atiende en Medicina Familiar y Prenatal</span>
-                            <a href="#reserva" onclick="preselectDoctor('Dra. Celia Yamile Rodriguez')" data-i18n="doc1_btn" class="bg-medical-600 hover:bg-medical-700 text-white font-semibold text-sm px-4 py-2 rounded-lg transition">Agendar con Dra. Rodriguez</a>
+                            <div class="flex items-center justify-between pt-4 border-t border-stone-200">
+                                <span data-i18n="doc1_schedule" class="text-sm text-slate-500"><i class="fa-solid fa-stethoscope text-medical-600 mr-1"></i> Atiende en Medicina Familiar y Prenatal</span>
+                                <a href="#reserva" onclick="preselectDoctor('Dra. Celia Yamile Rodriguez')" data-i18n="doc1_btn" class="bg-medical-600 hover:bg-medical-700 text-white font-semibold text-sm px-4 py-2 rounded-lg transition">Agendar con Dra. Rodriguez</a>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Doctor Card 2: Dr. Moses Ofosu Amoako -->
-                    <div class="bg-white rounded-2xl p-6 md:p-8 shadow-md border border-stone-200 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-start justify-between gap-4 mb-4">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-16 h-16 rounded-full bg-slate-800 text-white flex items-center justify-center text-2xl font-bold shadow">
-                                        <i class="fa-solid fa-user-doctor"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-xl font-bold text-brandDark">Dr. Moses Ofosu Amoako</h4>
-                                        <p data-i18n="doc2_role" class="text-sm font-semibold text-medical-600">MÉDICO CONSULTOR Y ESPECIALISTA</p>
-                                        <p data-i18n="doc2_spec" class="text-sm text-slate-500">Especialista en Medicina Ocupacional y Metabólica</p>
-                                    </div>
+                    <div class="bg-white rounded-2xl shadow-md border border-stone-200 overflow-hidden">
+                        <button type="button" onclick="toggleDoctorCard(this)" class="w-full flex items-center justify-between gap-4 p-6 md:p-8 text-left">
+                            <div class="flex items-center gap-4 min-w-0">
+                                <div class="w-16 h-16 rounded-full bg-slate-800 text-white flex items-center justify-center text-2xl font-bold shadow shrink-0">
+                                    <i class="fa-solid fa-user-doctor"></i>
                                 </div>
-                                <span class="bg-emerald-100 text-emerald-800 text-sm px-2.5 py-1 rounded-full font-bold">HeFRA Reg.</span>
+                                <div class="min-w-0">
+                                    <h4 class="text-xl font-bold text-brandDark">Dr. Moses Ofosu Amoako</h4>
+                                    <p data-i18n="doc2_spec" class="text-sm text-slate-500">Especialista en Medicina Ocupacional y Metabólica</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-down text-slate-400 transition-transform shrink-0 doctor-chevron"></i>
+                        </button>
+
+                        <div class="doctor-details hidden px-6 md:px-8 pb-6 md:pb-8">
+                            <div class="flex items-center justify-between gap-4 mb-4">
+                                <p data-i18n="doc2_role" class="text-sm font-semibold text-medical-600">MÉDICO CONSULTOR Y ESPECIALISTA</p>
+                                <span class="bg-emerald-100 text-emerald-800 text-sm px-2.5 py-1 rounded-full font-bold shrink-0">HeFRA Reg.</span>
                             </div>
 
                             <p data-i18n="doc2_bio" class="text-slate-600 text-sm leading-relaxed mb-4">
@@ -302,11 +310,11 @@
                                     <li><strong data-i18n="doc2_r3_t">Inseguridad Alimentaria:</strong> <span data-i18n="doc2_r3_d">Impacto de factores nutricionales en la anemia y presión en adultos jóvenes.</span></li>
                                 </ul>
                             </div>
-                        </div>
 
-                        <div class="flex items-center justify-between pt-4 border-t border-stone-200">
-                            <span data-i18n="doc2_schedule" class="text-sm text-slate-500"><i class="fa-solid fa-heart-pulse text-indigo-600 mr-1"></i> Consulta Crónica y Ocupacional</span>
-                            <a href="#reserva" onclick="preselectDoctor('Dr. Moses Ofosu Amoako')" data-i18n="doc2_btn" class="bg-brandDark hover:bg-slate-800 text-white font-semibold text-sm px-4 py-2 rounded-lg transition">Agendar con Dr. Amoako</a>
+                            <div class="flex items-center justify-between pt-4 border-t border-stone-200">
+                                <span data-i18n="doc2_schedule" class="text-sm text-slate-500"><i class="fa-solid fa-heart-pulse text-indigo-600 mr-1"></i> Consulta Crónica y Ocupacional</span>
+                                <a href="#reserva" onclick="preselectDoctor('Dr. Moses Ofosu Amoako')" data-i18n="doc2_btn" class="bg-brandDark hover:bg-slate-800 text-white font-semibold text-sm px-4 py-2 rounded-lg transition">Agendar con Dr. Amoako</a>
+                            </div>
                         </div>
                     </div>
 
@@ -1406,6 +1414,15 @@
                     card.classList.add('hidden');
                 }
             });
+        }
+
+        // Doctor Card Accordion
+        function toggleDoctorCard(btn) {
+            const details = btn.nextElementSibling;
+            const chevron = btn.querySelector('.doctor-chevron');
+            const willOpen = details.classList.contains('hidden');
+            details.classList.toggle('hidden');
+            if (chevron) chevron.classList.toggle('rotate-180', willOpen);
         }
 
         // Preselect Doctor in Booking Form
