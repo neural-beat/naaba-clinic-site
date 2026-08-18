@@ -157,6 +157,14 @@
                                     Seleccione su motivo de consulta y reciba indicación inmediata de a dónde acudir.
                                 </p>
                             </div>
+                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('servicios')">
+                                <h2 data-i18n="hero_slide_services_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                    Explore Nuestros Servicios
+                                </h2>
+                                <p data-i18n="hero_slide_services_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                    Filtre por especialidad: medicina general, TB/DOT, salud materno-infantil y más.
+                                </p>
+                            </div>
                             <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('equipo')">
                                 <h2 data-i18n="hero_slide_team_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
                                     Conozca a Nuestro Equipo Médico
@@ -179,6 +187,30 @@
                                 </h2>
                                 <p data-i18n="hero_slide_nhis_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
                                     Sepa qué está cubierto antes de su visita — sin cobros ocultos.
+                                </p>
+                            </div>
+                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('portal')">
+                                <h2 data-i18n="hero_slide_portal_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                    Portal de Conocimiento
+                                </h2>
+                                <p data-i18n="hero_slide_portal_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                    Artículos de salud basados en evidencia, escritos por nuestro equipo médico.
+                                </p>
+                            </div>
+                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('resenas')">
+                                <h2 data-i18n="hero_slide_reviews_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                    Opiniones de Pacientes
+                                </h2>
+                                <p data-i18n="hero_slide_reviews_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                    Vea lo que dicen otros pacientes, o deje su propia opinión.
+                                </p>
+                            </div>
+                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('contacto')">
+                                <h2 data-i18n="hero_slide_contact_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                    Visítenos o Contáctenos
+                                </h2>
+                                <p data-i18n="hero_slide_contact_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                    Encuentre nuestra ubicación, líneas telefónicas y estatus NHIS.
                                 </p>
                             </div>
                         </div>
@@ -975,6 +1007,14 @@
                 hero_slide_stats_desc: "Vea datos reales de salud de Bawku West y la Región Alta Oriental.",
                 hero_slide_nhis_title: "Verifique su Cobertura NHIS",
                 hero_slide_nhis_desc: "Sepa qué está cubierto antes de su visita — sin cobros ocultos.",
+                hero_slide_services_title: "Explore Nuestros Servicios",
+                hero_slide_services_desc: "Filtre por especialidad: medicina general, TB/DOT, salud materno-infantil y más.",
+                hero_slide_portal_title: "Portal de Conocimiento",
+                hero_slide_portal_desc: "Artículos de salud basados en evidencia, escritos por nuestro equipo médico.",
+                hero_slide_reviews_title: "Opiniones de Pacientes",
+                hero_slide_reviews_desc: "Vea lo que dicen otros pacientes, o deje su propia opinión.",
+                hero_slide_contact_title: "Visítenos o Contáctenos",
+                hero_slide_contact_desc: "Encuentre nuestra ubicación, líneas telefónicas y estatus NHIS.",
                 cta_whatsapp: "Consultar por WhatsApp",
                 cta_call: "Llamar Directamente",
                 trust_hefra: "Licencia HeFRA Gubernamental",
@@ -1197,6 +1237,14 @@
                 hero_slide_stats_desc: "See real health data for Bawku West and the Upper East Region.",
                 hero_slide_nhis_title: "Check Your NHIS Coverage",
                 hero_slide_nhis_desc: "Find out what's covered before your visit — no hidden charges.",
+                hero_slide_services_title: "Explore Our Services",
+                hero_slide_services_desc: "Filter by specialty: general medicine, TB/DOT, maternal & child health, and more.",
+                hero_slide_portal_title: "Knowledge Portal",
+                hero_slide_portal_desc: "Evidence-based health articles, written by our medical team.",
+                hero_slide_reviews_title: "Patient Reviews",
+                hero_slide_reviews_desc: "See what other patients say, or leave your own review.",
+                hero_slide_contact_title: "Visit or Contact Us",
+                hero_slide_contact_desc: "Find our location, phone lines, and NHIS status.",
                 cta_whatsapp: "Enquire via WhatsApp",
                 cta_call: "Call Directly",
                 trust_hefra: "Governmental HeFRA Licence",
@@ -1633,38 +1681,58 @@
         }
 
         function initHeroCarousel() {
+            const wrapper = document.getElementById('heroCarouselWrapper');
             const track = document.getElementById('heroCarouselTrack');
-            if (!track) return;
+            if (!wrapper || !track) return;
             sizeHeroSlides();
             renderHeroDots();
             startHeroAutoAdvance();
             window.addEventListener('resize', sizeHeroSlides);
 
-            let startX = 0, currentX = 0, dragging = false;
+            // Pointer Events unify touch, mouse and pen — drag follows the
+            // finger/cursor in real time, then snaps to the nearest slide.
+            let dragging = false;
+            let startX = 0;
+            let delta = 0;
 
-            track.addEventListener('touchstart', (e) => {
-                startX = e.touches[0].clientX;
-                currentX = startX;
+            function onPointerDown(e) {
                 dragging = true;
-            }, { passive: true });
+                startX = e.clientX;
+                delta = 0;
+                track.style.transition = 'none';
+                wrapper.style.cursor = 'grabbing';
+                if (wrapper.setPointerCapture) wrapper.setPointerCapture(e.pointerId);
+            }
 
-            track.addEventListener('touchmove', (e) => {
+            function onPointerMove(e) {
                 if (!dragging) return;
-                currentX = e.touches[0].clientX;
-            }, { passive: true });
+                delta = e.clientX - startX;
+                const base = -heroSlideIndex * wrapper.clientWidth;
+                track.style.transform = `translateX(${base + delta}px)`;
+            }
 
-            track.addEventListener('touchend', () => {
+            function endDrag() {
                 if (!dragging) return;
                 dragging = false;
-                const delta = currentX - startX;
+                wrapper.style.cursor = 'grab';
+                track.style.transition = '';
                 heroSuppressClick = Math.abs(delta) > 10;
                 if (Math.abs(delta) > 40) {
                     goToHeroSlide(heroSlideIndex + (delta < 0 ? 1 : -1), true);
+                } else {
+                    goToHeroSlide(heroSlideIndex, false);
                 }
                 setTimeout(() => { heroSuppressClick = false; }, 300);
-                startX = 0;
-                currentX = 0;
-            });
+                delta = 0;
+            }
+
+            wrapper.style.cursor = 'grab';
+            wrapper.style.touchAction = 'pan-y';
+            wrapper.addEventListener('pointerdown', onPointerDown);
+            wrapper.addEventListener('pointermove', onPointerMove);
+            wrapper.addEventListener('pointerup', endDrag);
+            wrapper.addEventListener('pointercancel', endDrag);
+            wrapper.addEventListener('pointerleave', () => { if (dragging) endDrag(); });
         }
 
         // Doctor Card Accordion
