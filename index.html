@@ -325,9 +325,9 @@
         </div>
 
         <!-- Floating Reviews Carousel (home page, approved 4-5 star reviews only) -->
-        <div id="homeReviewsWidget" class="hidden mt-12 max-w-7xl mx-auto">
-            <h3 data-i18n="home_reviews_title" class="text-center text-white text-xl font-bold mb-4">Lo que dicen nuestros pacientes</h3>
-            <div id="homeReviewsCarousel" class="relative max-w-2xl mx-auto bg-white/95 rounded-2xl p-6 md:p-8 shadow-xl min-h-[140px] flex items-center justify-center text-center transition-opacity duration-300"></div>
+        <div id="homeReviewsWidget" class="hidden mt-8 max-w-7xl mx-auto">
+            <p data-i18n="home_reviews_title" class="text-center text-slate-400 text-xs font-semibold uppercase tracking-wide mb-2">Lo que dicen nuestros pacientes</p>
+            <div id="homeReviewsCarousel" class="relative max-w-sm mx-auto bg-white/95 rounded-xl px-4 py-3 shadow-md min-h-[64px] flex items-center justify-center text-center transition-opacity duration-300"></div>
             <div id="homeReviewsDots" class="flex items-center justify-center gap-2 mt-4"></div>
         </div>
         </section>
@@ -1718,6 +1718,7 @@
         // as CSV, which we fetch here and auto-filter to 4-5 star reviews only.
         const REVIEWS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQrjWxqV0n3DjetPh7dw_Lc7AOfqx0hDSRNwYUvwJ7Ib0ZdBgnz3b7SU-MnK-sQ6IwMzTEWKqeB7EzP/pub?gid=1861185852&single=true&output=csv';
         let approvedReviews = [];
+        let homeReviews = [];
 
         function parseReviewsCSV(csvText) {
             const rows = [];
@@ -1751,13 +1752,29 @@
 
                 const headers = rows[0].map(h => h.trim().toLowerCase());
                 let ratingCol = headers.findIndex(h => h.includes('qualif') || h.includes('calif') || h.includes('rating') || h.includes('estrella'));
-                let textCol = headers.findIndex(h => h.includes('review') || h.includes('mensaje') || h.includes('message') || h.includes('opini')) ;
+                let textCol = headers.findIndex(h => h.includes('review') || h.includes('mensaje') || h.includes('message') || h.includes('opini'));
+                let timeCol = headers.findIndex(h => h.includes('timestamp') || h.includes('marca temporal') || h.includes('fecha'));
                 if (ratingCol === -1) ratingCol = 1;
                 if (textCol === -1) textCol = 2;
+                if (timeCol === -1) timeCol = 0;
 
-                approvedReviews = rows.slice(1)
-                    .map(r => ({ rating: parseInt(r[ratingCol], 10), text: (r[textCol] || '').trim() }))
-                    .filter(r => r.rating >= 4 && r.text);
+                const parsed = rows.slice(1)
+                    .map(r => ({
+                        rating: parseInt(r[ratingCol], 10),
+                        text: (r[textCol] || '').trim(),
+                        time: new Date(r[timeCol]).getTime() || 0
+                    }))
+                    .filter(r => r.text);
+
+                // Full "Opiniones" section: all 4-5 star reviews, most recent first.
+                approvedReviews = parsed
+                    .filter(r => r.rating >= 4)
+                    .sort((a, b) => b.time - a.time);
+
+                // Small floating carousel on the home page: only 5-star, most recent first.
+                homeReviews = parsed
+                    .filter(r => r.rating === 5)
+                    .sort((a, b) => b.time - a.time);
 
                 renderApprovedReviews();
                 renderHomeReviewsWidget();
@@ -1780,22 +1797,22 @@
                 homeReviewInterval = null;
             }
 
-            if (approvedReviews.length === 0) {
+            if (homeReviews.length === 0) {
                 widget.classList.add('hidden');
                 return;
             }
 
             widget.classList.remove('hidden');
-            dots.innerHTML = approvedReviews.map((_, i) =>
-                `<span class="home-review-dot w-2 h-2 rounded-full ${i === 0 ? 'bg-medical-600' : 'bg-stone-300'}"></span>`
+            dots.innerHTML = homeReviews.map((_, i) =>
+                `<span class="home-review-dot w-1.5 h-1.5 rounded-full ${i === 0 ? 'bg-medical-600' : 'bg-stone-300'}"></span>`
             ).join('');
 
             homeReviewIndex = 0;
             showHomeReview(0);
 
-            if (approvedReviews.length > 1) {
+            if (homeReviews.length > 1) {
                 homeReviewInterval = setInterval(() => {
-                    homeReviewIndex = (homeReviewIndex + 1) % approvedReviews.length;
+                    homeReviewIndex = (homeReviewIndex + 1) % homeReviews.length;
                     showHomeReview(homeReviewIndex);
                 }, 5000);
             }
@@ -1803,15 +1820,15 @@
 
         function showHomeReview(i) {
             const carousel = document.getElementById('homeReviewsCarousel');
-            const r = approvedReviews[i];
+            const r = homeReviews[i];
             if (!r || !carousel) return;
 
             carousel.style.opacity = 0;
             setTimeout(() => {
                 carousel.innerHTML = `
                     <div>
-                        <div class="text-amber-400 text-2xl mb-2">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</div>
-                        <p class="text-slate-700 text-base italic leading-relaxed">"${r.text}"</p>
+                        <div class="text-amber-400 text-sm mb-1">${'★'.repeat(r.rating)}</div>
+                        <p class="text-slate-600 text-xs italic leading-relaxed">"${r.text}"</p>
                     </div>
                 `;
                 carousel.style.opacity = 1;
