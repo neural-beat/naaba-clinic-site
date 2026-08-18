@@ -138,12 +138,52 @@
                     <div class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-300 px-3 py-1.5 rounded-full border border-emerald-500/30 text-sm sm:text-sm font-medium">
                         <i class="fa-solid fa-circle-check"></i> <span data-i18n="hero_badge">Refugio de Atención Médica Segura e Ininterrumpida</span>
                     </div>
-                    <h2 data-i18n="hero_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-                        Atención Médica Especializada y Humana en Zebilla
-                    </h2>
-                    <p data-i18n="hero_desc" class="text-stone-300 text-base md:text-lg leading-relaxed">
-                        El <strong class="text-white">Naaba Akparabilla Medical Centre</strong> ofrece medicina familiar, programas de tratamiento contra la Tuberculosis (Centro DOT oficial), salud materno-infantil y prevención de riesgos metabólicos para la comunidad de Bawku West y la Región Alta Oriental.
-                    </p>
+                    <!-- Hero Carousel -->
+                    <div id="heroCarouselWrapper" class="relative min-h-[190px] sm:min-h-[160px] overflow-hidden">
+                        <div id="heroCarouselTrack" class="flex transition-transform duration-700 ease-out">
+                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('')">
+                                <h2 data-i18n="hero_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                    Atención Médica Especializada y Humana en Zebilla
+                                </h2>
+                                <p data-i18n="hero_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                    El <strong class="text-white">Naaba Akparabilla Medical Centre</strong> ofrece medicina familiar, programas de tratamiento contra la Tuberculosis (Centro DOT oficial), salud materno-infantil y prevención de riesgos metabólicos para la comunidad de Bawku West y la Región Alta Oriental.
+                                </p>
+                            </div>
+                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('triageWidget')">
+                                <h2 data-i18n="hero_slide_triage_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                    Triaje Rápido de Síntomas en Segundos
+                                </h2>
+                                <p data-i18n="hero_slide_triage_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                    Seleccione su motivo de consulta y reciba indicación inmediata de a dónde acudir.
+                                </p>
+                            </div>
+                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('equipo')">
+                                <h2 data-i18n="hero_slide_team_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                    Conozca a Nuestro Equipo Médico
+                                </h2>
+                                <p data-i18n="hero_slide_team_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                    Dos especialistas dedicados listos para cuidar de usted y su familia.
+                                </p>
+                            </div>
+                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('estadisticas')">
+                                <h2 data-i18n="hero_slide_stats_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                    Datos de Salud Regional
+                                </h2>
+                                <p data-i18n="hero_slide_stats_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                    Vea datos reales de salud de Bawku West y la Región Alta Oriental.
+                                </p>
+                            </div>
+                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('herramientas')">
+                                <h2 data-i18n="hero_slide_nhis_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                    Verifique su Cobertura NHIS
+                                </h2>
+                                <p data-i18n="hero_slide_nhis_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                    Sepa qué está cubierto antes de su visita — sin cobros ocultos.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="heroCarouselDots" class="flex items-center gap-2"></div>
 
                     <!-- CTAs -->
                     <div class="flex flex-col sm:flex-row gap-4 pt-2">
@@ -173,7 +213,7 @@
                 </div>
 
                 <!-- Interactive Triaje Quick Widget -->
-                <div class="lg:col-span-5 bg-white text-slate-800 rounded-2xl p-6 shadow-2xl border border-stone-200">
+                <div id="triageWidget" class="lg:col-span-5 bg-white text-slate-800 rounded-2xl p-6 shadow-2xl border border-stone-200">
                     <h3 class="text-xl font-bold text-brandDark mb-2 flex items-center gap-2">
                         <i class="fa-solid fa-stethoscope text-medical-600"></i> <span data-i18n="triage_title">Triaje Rápido de Síntomas</span>
                     </h3>
@@ -927,6 +967,14 @@
                 hero_badge: "Refugio de Atención Médica Segura e Ininterrumpida",
                 hero_title: "Atención Médica Especializada y Humana en Zebilla",
                 hero_desc: "El Naaba Akparabilla Medical Centre ofrece medicina familiar, programas de tratamiento contra la Tuberculosis (Centro DOT oficial), salud materno-infantil y prevención de riesgos metabólicos para la comunidad de Bawku West y la Región Alta Oriental.",
+                hero_slide_triage_title: "Triaje Rápido de Síntomas en Segundos",
+                hero_slide_triage_desc: "Seleccione su motivo de consulta y reciba indicación inmediata de a dónde acudir.",
+                hero_slide_team_title: "Conozca a Nuestro Equipo Médico",
+                hero_slide_team_desc: "Dos especialistas dedicados listos para cuidar de usted y su familia.",
+                hero_slide_stats_title: "Datos de Salud Regional",
+                hero_slide_stats_desc: "Vea datos reales de salud de Bawku West y la Región Alta Oriental.",
+                hero_slide_nhis_title: "Verifique su Cobertura NHIS",
+                hero_slide_nhis_desc: "Sepa qué está cubierto antes de su visita — sin cobros ocultos.",
                 cta_whatsapp: "Consultar por WhatsApp",
                 cta_call: "Llamar Directamente",
                 trust_hefra: "Licencia HeFRA Gubernamental",
@@ -1141,6 +1189,14 @@
                 hero_badge: "Safe & Uninterrupted Healthcare Sanctuary",
                 hero_title: "Specialized & Compassionate Healthcare in Zebilla",
                 hero_desc: "Naaba Akparabilla Medical Centre provides Family Medicine, Tuberculosis care (Official DOT Center), Maternal-Child Health, and Metabolic Risk Prevention for the Bawku West community and the Upper East Region.",
+                hero_slide_triage_title: "Quick Symptom Triage in Seconds",
+                hero_slide_triage_desc: "Select your main reason for visit and get instant guidance on where to go.",
+                hero_slide_team_title: "Meet Our Medical Team",
+                hero_slide_team_desc: "Two dedicated specialists ready to care for you and your family.",
+                hero_slide_stats_title: "Regional Health Insights",
+                hero_slide_stats_desc: "See real health data for Bawku West and the Upper East Region.",
+                hero_slide_nhis_title: "Check Your NHIS Coverage",
+                hero_slide_nhis_desc: "Find out what's covered before your visit — no hidden charges.",
                 cta_whatsapp: "Enquire via WhatsApp",
                 cta_call: "Call Directly",
                 trust_hefra: "Governmental HeFRA Licence",
@@ -1512,6 +1568,102 @@
                 } else {
                     card.classList.add('hidden');
                 }
+            });
+        }
+
+        // Hero Carousel — auto-advances, swipeable, clickable, dot indicators
+        let heroSlideIndex = 0;
+        let heroAutoTimer = null;
+        let heroSuppressClick = false;
+
+        function renderHeroDots() {
+            const dots = document.getElementById('heroCarouselDots');
+            const track = document.getElementById('heroCarouselTrack');
+            if (!dots || !track) return;
+            const count = track.children.length;
+            dots.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.setAttribute('aria-label', `Slide ${i + 1}`);
+                dot.className = 'h-1.5 rounded-full transition-all duration-300 ' +
+                    (i === heroSlideIndex ? 'w-6 bg-emerald-400' : 'w-1.5 bg-white/30 hover:bg-white/50');
+                dot.onclick = () => goToHeroSlide(i, true);
+                dots.appendChild(dot);
+            }
+        }
+
+        function sizeHeroSlides() {
+            const wrapper = document.getElementById('heroCarouselWrapper');
+            const track = document.getElementById('heroCarouselTrack');
+            if (!wrapper || !track || !track.children.length) return;
+            const slideWidth = wrapper.clientWidth;
+            [...track.children].forEach(slide => { slide.style.width = slideWidth + 'px'; });
+            track.style.transform = `translateX(-${heroSlideIndex * slideWidth}px)`;
+        }
+
+        function goToHeroSlide(index, userInitiated) {
+            const wrapper = document.getElementById('heroCarouselWrapper');
+            const track = document.getElementById('heroCarouselTrack');
+            if (!wrapper || !track || !track.children.length) return;
+            const count = track.children.length;
+            heroSlideIndex = (index + count) % count;
+            track.style.transform = `translateX(-${heroSlideIndex * wrapper.clientWidth}px)`;
+            renderHeroDots();
+            if (userInitiated) startHeroAutoAdvance();
+        }
+
+        function startHeroAutoAdvance() {
+            if (heroAutoTimer) clearInterval(heroAutoTimer);
+            heroAutoTimer = setInterval(() => {
+                const inicio = document.getElementById('inicio');
+                if (inicio && inicio.classList.contains('hidden')) return;
+                goToHeroSlide(heroSlideIndex + 1, false);
+            }, 10000);
+        }
+
+        function heroSlideClick(target) {
+            if (heroSuppressClick) return;
+            if (target === 'triageWidget') {
+                document.getElementById('triageWidget')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+            if (!target) return;
+            showSection(target);
+        }
+
+        function initHeroCarousel() {
+            const track = document.getElementById('heroCarouselTrack');
+            if (!track) return;
+            sizeHeroSlides();
+            renderHeroDots();
+            startHeroAutoAdvance();
+            window.addEventListener('resize', sizeHeroSlides);
+
+            let startX = 0, currentX = 0, dragging = false;
+
+            track.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                currentX = startX;
+                dragging = true;
+            }, { passive: true });
+
+            track.addEventListener('touchmove', (e) => {
+                if (!dragging) return;
+                currentX = e.touches[0].clientX;
+            }, { passive: true });
+
+            track.addEventListener('touchend', () => {
+                if (!dragging) return;
+                dragging = false;
+                const delta = currentX - startX;
+                heroSuppressClick = Math.abs(delta) > 10;
+                if (Math.abs(delta) > 40) {
+                    goToHeroSlide(heroSlideIndex + (delta < 0 ? 1 : -1), true);
+                }
+                setTimeout(() => { heroSuppressClick = false; }, 300);
+                startX = 0;
+                currentX = 0;
             });
         }
 
@@ -2040,6 +2192,7 @@
             });
 
             loadReviewsFromSheet();
+            initHeroCarousel();
 
             // Apply device/browser language now that charts exist
             setLanguage(detectedLang);
