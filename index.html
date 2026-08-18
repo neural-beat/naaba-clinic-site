@@ -846,7 +846,7 @@
     </footer>
 
     <!-- Floating "Leave a Review" Button (always visible) -->
-    <a href="#resenas" data-i18n-aria="floating_review_aria" aria-label="Dejar una reseña" class="fixed bottom-5 right-5 z-40 w-14 h-14 sm:w-auto sm:h-auto sm:px-5 sm:py-3 rounded-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold shadow-xl flex items-center justify-center gap-2 transition hover:scale-105">
+    <a href="#resenas" id="floatingReviewBtn" data-i18n-aria="floating_review_aria" aria-label="Dejar una reseña" class="fixed bottom-5 right-5 z-40 w-14 h-14 sm:w-auto sm:h-auto sm:px-5 sm:py-3 rounded-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold shadow-xl flex items-center justify-center gap-2 transition hover:scale-105">
         <i class="fa-solid fa-star text-lg"></i>
         <span data-i18n="floating_review_btn" class="hidden sm:inline text-sm whitespace-nowrap">Dejar una Reseña</span>
     </a>
@@ -1407,6 +1407,9 @@
             });
 
             window.scrollTo({ top: 0, behavior: 'instant' });
+
+            const floatingReviewBtn = document.getElementById('floatingReviewBtn');
+            if (floatingReviewBtn) floatingReviewBtn.classList.toggle('hidden', sectionId === 'resenas');
 
             if (sectionId === 'estadisticas') {
                 requestAnimationFrame(() => {
