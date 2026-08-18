@@ -230,7 +230,7 @@
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
 
                     <!-- Doctor Card 1: Dr. Celia Yamile Rodriguez -->
                     <div class="bg-white rounded-2xl shadow-md border border-stone-200 overflow-hidden">
@@ -322,6 +322,13 @@
 
                 </div>
             </div>
+        </div>
+
+        <!-- Floating Reviews Carousel (home page, approved 4-5 star reviews only) -->
+        <div id="homeReviewsWidget" class="hidden mt-12 max-w-7xl mx-auto">
+            <h3 data-i18n="home_reviews_title" class="text-center text-white text-xl font-bold mb-4">Lo que dicen nuestros pacientes</h3>
+            <div id="homeReviewsCarousel" class="relative max-w-2xl mx-auto bg-white/95 rounded-2xl p-6 md:p-8 shadow-xl min-h-[140px] flex items-center justify-center text-center transition-opacity duration-300"></div>
+            <div id="homeReviewsDots" class="flex items-center justify-center gap-2 mt-4"></div>
         </div>
         </section>
 
@@ -1091,7 +1098,8 @@
                 reviews_form_title: "Deje su Opinión",
                 reviews_form_desc: "No pedimos su nombre ni contacto. Solo su calificación y su mensaje.",
                 reviews_placeholder: "Cuéntenos su experiencia...",
-                reviews_submit_btn: "Enviar Opinión"
+                reviews_submit_btn: "Enviar Opinión",
+                home_reviews_title: "Lo Que Dicen Nuestros Pacientes"
             },
             en: {
                 top_hefra: "HeFRA Certified (Government of Ghana)",
@@ -1300,7 +1308,8 @@
                 reviews_form_title: "Leave Your Review",
                 reviews_form_desc: "We don't ask for your name or contact details. Just your rating and your message.",
                 reviews_placeholder: "Tell us about your experience...",
-                reviews_submit_btn: "Submit Review"
+                reviews_submit_btn: "Submit Review",
+                home_reviews_title: "What Our Patients Say"
             }
         };
 
@@ -1722,6 +1731,63 @@
         ];
         let selectedReviewRating = 0;
 
+        let homeReviewIndex = 0;
+        let homeReviewInterval = null;
+
+        function renderHomeReviewsWidget() {
+            const widget = document.getElementById('homeReviewsWidget');
+            const carousel = document.getElementById('homeReviewsCarousel');
+            const dots = document.getElementById('homeReviewsDots');
+            if (!widget || !carousel || !dots) return;
+
+            if (homeReviewInterval) {
+                clearInterval(homeReviewInterval);
+                homeReviewInterval = null;
+            }
+
+            if (approvedReviews.length === 0) {
+                widget.classList.add('hidden');
+                return;
+            }
+
+            widget.classList.remove('hidden');
+            dots.innerHTML = approvedReviews.map((_, i) =>
+                `<span class="home-review-dot w-2 h-2 rounded-full ${i === 0 ? 'bg-medical-600' : 'bg-stone-300'}"></span>`
+            ).join('');
+
+            homeReviewIndex = 0;
+            showHomeReview(0);
+
+            if (approvedReviews.length > 1) {
+                homeReviewInterval = setInterval(() => {
+                    homeReviewIndex = (homeReviewIndex + 1) % approvedReviews.length;
+                    showHomeReview(homeReviewIndex);
+                }, 5000);
+            }
+        }
+
+        function showHomeReview(i) {
+            const carousel = document.getElementById('homeReviewsCarousel');
+            const r = approvedReviews[i];
+            if (!r || !carousel) return;
+
+            carousel.style.opacity = 0;
+            setTimeout(() => {
+                carousel.innerHTML = `
+                    <div>
+                        <div class="text-amber-400 text-2xl mb-2">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</div>
+                        <p class="text-slate-700 text-base italic leading-relaxed">"${r.text}"</p>
+                    </div>
+                `;
+                carousel.style.opacity = 1;
+            }, 300);
+
+            document.querySelectorAll('.home-review-dot').forEach((dot, idx) => {
+                dot.classList.toggle('bg-medical-600', idx === i);
+                dot.classList.toggle('bg-stone-300', idx !== i);
+            });
+        }
+
         function renderApprovedReviews() {
             const grid = document.getElementById('approvedReviewsGrid');
             const emptyMsg = document.getElementById('noReviewsMsg');
@@ -1895,6 +1961,7 @@
             });
 
             renderApprovedReviews();
+            renderHomeReviewsWidget();
 
             // Apply device/browser language now that charts exist
             setLanguage(detectedLang);
