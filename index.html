@@ -74,7 +74,7 @@
 <body class="min-h-screen flex flex-col">
 
     <!-- Top Emergency & Accreditation Bar -->
-    <div class="bg-brandDark text-white text-xs md:text-sm py-2 px-4 shadow-sm">
+    <div class="bg-brandDark text-white text-sm md:text-sm py-2 px-4 shadow-sm">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
             <div class="flex items-center gap-4 flex-wrap justify-center">
                 <span><i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i> <span data-i18n="top_hefra">Certificado HeFRA (Gobierno de Ghana)</span></span>
@@ -87,8 +87,8 @@
             <div class="flex items-center gap-4">
                 <!-- Language Selector in Top Bar -->
                 <div class="flex items-center bg-slate-800 rounded-lg p-0.5 border border-slate-700">
-                    <button onclick="setLanguage('es')" id="btnLangEs" class="lang-btn active px-2.5 py-1 rounded-md text-[11px] transition">ES</button>
-                    <button onclick="setLanguage('en')" id="btnLangEn" class="lang-btn text-slate-300 px-2.5 py-1 rounded-md text-[11px] transition">EN</button>
+                    <button onclick="setLanguage('es')" id="btnLangEs" class="lang-btn active px-2.5 py-1 rounded-md text-sm transition">ES</button>
+                    <button onclick="setLanguage('en')" id="btnLangEn" class="lang-btn text-slate-300 px-2.5 py-1 rounded-md text-sm transition">EN</button>
                 </div>
 
                 <div class="flex items-center gap-2 font-bold">
@@ -110,7 +110,7 @@
                     </div>
                     <div>
                         <h1 class="text-lg md:text-xl font-bold text-brandDark leading-tight">Naaba Akparabilla</h1>
-                        <p class="text-xs text-medical-700 font-semibold tracking-wide">MEDICAL CENTRE • ZEBILLA</p>
+                        <p class="text-sm text-medical-700 font-semibold tracking-wide">MEDICAL CENTRE • ZEBILLA</p>
                     </div>
                 </div>
 
@@ -138,10 +138,10 @@
         <!-- Mobile Dropdown Navigation -->
         <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-stone-200 px-4 py-4 space-y-3 text-sm">
             <div class="flex items-center justify-between pb-2 border-b border-stone-100">
-                <span class="text-xs font-bold text-slate-500 uppercase" data-i18n="mobile_lang_select">Seleccionar Idioma:</span>
+                <span class="text-sm font-bold text-slate-500 uppercase" data-i18n="mobile_lang_select">Seleccionar Idioma:</span>
                 <div class="flex items-center bg-stone-100 rounded-lg p-0.5 border border-stone-200">
-                    <button onclick="setLanguage('es')" id="btnLangEsMob" class="lang-btn active px-3 py-1 rounded-md text-xs transition">Español</button>
-                    <button onclick="setLanguage('en')" id="btnLangEnMob" class="lang-btn text-slate-600 px-3 py-1 rounded-md text-xs transition">English</button>
+                    <button onclick="setLanguage('es')" id="btnLangEsMob" class="lang-btn active px-3 py-1 rounded-md text-sm transition">Español</button>
+                    <button onclick="setLanguage('en')" id="btnLangEnMob" class="lang-btn text-slate-600 px-3 py-1 rounded-md text-sm transition">English</button>
                 </div>
             </div>
             <a href="#inicio" data-i18n="nav_home" class="block text-slate-700 hover:text-medical-600 font-medium">Inicio</a>
@@ -161,7 +161,7 @@
         <section id="inicio" class="relative bg-gradient-to-br from-teal-900 via-slate-900 to-slate-800 text-white py-16 md:py-24 px-4 overflow-hidden">
             <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
                 <div class="lg:col-span-7 space-y-6">
-                    <div class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-300 px-3 py-1.5 rounded-full border border-emerald-500/30 text-xs sm:text-sm font-medium">
+                    <div class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-300 px-3 py-1.5 rounded-full border border-emerald-500/30 text-sm sm:text-sm font-medium">
                         <i class="fa-solid fa-circle-check"></i> <span data-i18n="hero_badge">Refugio de Atención Médica Segura e Ininterrumpida</span>
                     </div>
                     <h2 data-i18n="hero_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
@@ -182,7 +182,7 @@
                     </div>
 
                     <!-- Trust Signals Badge Group -->
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 border-t border-slate-700/80 text-xs sm:text-sm">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 border-t border-slate-700/80 text-sm sm:text-sm">
                         <div class="flex items-center gap-2 text-stone-300">
                             <i class="fa-solid fa-file-contract text-emerald-400 text-lg"></i>
                             <span data-i18n="trust_hefra">Licencia HeFRA Gubernamental</span>
@@ -203,13 +203,13 @@
                     <h3 class="text-xl font-bold text-brandDark mb-2 flex items-center gap-2">
                         <i class="fa-solid fa-stethoscope text-medical-600"></i> <span data-i18n="triage_title">Triaje Rápido de Síntomas</span>
                     </h3>
-                    <p data-i18n="triage_subtitle" class="text-xs text-slate-500 mb-4">Seleccione su motivo principal de consulta para ver la disponibilidad e indicación inmediata:</p>
+                    <p data-i18n="triage_subtitle" class="text-sm text-slate-500 mb-4">Seleccione su motivo principal de consulta para ver la disponibilidad e indicación inmediata:</p>
                     
                     <div class="space-y-3">
                         <button onclick="quickTriage('general')" class="w-full text-left p-3 rounded-lg border border-stone-200 hover:border-medical-500 hover:bg-medical-50 transition flex justify-between items-center group">
                             <div>
                                 <span data-i18n="triage_opt1_title" class="font-semibold block text-sm">Fiebre, Malaria o Síntomas Infecciosos</span>
-                                <span data-i18n="triage_opt1_desc" class="text-xs text-slate-500">Evaluación inmediata por Medicina General</span>
+                                <span data-i18n="triage_opt1_desc" class="text-sm text-slate-500">Evaluación inmediata por Medicina General</span>
                             </div>
                             <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-medical-600"></i>
                         </button>
@@ -217,7 +217,7 @@
                         <button onclick="quickTriage('maternal')" class="w-full text-left p-3 rounded-lg border border-stone-200 hover:border-medical-500 hover:bg-medical-50 transition flex justify-between items-center group">
                             <div>
                                 <span data-i18n="triage_opt2_title" class="font-semibold block text-sm">Control Prenatal / Salud Materno-Infantil</span>
-                                <span data-i18n="triage_opt2_desc" class="text-xs text-slate-500">Atención prenatal y despistaje de anemia</span>
+                                <span data-i18n="triage_opt2_desc" class="text-sm text-slate-500">Atención prenatal y despistaje de anemia</span>
                             </div>
                             <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-medical-600"></i>
                         </button>
@@ -225,7 +225,7 @@
                         <button onclick="quickTriage('tb')" class="w-full text-left p-3 rounded-lg border border-stone-200 hover:border-medical-500 hover:bg-medical-50 transition flex justify-between items-center group">
                             <div>
                                 <span data-i18n="triage_opt3_title" class="font-semibold block text-sm">Tos Tosca Continua / Despistaje Tuberculosis</span>
-                                <span data-i18n="triage_opt3_desc" class="text-xs text-slate-500">Programa DOT Gratuito / Subsidio de Estado</span>
+                                <span data-i18n="triage_opt3_desc" class="text-sm text-slate-500">Programa DOT Gratuito / Subsidio de Estado</span>
                             </div>
                             <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-medical-600"></i>
                         </button>
@@ -233,13 +233,13 @@
                         <button onclick="quickTriage('metabolic')" class="w-full text-left p-3 rounded-lg border border-stone-200 hover:border-medical-500 hover:bg-medical-50 transition flex justify-between items-center group">
                             <div>
                                 <span data-i18n="triage_opt4_title" class="font-semibold block text-sm">Chequeo de Presión, Glucosa o Peso</span>
-                                <span data-i18n="triage_opt4_desc" class="text-xs text-slate-500">Evaluación Cardiometabólica Especializada</span>
+                                <span data-i18n="triage_opt4_desc" class="text-sm text-slate-500">Evaluación Cardiometabólica Especializada</span>
                             </div>
                             <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-medical-600"></i>
                         </button>
                     </div>
 
-                    <div id="triageResult" class="mt-4 p-3 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-lg text-xs hidden">
+                    <div id="triageResult" class="mt-4 p-3 bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-lg text-sm hidden">
                         <!-- Dynamic Result JS Injection -->
                     </div>
                 </div>
@@ -247,9 +247,9 @@
         </section>
 
         <!-- Dynamic Services & Interactive Filters -->
-        <section id="servicios" class="py-16 px-4 max-w-7xl mx-auto">
+        <section id="servicios" class="hidden py-16 px-4 max-w-7xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-10">
-                <h2 data-i18n="services_subtitle" class="text-xs font-bold text-medical-600 uppercase tracking-widest mb-2">Cartera de Servicios</h2>
+                <h2 data-i18n="services_subtitle" class="text-sm font-bold text-medical-600 uppercase tracking-widest mb-2">Cartera de Servicios</h2>
                 <h3 data-i18n="services_title" class="text-3xl font-extrabold text-brandDark">Especialidades Clínicas y Asistencia Integral</h3>
                 <p data-i18n="services_desc" class="text-slate-600 mt-2 text-sm md:text-base">
                     Esta sección describe la oferta de salud del centro en Zebilla South. Puede filtrar los servicios para explorar la cobertura, horarios e indicaciones para pacientes.
@@ -273,12 +273,12 @@
                     <div class="w-12 h-12 rounded-lg bg-teal-100 text-teal-700 flex items-center justify-center text-xl font-bold mb-4">
                         <i class="fa-solid fa-notes-medical"></i>
                     </div>
-                    <span data-i18n="card_nhis_badge" class="text-xs font-semibold px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-md">Cobertura NHIS</span>
+                    <span data-i18n="card_nhis_badge" class="text-sm font-semibold px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-md">Cobertura NHIS</span>
                     <h4 data-i18n="s1_title" class="text-xl font-bold text-brandDark mt-2">Consulta de Medicina General</h4>
                     <p data-i18n="s1_desc" class="text-slate-600 text-sm mt-2">
                         Diagnóstico y tratamiento de enfermedades agudas endémicas como malaria severa, infecciones respiratorias, fiebre tifoidea y trastornos digestivos.
                     </p>
-                    <ul class="text-xs text-slate-500 mt-4 space-y-1">
+                    <ul class="text-sm text-slate-500 mt-4 space-y-1">
                         <li><i class="fa-solid fa-check text-emerald-600 mr-1"></i> <span data-i18n="s1_b1">Triaje rápido continuo</span></li>
                         <li><i class="fa-solid fa-check text-emerald-600 mr-1"></i> <span data-i18n="s1_b2">Prescripción según formulario NHIS</span></li>
                     </ul>
@@ -289,12 +289,12 @@
                     <div class="w-12 h-12 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-xl font-bold mb-4">
                         <i class="fa-solid fa-lungs"></i>
                     </div>
-                    <span data-i18n="card_gov_badge" class="text-xs font-semibold px-2.5 py-1 bg-amber-100 text-amber-800 rounded-md">Programa Nacional de Salud</span>
+                    <span data-i18n="card_gov_badge" class="text-sm font-semibold px-2.5 py-1 bg-amber-100 text-amber-800 rounded-md">Programa Nacional de Salud</span>
                     <h4 data-i18n="s2_title" class="text-xl font-bold text-brandDark mt-2">Centro DOT para Tuberculosis</h4>
                     <p data-i18n="s2_desc" class="text-slate-600 text-sm mt-2">
                         Unidad autorizada en Bawku West para el despistaje, diagnóstico baciloscópico y tratamiento supervisado (DOT) contra la Tuberculosis con confidencialidad absoluta.
                     </p>
-                    <ul class="text-xs text-slate-500 mt-4 space-y-1">
+                    <ul class="text-sm text-slate-500 mt-4 space-y-1">
                         <li><i class="fa-solid fa-check text-amber-600 mr-1"></i> <span data-i18n="s2_b1">Medicamentos altamente subsidiados/gratuitos</span></li>
                         <li><i class="fa-solid fa-check text-amber-600 mr-1"></i> <span data-i18n="s2_b2">Seguimiento comunitario y familiar</span></li>
                     </ul>
@@ -305,12 +305,12 @@
                     <div class="w-12 h-12 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center text-xl font-bold mb-4">
                         <i class="fa-solid fa-person-pregnant"></i>
                     </div>
-                    <span data-i18n="card_nhis_badge" class="text-xs font-semibold px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-md">Cobertura NHIS</span>
+                    <span data-i18n="card_nhis_badge" class="text-sm font-semibold px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-md">Cobertura NHIS</span>
                     <h4 data-i18n="s3_title" class="text-xl font-bold text-brandDark mt-2">Atención Prenatal y Pediatría</h4>
                     <p data-i18n="s3_desc" class="text-slate-600 text-sm mt-2">
                         Supervisión integral del embarazo, control del crecimiento infantil, prevención y manejo de la anemia gestacional y evaluación de malformaciones tempranas.
                     </p>
-                    <ul class="text-xs text-slate-500 mt-4 space-y-1">
+                    <ul class="text-sm text-slate-500 mt-4 space-y-1">
                         <li><i class="fa-solid fa-check text-emerald-600 mr-1"></i> <span data-i18n="s3_b1">Evaluación nutricional preparto</span></li>
                         <li><i class="fa-solid fa-check text-emerald-600 mr-1"></i> <span data-i18n="s3_b2">Despistaje pediátrico especializado</span></li>
                     </ul>
@@ -321,12 +321,12 @@
                     <div class="w-12 h-12 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center text-xl font-bold mb-4">
                         <i class="fa-solid fa-heart-pulse"></i>
                     </div>
-                    <span data-i18n="card_check_badge" class="text-xs font-semibold px-2.5 py-1 bg-indigo-100 text-indigo-800 rounded-md">Chequeo Preventivo</span>
+                    <span data-i18n="card_check_badge" class="text-sm font-semibold px-2.5 py-1 bg-indigo-100 text-indigo-800 rounded-md">Chequeo Preventivo</span>
                     <h4 data-i18n="s4_title" class="text-xl font-bold text-brandDark mt-2">Salud Cardiometabólica e Hipertensión</h4>
                     <p data-i18n="s4_desc" class="text-slate-600 text-sm mt-2">
                         Evaluación del riesgo cardiovascular, perfil lipídico, función hepática (ratios AST/ALT) y control integral de diabetes tipo 2 y obesidad abdominal.
                     </p>
-                    <ul class="text-xs text-slate-500 mt-4 space-y-1">
+                    <ul class="text-sm text-slate-500 mt-4 space-y-1">
                         <li><i class="fa-solid fa-check text-indigo-600 mr-1"></i> <span data-i18n="s4_b1">Control de presión arterial y glucosa</span></li>
                         <li><i class="fa-solid fa-check text-indigo-600 mr-1"></i> <span data-i18n="s4_b2">Asesoría dietética y de estilo de vida</span></li>
                     </ul>
@@ -337,12 +337,12 @@
                     <div class="w-12 h-12 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center text-xl font-bold mb-4">
                         <i class="fa-solid fa-syringe"></i>
                     </div>
-                    <span data-i18n="card_nhis_badge" class="text-xs font-semibold px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-md">Cobertura NHIS</span>
+                    <span data-i18n="card_nhis_badge" class="text-sm font-semibold px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-md">Cobertura NHIS</span>
                     <h4 data-i18n="s5_title" class="text-xl font-bold text-brandDark mt-2">Prevención y Módulo de Hepatitis B</h4>
                     <p data-i18n="s5_desc" class="text-slate-600 text-sm mt-2">
                         Detección serológica, vacunación y asesoría preventiva sobre el Virus de la Hepatitis B (VHB) para mitigar el riesgo de complicaciones hepáticas a largo plazo.
                     </p>
-                    <ul class="text-xs text-slate-500 mt-4 space-y-1">
+                    <ul class="text-sm text-slate-500 mt-4 space-y-1">
                         <li><i class="fa-solid fa-check text-blue-600 mr-1"></i> <span data-i18n="s5_b1">Basado en investigaciones locales UDS</span></li>
                         <li><i class="fa-solid fa-check text-blue-600 mr-1"></i> <span data-i18n="s5_b2">Orientación para grupos de riesgo</span></li>
                     </ul>
@@ -353,12 +353,12 @@
                     <div class="w-12 h-12 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center text-xl font-bold mb-4">
                         <i class="fa-solid fa-user-doctor"></i>
                     </div>
-                    <span data-i18n="card_occ_badge" class="text-xs font-semibold px-2.5 py-1 bg-purple-100 text-purple-800 rounded-md">Salud Ocupacional</span>
+                    <span data-i18n="card_occ_badge" class="text-sm font-semibold px-2.5 py-1 bg-purple-100 text-purple-800 rounded-md">Salud Ocupacional</span>
                     <h4 data-i18n="s6_title" class="text-xl font-bold text-brandDark mt-2">Evaluación de Estrés Ocupacional</h4>
                     <p data-i18n="s6_desc" class="text-slate-600 text-sm mt-2">
                         Exámenes para personal docente, funcionarios gubernamentales y trabajadores expuestos a alto estrés laboral e hipertensión asociada.
                     </p>
-                    <ul class="text-xs text-slate-500 mt-4 space-y-1">
+                    <ul class="text-sm text-slate-500 mt-4 space-y-1">
                         <li><i class="fa-solid fa-check text-purple-600 mr-1"></i> <span data-i18n="s6_b1">Certificados de aptitud médica</span></li>
                         <li><i class="fa-solid fa-check text-purple-600 mr-1"></i> <span data-i18n="s6_b2">Plan nutricional laboral</span></li>
                     </ul>
@@ -368,10 +368,10 @@
         </section>
 
         <!-- Medical Leadership & Academic Capital Section -->
-        <section id="equipo" class="bg-stone-100 py-16 px-4 border-y border-stone-200">
+        <section id="equipo" class="hidden bg-stone-100 py-16 px-4 border-y border-stone-200">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center max-w-3xl mx-auto mb-12">
-                    <h2 data-i18n="team_subtitle" class="text-xs font-bold text-medical-600 uppercase tracking-widest mb-2">Liderazgo Médico e Investigación</h2>
+                    <h2 data-i18n="team_subtitle" class="text-sm font-bold text-medical-600 uppercase tracking-widest mb-2">Liderazgo Médico e Investigación</h2>
                     <h3 data-i18n="team_title" class="text-3xl font-extrabold text-brandDark">Excelencia Académica al Servicio de Zebilla</h3>
                     <p data-i18n="team_desc" class="text-slate-600 mt-2 text-sm md:text-base">
                         Esta sección destaca a los profesionales médicos responsables de la dirección clínica y consultiva del centro. Su labor investigativa garantiza tratamientos basados en la evidencia científica adaptados al norte de Ghana.
@@ -390,11 +390,11 @@
                                     </div>
                                     <div>
                                         <h4 class="text-xl font-bold text-brandDark">Dra. Celia Yamile Rodriguez</h4>
-                                        <p data-i18n="doc1_role" class="text-xs font-semibold text-medical-600">PRACTITIONER IN-CHARGE / DIRECTORA MÉDICA</p>
-                                        <p data-i18n="doc1_spec" class="text-xs text-slate-500">Especialista en Medicina Familiar y Salud Pública</p>
+                                        <p data-i18n="doc1_role" class="text-sm font-semibold text-medical-600">PRACTITIONER IN-CHARGE / DIRECTORA MÉDICA</p>
+                                        <p data-i18n="doc1_spec" class="text-sm text-slate-500">Especialista en Medicina Familiar y Salud Pública</p>
                                     </div>
                                 </div>
-                                <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full font-bold">HeFRA Reg.</span>
+                                <span class="bg-emerald-100 text-emerald-800 text-sm px-2.5 py-1 rounded-full font-bold">HeFRA Reg.</span>
                             </div>
 
                             <p data-i18n="doc1_bio" class="text-slate-600 text-sm leading-relaxed mb-4">
@@ -402,7 +402,7 @@
                             </p>
 
                             <!-- Academic Research Highlights Collapsible -->
-                            <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 text-xs space-y-2 mb-6">
+                            <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 text-sm space-y-2 mb-6">
                                 <p data-i18n="research_title" class="font-bold text-brandDark flex items-center gap-2">
                                     <i class="fa-solid fa-graduation-cap text-medical-600"></i> Investigaciones Clave Publicadas:
                                 </p>
@@ -415,8 +415,8 @@
                         </div>
 
                         <div class="flex items-center justify-between pt-4 border-t border-stone-200">
-                            <span data-i18n="doc1_schedule" class="text-xs text-slate-500"><i class="fa-solid fa-stethoscope text-medical-600 mr-1"></i> Atiende en Medicina Familiar y Prenatal</span>
-                            <a href="#reserva" onclick="preselectDoctor('Dra. Celia Yamile Rodriguez')" data-i18n="doc1_btn" class="bg-medical-600 hover:bg-medical-700 text-white font-semibold text-xs px-4 py-2 rounded-lg transition">Agendar con Dra. Rodriguez</a>
+                            <span data-i18n="doc1_schedule" class="text-sm text-slate-500"><i class="fa-solid fa-stethoscope text-medical-600 mr-1"></i> Atiende en Medicina Familiar y Prenatal</span>
+                            <a href="#reserva" onclick="preselectDoctor('Dra. Celia Yamile Rodriguez')" data-i18n="doc1_btn" class="bg-medical-600 hover:bg-medical-700 text-white font-semibold text-sm px-4 py-2 rounded-lg transition">Agendar con Dra. Rodriguez</a>
                         </div>
                     </div>
 
@@ -430,11 +430,11 @@
                                     </div>
                                     <div>
                                         <h4 class="text-xl font-bold text-brandDark">Dr. Moses Ofosu Amoako</h4>
-                                        <p data-i18n="doc2_role" class="text-xs font-semibold text-medical-600">MÉDICO CONSULTOR Y ESPECIALISTA</p>
-                                        <p data-i18n="doc2_spec" class="text-xs text-slate-500">Especialista en Medicina Ocupacional y Metabólica</p>
+                                        <p data-i18n="doc2_role" class="text-sm font-semibold text-medical-600">MÉDICO CONSULTOR Y ESPECIALISTA</p>
+                                        <p data-i18n="doc2_spec" class="text-sm text-slate-500">Especialista en Medicina Ocupacional y Metabólica</p>
                                     </div>
                                 </div>
-                                <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-full font-bold">HeFRA Reg.</span>
+                                <span class="bg-emerald-100 text-emerald-800 text-sm px-2.5 py-1 rounded-full font-bold">HeFRA Reg.</span>
                             </div>
 
                             <p data-i18n="doc2_bio" class="text-slate-600 text-sm leading-relaxed mb-4">
@@ -442,7 +442,7 @@
                             </p>
 
                             <!-- Academic Research Highlights Collapsible -->
-                            <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 text-xs space-y-2 mb-6">
+                            <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 text-sm space-y-2 mb-6">
                                 <p data-i18n="research_title" class="font-bold text-brandDark flex items-center gap-2">
                                     <i class="fa-solid fa-microscope text-medical-600"></i> Investigaciones Clave Publicadas:
                                 </p>
@@ -455,8 +455,8 @@
                         </div>
 
                         <div class="flex items-center justify-between pt-4 border-t border-stone-200">
-                            <span data-i18n="doc2_schedule" class="text-xs text-slate-500"><i class="fa-solid fa-heart-pulse text-indigo-600 mr-1"></i> Consulta Crónica y Ocupacional</span>
-                            <a href="#reserva" onclick="preselectDoctor('Dr. Moses Ofosu Amoako')" data-i18n="doc2_btn" class="bg-brandDark hover:bg-slate-800 text-white font-semibold text-xs px-4 py-2 rounded-lg transition">Agendar con Dr. Amoako</a>
+                            <span data-i18n="doc2_schedule" class="text-sm text-slate-500"><i class="fa-solid fa-heart-pulse text-indigo-600 mr-1"></i> Consulta Crónica y Ocupacional</span>
+                            <a href="#reserva" onclick="preselectDoctor('Dr. Moses Ofosu Amoako')" data-i18n="doc2_btn" class="bg-brandDark hover:bg-slate-800 text-white font-semibold text-sm px-4 py-2 rounded-lg transition">Agendar con Dr. Amoako</a>
                         </div>
                     </div>
 
@@ -465,9 +465,9 @@
         </section>
 
         <!-- Interactive Patient Tools: NHIS Checker & Cardiometabolic Calculator -->
-        <section id="herramientas" class="py-16 px-4 max-w-7xl mx-auto">
+        <section id="herramientas" class="hidden py-16 px-4 max-w-7xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-12">
-                <h2 data-i18n="tools_subtitle" class="text-xs font-bold text-medical-600 uppercase tracking-widest mb-2">Herramientas Interactivas para el Paciente</h2>
+                <h2 data-i18n="tools_subtitle" class="text-sm font-bold text-medical-600 uppercase tracking-widest mb-2">Herramientas Interactivas para el Paciente</h2>
                 <h3 data-i18n="tools_title" class="text-3xl font-extrabold text-brandDark">Transparencia de Tarifas e Indicadores de Salud</h3>
                 <p data-i18n="tools_desc" class="text-slate-600 mt-2 text-sm md:text-base">
                     Utilice estas herramientas desarrolladas para simplificar su visita. Verifique la cobertura de su seguro NHIS o evalúe su perfil metabólico preliminar.
@@ -484,17 +484,17 @@
                         </div>
                         <div>
                             <h4 data-i18n="nhis_tool_title" class="text-lg font-bold text-brandDark">Comprobador de Cobertura NHIS</h4>
-                            <p data-i18n="nhis_tool_subtitle" class="text-xs text-slate-500">Compromiso de cero cobros ilegales adicionales</p>
+                            <p data-i18n="nhis_tool_subtitle" class="text-sm text-slate-500">Compromiso de cero cobros ilegales adicionales</p>
                         </div>
                     </div>
 
-                    <p data-i18n="nhis_tool_desc" class="text-xs text-slate-600 mb-4">
+                    <p data-i18n="nhis_tool_desc" class="text-sm text-slate-600 mb-4">
                         Seleccione el servicio que necesita para verificar su cobertura bajo el National Health Insurance Scheme de Ghana en el centro:
                     </p>
 
                     <div class="space-y-4">
                         <div>
-                            <label data-i18n="nhis_label_service" class="block text-xs font-bold text-slate-700 mb-1">Servicio / Procedimiento Médicos</label>
+                            <label data-i18n="nhis_label_service" class="block text-sm font-bold text-slate-700 mb-1">Servicio / Procedimiento Médicos</label>
                             <select id="nhisSelect" onchange="checkNhisCoverage()" class="w-full p-2.5 border border-stone-300 rounded-lg text-sm focus:ring-2 focus:ring-medical-500 focus:outline-none">
                                 <option value="" data-i18n="nhis_opt_select">-- Seleccionar Servicio --</option>
                                 <option value="general" data-i18n="nhis_opt_1">Consulta Médica General</option>
@@ -505,7 +505,7 @@
                             </select>
                         </div>
 
-                        <div id="nhisResult" class="p-4 bg-stone-50 rounded-xl border border-stone-200 text-xs text-slate-700 hidden">
+                        <div id="nhisResult" class="p-4 bg-stone-50 rounded-xl border border-stone-200 text-sm text-slate-700 hidden">
                             <!-- Dynamic Content -->
                         </div>
                     </div>
@@ -519,11 +519,11 @@
                         </div>
                         <div>
                             <h4 data-i18n="calc_tool_title" class="text-lg font-bold text-brandDark">Evaluador de Riesgo Metabólico</h4>
-                            <p data-i18n="calc_tool_subtitle" class="text-xs text-slate-500">Basado en hallazgos de investigación del Dr. Amoako</p>
+                            <p data-i18n="calc_tool_subtitle" class="text-sm text-slate-500">Basado en hallazgos de investigación del Dr. Amoako</p>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                         <div>
                             <label data-i18n="calc_label_gender" class="block font-bold text-slate-700 mb-1">Género</label>
                             <select id="calcGender" class="w-full p-2.5 border border-stone-300 rounded-lg focus:ring-2 focus:ring-medical-500">
@@ -544,11 +544,11 @@
                         </div>
                     </div>
 
-                    <button onclick="calculateMetabolicRisk()" data-i18n="calc_btn" class="w-full mt-4 bg-brandDark hover:bg-slate-800 text-white font-bold py-2.5 rounded-lg text-xs transition">
+                    <button onclick="calculateMetabolicRisk()" data-i18n="calc_btn" class="w-full mt-4 bg-brandDark hover:bg-slate-800 text-white font-bold py-2.5 rounded-lg text-sm transition">
                         Calcular Evaluación Preliminar
                     </button>
 
-                    <div id="calcResult" class="mt-4 p-4 bg-stone-50 rounded-xl border border-stone-200 text-xs hidden">
+                    <div id="calcResult" class="mt-4 p-4 bg-stone-50 rounded-xl border border-stone-200 text-sm hidden">
                         <!-- Dynamic Assessment Injection -->
                     </div>
                 </div>
@@ -557,10 +557,10 @@
         </section>
 
         <!-- Data Visualizations Section (Chart.js) -->
-        <section id="estadisticas" class="bg-stone-100 py-16 px-4 border-y border-stone-200">
+        <section id="estadisticas" class="hidden bg-stone-100 py-16 px-4 border-y border-stone-200">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center max-w-3xl mx-auto mb-10">
-                    <h2 data-i18n="stats_subtitle" class="text-xs font-bold text-medical-600 uppercase tracking-widest mb-2">Datos y Contexto de Salud</h2>
+                    <h2 data-i18n="stats_subtitle" class="text-sm font-bold text-medical-600 uppercase tracking-widest mb-2">Datos y Contexto de Salud</h2>
                     <h3 data-i18n="stats_title" class="text-3xl font-extrabold text-brandDark">Panorámica Demográfica y Epidemiológica</h3>
                     <p data-i18n="stats_desc" class="text-slate-600 mt-2 text-sm md:text-base">
                         Esta sección presenta datos visuales cuantitativos derivados de los análisis demográficos del distrito de Bawku West y de las investigaciones científicas publicadas por el liderazgo del centro.
@@ -573,14 +573,14 @@
                     <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
                         <div>
                             <h4 data-i18n="c1_title" class="text-lg font-bold text-brandDark mb-1">Prevalencia Cardiometabólica en el Norte de Ghana</h4>
-                            <p data-i18n="c1_desc" class="text-xs text-slate-500 mb-4">Datos extraídos de publicaciones de investigación del Dr. Amoako y colaboradores.</p>
+                            <p data-i18n="c1_desc" class="text-sm text-slate-500 mb-4">Datos extraídos de publicaciones de investigación del Dr. Amoako y colaboradores.</p>
                             
                             <!-- Chart Canvas Container -->
                             <div class="chart-container">
                                 <canvas id="metabolicChart"></canvas>
                             </div>
                         </div>
-                        <p data-i18n="c1_note" class="text-xs text-slate-500 mt-4 italic bg-stone-50 p-2.5 rounded-lg border border-stone-200">
+                        <p data-i18n="c1_note" class="text-sm text-slate-500 mt-4 italic bg-stone-50 p-2.5 rounded-lg border border-stone-200">
                             Nota: La alta frecuencia de obesidad abdominal (57.1%) fundamenta la necesidad de los chequeos preventivos en la clínica.
                         </p>
                     </div>
@@ -589,14 +589,14 @@
                     <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
                         <div>
                             <h4 data-i18n="c2_title" class="text-lg font-bold text-brandDark mb-1">Distribución Demográfica de Bawku West</h4>
-                            <p data-i18n="c2_desc" class="text-xs text-slate-500 mb-4">Población total: 144,189 habitantes (Censo Oficial - 2,714 km²).</p>
+                            <p data-i18n="c2_desc" class="text-sm text-slate-500 mb-4">Población total: 144,189 habitantes (Censo Oficial - 2,714 km²).</p>
 
                             <!-- Chart Canvas Container -->
                             <div class="chart-container">
                                 <canvas id="demographicsChart"></canvas>
                             </div>
                         </div>
-                        <p data-i18n="c2_note" class="text-xs text-slate-500 mt-4 italic bg-stone-50 p-2.5 rounded-lg border border-stone-200">
+                        <p data-i18n="c2_note" class="text-sm text-slate-500 mt-4 italic bg-stone-50 p-2.5 rounded-lg border border-stone-200">
                             El 84.9% de residentes en zonas rurales requiere que la web actúe como un canal claro de verificación de servicios antes del viaje a Zebilla.
                         </p>
                     </div>
@@ -606,9 +606,9 @@
         </section>
 
         <!-- Knowledge Portal / Health Blog (Evidence-Based Articles) -->
-        <section id="portal" class="py-16 px-4 max-w-7xl mx-auto">
+        <section id="portal" class="hidden py-16 px-4 max-w-7xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-12">
-                <h2 data-i18n="blog_subtitle" class="text-xs font-bold text-medical-600 uppercase tracking-widest mb-2">Portal de Conocimiento Comunitario</h2>
+                <h2 data-i18n="blog_subtitle" class="text-sm font-bold text-medical-600 uppercase tracking-widest mb-2">Portal de Conocimiento Comunitario</h2>
                 <h3 data-i18n="blog_title" class="text-3xl font-extrabold text-brandDark">Artículos Educativos Basados en Evidencia</h3>
                 <p data-i18n="blog_desc" class="text-slate-600 mt-2 text-sm md:text-base">
                     Guias preventivas preparadas por nuestro personal médico traduciendo la literatura científica a recomendaciones comunitarias sencillas.
@@ -620,14 +620,14 @@
                 <!-- Article 1 -->
                 <article class="bg-white rounded-xl border border-stone-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
                     <div class="p-6">
-                        <span data-i18n="a1_tag" class="text-xs font-bold text-teal-700 bg-teal-100 px-2.5 py-1 rounded-md">Salud Hepática</span>
+                        <span data-i18n="a1_tag" class="text-sm font-bold text-teal-700 bg-teal-100 px-2.5 py-1 rounded-md">Salud Hepática</span>
                         <h4 data-i18n="a1_title" class="text-lg font-bold text-brandDark mt-3">Prevención de la Hepatitis B en la Región Oriental</h4>
-                        <p data-i18n="a1_desc" class="text-slate-600 text-xs mt-2 leading-relaxed">
+                        <p data-i18n="a1_desc" class="text-slate-600 text-sm mt-2 leading-relaxed">
                             Basado en el estudio de la Dra. Rodriguez (2025). Conozca cómo el virus afecta al hígado, las vías de transmisión y la importancia de la vacunación temprana.
                         </p>
                     </div>
                     <div class="px-6 pb-6 pt-0">
-                        <button onclick="openBlogModal('hepB')" data-i18n="read_article_btn" class="text-xs font-bold text-medical-600 hover:text-medical-800 flex items-center gap-1">
+                        <button onclick="openBlogModal('hepB')" data-i18n="read_article_btn" class="text-sm font-bold text-medical-600 hover:text-medical-800 flex items-center gap-1">
                             Leer Artículo Completo <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
@@ -636,14 +636,14 @@
                 <!-- Article 2 -->
                 <article class="bg-white rounded-xl border border-stone-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
                     <div class="p-6">
-                        <span data-i18n="a2_tag" class="text-xs font-bold text-indigo-700 bg-indigo-100 px-2.5 py-1 rounded-md">Salud Cardiovascular</span>
+                        <span data-i18n="a2_tag" class="text-sm font-bold text-indigo-700 bg-indigo-100 px-2.5 py-1 rounded-md">Salud Cardiovascular</span>
                         <h4 data-i18n="a2_title" class="text-lg font-bold text-brandDark mt-3">Hipertensión, Estrés Laboral y Dieta</h4>
-                        <p data-i18n="a2_desc" class="text-slate-600 text-xs mt-2 leading-relaxed">
+                        <p data-i18n="a2_desc" class="text-slate-600 text-sm mt-2 leading-relaxed">
                             Derivado de los hallazgos del Dr. Amoako. Explicación de cómo los patrones alimentarios occidentalizados y el estrés diario incrementan la presión arterial.
                         </p>
                     </div>
                     <div class="px-6 pb-6 pt-0">
-                        <button onclick="openBlogModal('hipertension')" data-i18n="read_article_btn" class="text-xs font-bold text-medical-600 hover:text-medical-800 flex items-center gap-1">
+                        <button onclick="openBlogModal('hipertension')" data-i18n="read_article_btn" class="text-sm font-bold text-medical-600 hover:text-medical-800 flex items-center gap-1">
                             Leer Artículo Completo <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
@@ -652,14 +652,14 @@
                 <!-- Article 3 -->
                 <article class="bg-white rounded-xl border border-stone-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
                     <div class="p-6">
-                        <span data-i18n="a3_tag" class="text-xs font-bold text-rose-700 bg-rose-100 px-2.5 py-1 rounded-md">Salud Materna</span>
+                        <span data-i18n="a3_tag" class="text-sm font-bold text-rose-700 bg-rose-100 px-2.5 py-1 rounded-md">Salud Materna</span>
                         <h4 data-i18n="a3_title" class="text-lg font-bold text-brandDark mt-3">Combatiendo la Anemia en el Embarazo</h4>
-                        <p data-i18n="a3_desc" class="text-slate-600 text-xs mt-2 leading-relaxed">
+                        <p data-i18n="a3_desc" class="text-slate-600 text-sm mt-2 leading-relaxed">
                             Guía para madres sobre la suplementación de hierro, los alimentos locales ricos en nutrientes y el seguimiento prenata oportuno en el centro.
                         </p>
                     </div>
                     <div class="px-6 pb-6 pt-0">
-                        <button onclick="openBlogModal('anemia')" data-i18n="read_article_btn" class="text-xs font-bold text-medical-600 hover:text-medical-800 flex items-center gap-1">
+                        <button onclick="openBlogModal('anemia')" data-i18n="read_article_btn" class="text-sm font-bold text-medical-600 hover:text-medical-800 flex items-center gap-1">
                             Leer Artículo Completo <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
@@ -669,7 +669,7 @@
         </section>
 
         <!-- Appointment Booking & Contact Section -->
-        <section id="reserva" class="bg-stone-900 text-white py-16 px-4">
+        <section id="reserva" class="hidden bg-stone-900 text-white py-16 px-4">
             <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
 
                 <!-- Form Side -->
@@ -677,11 +677,11 @@
                     <h3 class="text-2xl font-bold text-white mb-2 flex items-center gap-2">
                         <i class="fa-regular fa-calendar-check text-emerald-400"></i> <span data-i18n="booking_title">Solicitud de Cita Médica</span>
                     </h3>
-                    <p data-i18n="booking_subtitle" class="text-slate-300 text-xs mb-6">
+                    <p data-i18n="booking_subtitle" class="text-slate-300 text-sm mb-6">
                         Complete sus datos. Su solicitud será procesada y el equipo enviará la confirmación vía llamada o mensaje de WhatsApp.
                     </p>
 
-                    <form id="bookingForm" onsubmit="handleBooking(event)" class="space-y-4 text-xs">
+                    <form id="bookingForm" onsubmit="handleBooking(event)" class="space-y-4 text-sm">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label data-i18n="form_label_name" class="block font-medium text-slate-300 mb-1">Nombre Completo del Paciente *</label>
@@ -727,12 +727,12 @@
                 <div id="contacto" class="lg:col-span-5 space-y-6">
                     <div>
                         <h3 data-i18n="contact_title" class="text-2xl font-bold text-white mb-2">Información Institucional</h3>
-                        <p data-i18n="contact_subtitle" class="text-slate-400 text-xs">
+                        <p data-i18n="contact_subtitle" class="text-slate-400 text-sm">
                             Ubicación estratégica en Zebilla South para la atención del distrito de Bawku West y zonas aledañas.
                         </p>
                     </div>
 
-                    <div class="space-y-4 text-xs text-slate-300">
+                    <div class="space-y-4 text-sm text-slate-300">
                         <div class="flex items-start gap-3">
                             <div class="w-8 h-8 rounded bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold flex-shrink-0">
                                 <i class="fa-solid fa-location-dot"></i>
@@ -740,7 +740,7 @@
                             <div>
                                 <p data-i18n="c_addr_title" class="font-bold text-white">Dirección Física</p>
                                 <p data-i18n="c_addr_val">Zebilla South, Distrito Bawku West, Región Alta Oriental (U.E.R.), Ghana</p>
-                                <p class="text-slate-400 text-[11px]"><span data-i18n="c_gps_label">Coordenadas GPS</span>: 10.971890, -0.516560</p>
+                                <p class="text-slate-400 text-sm"><span data-i18n="c_gps_label">Coordenadas GPS</span>: 10.971890, -0.516560</p>
                             </div>
                         </div>
 
@@ -778,7 +778,7 @@
                     </div>
 
                     <!-- Location Callout Box -->
-                    <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700 text-xs text-slate-300 space-y-2">
+                    <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700 text-sm text-slate-300 space-y-2">
                         <p data-i18n="c_safe_title" class="font-bold text-white flex items-center gap-1.5">
                             <i class="fa-solid fa-shield-cat text-emerald-400"></i> Entorno Seguro e Ininterrumpido
                         </p>
@@ -794,7 +794,7 @@
     </main>
 
     <!-- Footer Section -->
-    <footer class="bg-brandDark text-slate-400 text-xs py-8 border-t border-slate-800">
+    <footer class="bg-brandDark text-slate-400 text-sm py-8 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-2">
                 <div class="w-7 h-7 rounded bg-medical-600 text-white flex items-center justify-center font-bold">
@@ -803,7 +803,7 @@
                 <span class="text-white font-bold">Naaba Akparabilla Medical Centre</span>
                 <span data-i18n="footer_rights">© 2026. Todos los derechos reservados.</span>
             </div>
-            <div class="flex items-center gap-4 text-[11px]">
+            <div class="flex items-center gap-4 text-sm">
                 <a href="#inicio" data-i18n="nav_home" class="hover:text-white transition">Inicio</a>
                 <span>•</span>
                 <a href="#herramientas" data-i18n="footer_nhis_policy" class="hover:text-white transition">Política NHIS</a>
@@ -830,14 +830,14 @@
                 <i class="fa-solid fa-circle-check"></i>
             </div>
             <h3 data-i18n="modal_book_title" class="text-xl font-bold text-brandDark">¡Solicitud Generada con Éxito!</h3>
-            <p class="text-xs text-slate-600 leading-relaxed" id="bookingModalText">
+            <p class="text-sm text-slate-600 leading-relaxed" id="bookingModalText">
                 Su cita ha sido registrada temporalmente. Para confirmación inmediata con recepción vía WhatsApp, haga clic en el botón a continuación.
             </p>
             <div class="pt-2 space-y-2">
-                <a id="whatsappConfirmBtn" href="#" target="_blank" class="block w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-3 rounded-xl text-xs transition">
+                <a id="whatsappConfirmBtn" href="#" target="_blank" class="block w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-3 rounded-xl text-sm transition">
                     <i class="fa-brands fa-whatsapp text-lg mr-1"></i> <span data-i18n="modal_book_wa">Confirmar por WhatsApp</span>
                 </a>
-                <button onclick="closeBookingModal()" data-i18n="modal_close" class="block w-full bg-stone-200 hover:bg-stone-300 text-slate-800 font-semibold py-2.5 rounded-xl text-xs transition">
+                <button onclick="closeBookingModal()" data-i18n="modal_close" class="block w-full bg-stone-200 hover:bg-stone-300 text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition">
                     Cerrar
                 </button>
             </div>
@@ -1324,6 +1324,51 @@
             link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
         });
 
+        // Section Navigation: only one section visible at a time, shown on tap
+        const SECTION_IDS = ['inicio', 'servicios', 'equipo', 'herramientas', 'estadisticas', 'portal', 'reserva'];
+        const ANCHOR_TO_SECTION = { contacto: 'reserva' };
+
+        function showSection(anchorId) {
+            const sectionId = SECTION_IDS.includes(anchorId) ? anchorId : (ANCHOR_TO_SECTION[anchorId] || 'inicio');
+
+            document.querySelectorAll('main > section').forEach(sec => {
+                sec.classList.toggle('hidden', sec.id !== sectionId);
+            });
+
+            document.querySelectorAll('nav a[href^="#"], #mobileMenu a[href^="#"]').forEach(link => {
+                const linkTarget = link.getAttribute('href').slice(1);
+                const linkSection = SECTION_IDS.includes(linkTarget) ? linkTarget : (ANCHOR_TO_SECTION[linkTarget] || linkTarget);
+                link.classList.toggle('text-medical-600', linkSection === sectionId);
+                link.classList.toggle('font-bold', linkSection === sectionId);
+            });
+
+            window.scrollTo({ top: 0, behavior: 'instant' });
+
+            if (sectionId === 'estadisticas') {
+                requestAnimationFrame(() => {
+                    if (metabolicChartInstance) metabolicChartInstance.resize();
+                    if (demographicsChartInstance) demographicsChartInstance.resize();
+                });
+            }
+
+            if (anchorId === 'contacto') {
+                setTimeout(() => {
+                    const contactBlock = document.getElementById('contacto');
+                    if (contactBlock) contactBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 60);
+            }
+        }
+
+        // Intercept every internal "#" link (nav, hero CTAs, doctor cards, footer) to switch sections
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a[href^="#"]');
+            if (!link) return;
+            const anchorId = link.getAttribute('href').slice(1);
+            if (!anchorId) return;
+            e.preventDefault();
+            showSection(anchorId);
+        });
+
         // Quick Triage Handler
         function quickTriage(type) {
             const res = document.getElementById('triageResult');
@@ -1448,7 +1493,7 @@
             if (gender === 'mujer' && waist >= 80) isAbdominalObesity = true;
 
             if (isAbdominalObesity || pressure === 'si') {
-                res.className = 'mt-4 p-4 rounded-xl border text-xs bg-amber-50 border-amber-200 text-amber-900';
+                res.className = 'mt-4 p-4 rounded-xl border text-sm bg-amber-50 border-amber-200 text-amber-900';
                 if (currentLang === 'es') {
                     res.innerHTML = `<p class="font-bold text-sm mb-1"><i class="fa-solid fa-triangle-exclamation"></i> Indicadores de Atención Cardiometabólica Detectados</p>
                     <p>Su medición indica posible presencia de obesidad abdominal o tensión elevada (condición presente en el 57.1% de pacientes evaluados en estudios regionales del Dr. Amoako). Le recomendamos agendar un chequeo preventivo para medir perfil hepático (AST/ALT), lípidos y glucosa en sangre.</p>`;
@@ -1457,7 +1502,7 @@
                     <p>Your measurements indicate abdominal obesity or elevated blood pressure (observed in 57.1% of patients in regional studies led by Dr. Amoako). We recommend booking a preventive checkup for liver enzyme ratios (AST/ALT), lipid profile, and blood glucose testing.</p>`;
                 }
             } else {
-                res.className = 'mt-4 p-4 rounded-xl border text-xs bg-emerald-50 border-emerald-200 text-emerald-900';
+                res.className = 'mt-4 p-4 rounded-xl border text-sm bg-emerald-50 border-emerald-200 text-emerald-900';
                 if (currentLang === 'es') {
                     res.innerHTML = `<p class="font-bold text-sm mb-1"><i class="fa-solid fa-circle-check"></i> Indicadores en Rango de Normalidad</p>
                     <p>Su perímetro de cintura se encuentra dentro de los parámetros recomendados de bajo riesgo metabólico. Mantenga una alimentación equilibrada con baja ingesta de ultraprocesados y realice actividad física regular.</p>`;
@@ -1478,10 +1523,10 @@
             if (type === 'hepB') {
                 if (currentLang === 'es') {
                     container.innerHTML = `
-                        <span class="text-xs font-bold text-teal-700 bg-teal-100 px-2.5 py-1 rounded-md">Investigación Médica</span>
+                        <span class="text-sm font-bold text-teal-700 bg-teal-100 px-2.5 py-1 rounded-md">Investigación Médica</span>
                         <h3 class="text-2xl font-bold text-brandDark mt-3 mb-2">Hepatitis B en el Norte de Ghana: Protección y Diagnóstico Oportuno</h3>
-                        <p class="text-xs text-slate-500 mb-4">Basado en la investigación de la Dra. Celia Yamile Rodriguez et al. (2025)</p>
-                        <div class="text-xs text-slate-700 space-y-3 leading-relaxed">
+                        <p class="text-sm text-slate-500 mb-4">Basado en la investigación de la Dra. Celia Yamile Rodriguez et al. (2025)</p>
+                        <div class="text-sm text-slate-700 space-y-3 leading-relaxed">
                             <p>El Virus de la Hepatitis B (VHB) representa uno de los desafíos de salud pública más significativos en nuestra región. En investigaciones realizadas entre estudiantes y comunidades de la UDS, se constató que si bien el 94.25% comprende que el VHB puede causar cirrosis y carcinoma hepatocelular, persisten brechas en las prácticas de detección y vacunación.</p>
                             <p><strong>¿Cómo Proteger a su Familia en Zebilla?</strong></p>
                             <ul class="list-disc list-inside space-y-1">
@@ -1493,10 +1538,10 @@
                     `;
                 } else {
                     container.innerHTML = `
-                        <span class="text-xs font-bold text-teal-700 bg-teal-100 px-2.5 py-1 rounded-md">Medical Research</span>
+                        <span class="text-sm font-bold text-teal-700 bg-teal-100 px-2.5 py-1 rounded-md">Medical Research</span>
                         <h3 class="text-2xl font-bold text-brandDark mt-3 mb-2">Hepatitis B in Northern Ghana: Early Diagnosis & Protection</h3>
-                        <p class="text-xs text-slate-500 mb-4">Based on published research by Dr. Celia Yamile Rodriguez et al. (2025)</p>
-                        <div class="text-xs text-slate-700 space-y-3 leading-relaxed">
+                        <p class="text-sm text-slate-500 mb-4">Based on published research by Dr. Celia Yamile Rodriguez et al. (2025)</p>
+                        <div class="text-sm text-slate-700 space-y-3 leading-relaxed">
                             <p>Hepatitis B Virus (HBV) remains a major public health challenge in Northern Ghana. Studies conducted across university and regional populations show that while 94.25% understand HBV causes cirrhosis and liver cancer, significant gaps remain in screening and complete vaccination coverage.</p>
                             <p><strong>Protecting Your Family in Zebilla:</strong></p>
                             <ul class="list-disc list-inside space-y-1">
@@ -1510,10 +1555,10 @@
             } else if (type === 'hipertension') {
                 if (currentLang === 'es') {
                     container.innerHTML = `
-                        <span class="text-xs font-bold text-indigo-700 bg-indigo-100 px-2.5 py-1 rounded-md">Salud Ocupacional</span>
+                        <span class="text-sm font-bold text-indigo-700 bg-indigo-100 px-2.5 py-1 rounded-md">Salud Ocupacional</span>
                         <h3 class="text-2xl font-bold text-brandDark mt-3 mb-2">Hipertensión y Síndrome Metabólico: El Vínculo con el Estrés</h3>
-                        <p class="text-xs text-slate-500 mb-4">Basado en las publicaciones científicas del Dr. Moses Ofosu Amoako</p>
-                        <div class="text-xs text-slate-700 space-y-3 leading-relaxed">
+                        <p class="text-sm text-slate-500 mb-4">Basado en las publicaciones científicas del Dr. Moses Ofosu Amoako</p>
+                        <div class="text-sm text-slate-700 space-y-3 leading-relaxed">
                             <p>Los estudios publicados en el <em>Journal of Health Population and Nutrition</em> revelan una prevalencia del 11.0% de síndrome metabólico, con un 29.7% de hipertensión arterial y un 57.1% de adiposidad abdominal en trabajadores expuestos a estrés.</p>
                             <p><strong>Factores Clave identificados:</strong></p>
                             <ul class="list-disc list-inside space-y-1">
@@ -1524,10 +1569,10 @@
                     `;
                 } else {
                     container.innerHTML = `
-                        <span class="text-xs font-bold text-indigo-700 bg-indigo-100 px-2.5 py-1 rounded-md">Occupational Health</span>
+                        <span class="text-sm font-bold text-indigo-700 bg-indigo-100 px-2.5 py-1 rounded-md">Occupational Health</span>
                         <h3 class="text-2xl font-bold text-brandDark mt-3 mb-2">Hypertension & Metabolic Syndrome: The Stress Connection</h3>
-                        <p class="text-xs text-slate-500 mb-4">Based on peer-reviewed research by Dr. Moses Ofosu Amoako</p>
-                        <div class="text-xs text-slate-700 space-y-3 leading-relaxed">
+                        <p class="text-sm text-slate-500 mb-4">Based on peer-reviewed research by Dr. Moses Ofosu Amoako</p>
+                        <div class="text-sm text-slate-700 space-y-3 leading-relaxed">
                             <p>Research in the <em>Journal of Health Population and Nutrition</em> highlights an 11.0% prevalence of metabolic syndrome, 29.7% hypertension rate, and 57.1% abdominal adiposity among working populations in Ghana.</p>
                             <p><strong>Key Contributing Factors:</strong></p>
                             <ul class="list-disc list-inside space-y-1">
@@ -1540,10 +1585,10 @@
             } else if (type === 'anemia') {
                 if (currentLang === 'es') {
                     container.innerHTML = `
-                        <span class="text-xs font-bold text-rose-700 bg-rose-100 px-2.5 py-1 rounded-md">Salud Prenatal</span>
+                        <span class="text-sm font-bold text-rose-700 bg-rose-100 px-2.5 py-1 rounded-md">Salud Prenatal</span>
                         <h3 class="text-2xl font-bold text-brandDark mt-3 mb-2">Combatiendo la Anemia Durante el Embarazo</h3>
-                        <p class="text-xs text-slate-500 mb-4">Orientación clínica prenatal del departamento de Medicina Familiar</p>
-                        <div class="text-xs text-slate-700 space-y-3 leading-relaxed">
+                        <p class="text-sm text-slate-500 mb-4">Orientación clínica prenatal del departamento de Medicina Familiar</p>
+                        <div class="text-sm text-slate-700 space-y-3 leading-relaxed">
                             <p>La anemia gestacional es una de las causas principales de bajo peso al nacer en la Región Alta Oriental. La detección temprana durante las primeras semanas de gestación es crucial.</p>
                             <p><strong>Recomendaciones Clínicas:</strong></p>
                             <ul class="list-disc list-inside space-y-1">
@@ -1555,10 +1600,10 @@
                     `;
                 } else {
                     container.innerHTML = `
-                        <span class="text-xs font-bold text-rose-700 bg-rose-100 px-2.5 py-1 rounded-md">Prenatal Health</span>
+                        <span class="text-sm font-bold text-rose-700 bg-rose-100 px-2.5 py-1 rounded-md">Prenatal Health</span>
                         <h3 class="text-2xl font-bold text-brandDark mt-3 mb-2">Combating Gestational Anaemia in Upper East Region</h3>
-                        <p class="text-xs text-slate-500 mb-4">Clinical antenatal guidance from our Family Medicine department</p>
-                        <div class="text-xs text-slate-700 space-y-3 leading-relaxed">
+                        <p class="text-sm text-slate-500 mb-4">Clinical antenatal guidance from our Family Medicine department</p>
+                        <div class="text-sm text-slate-700 space-y-3 leading-relaxed">
                             <p>Gestational anaemia remains a primary cause of low birth weight and perinatal complications. Early detection during initial antenatal visits is critical for mother and child safety.</p>
                             <p><strong>Key Clinical Guidelines:</strong></p>
                             <ul class="list-disc list-inside space-y-1">
@@ -1725,6 +1770,7 @@
 
             // Apply device/browser language now that charts exist
             setLanguage(detectedLang);
+            showSection('inicio');
         });
     </script>
 </body>
