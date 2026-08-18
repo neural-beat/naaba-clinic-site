@@ -1248,6 +1248,8 @@
             }
         };
 
+        // Default to Spanish only if the device/browser language is Spanish; otherwise English.
+        const detectedLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase().startsWith('es') ? 'es' : 'en';
         let currentLang = 'es';
         let metabolicChartInstance = null;
         let demographicsChartInstance = null;
@@ -1720,6 +1722,9 @@
                     }
                 }
             });
+
+            // Apply device/browser language now that charts exist
+            setLanguage(detectedLang);
         });
     </script>
 </body>
