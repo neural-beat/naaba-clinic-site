@@ -671,23 +671,11 @@
                 <div id="approvedReviewsGrid" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"></div>
                 <p id="noReviewsMsg" data-i18n="reviews_empty" class="text-center text-slate-500 text-sm mb-12">Todavía no hay reseñas publicadas. ¡Sea el primero en compartir su experiencia!</p>
 
-                <div class="max-w-xl mx-auto bg-white p-6 md:p-8 rounded-2xl border border-stone-200 shadow-sm">
-                    <h4 data-i18n="reviews_form_title" class="text-lg font-bold text-brandDark mb-1 text-center">Deje su Opinión</h4>
-                    <p data-i18n="reviews_form_desc" class="text-sm text-slate-500 mb-4 text-center">No pedimos su nombre ni contacto. Solo su calificación y su mensaje.</p>
+                <div class="max-w-xl mx-auto bg-white p-6 md:p-8 rounded-2xl border border-stone-200 shadow-sm text-center">
+                    <h4 data-i18n="reviews_form_title" class="text-lg font-bold text-brandDark mb-1">Deje su Opinión</h4>
+                    <p data-i18n="reviews_form_desc" class="text-sm text-slate-500 mb-4">No pedimos su nombre ni contacto. Solo su calificación y su mensaje.</p>
 
-                    <div class="flex items-center justify-center gap-2 mb-4" id="starPicker">
-                        <button type="button" data-star="1" onclick="setReviewRating(1)" class="text-3xl text-stone-300 hover:text-amber-300 transition"><i class="fa-solid fa-star"></i></button>
-                        <button type="button" data-star="2" onclick="setReviewRating(2)" class="text-3xl text-stone-300 hover:text-amber-300 transition"><i class="fa-solid fa-star"></i></button>
-                        <button type="button" data-star="3" onclick="setReviewRating(3)" class="text-3xl text-stone-300 hover:text-amber-300 transition"><i class="fa-solid fa-star"></i></button>
-                        <button type="button" data-star="4" onclick="setReviewRating(4)" class="text-3xl text-stone-300 hover:text-amber-300 transition"><i class="fa-solid fa-star"></i></button>
-                        <button type="button" data-star="5" onclick="setReviewRating(5)" class="text-3xl text-stone-300 hover:text-amber-300 transition"><i class="fa-solid fa-star"></i></button>
-                    </div>
-
-                    <textarea id="reviewMessage" rows="4" data-i18n-placeholder="reviews_placeholder" placeholder="Cuéntenos su experiencia..." class="w-full p-3 rounded-lg border border-stone-300 text-sm focus:ring-2 focus:ring-medical-500 focus:outline-none mb-4"></textarea>
-
-                    <button onclick="submitReview()" data-i18n="reviews_submit_btn" class="w-full bg-medical-600 hover:bg-medical-700 text-white font-bold py-3 rounded-lg text-sm transition">Enviar Opinión</button>
-
-                    <p id="reviewFormMsg" class="text-sm text-center mt-3 hidden"></p>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc-5FpipxMFql6icCpAlNzy_3jEESa0VLMfAegVkDlmjw49iw/viewform" target="_blank" rel="noopener" data-i18n="reviews_submit_btn" class="inline-block bg-medical-600 hover:bg-medical-700 text-white font-bold py-3 px-8 rounded-lg text-sm transition">Dejar mi Opinión</a>
                 </div>
             </div>
         </section>
@@ -877,8 +865,8 @@
                 Su cita ha sido registrada temporalmente. Para confirmación inmediata con recepción vía WhatsApp, haga clic en el botón a continuación.
             </p>
             <div class="pt-2 space-y-2">
-                <a id="whatsappConfirmBtn" href="#" target="_blank" class="block w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-3 rounded-xl text-sm transition">
-                    <i class="fa-brands fa-whatsapp text-lg mr-1"></i> <span data-i18n="modal_book_wa">Confirmar por WhatsApp</span>
+                <a id="emailConfirmBtn" href="#" class="block w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-3 rounded-xl text-sm transition">
+                    <i class="fa-solid fa-envelope text-lg mr-1"></i> <span data-i18n="modal_book_email">Enviar Correo</span>
                 </a>
                 <button onclick="closeBookingModal()" data-i18n="modal_close" class="block w-full bg-stone-200 hover:bg-stone-300 text-slate-800 font-semibold py-2.5 rounded-xl text-sm transition">
                     Cerrar
@@ -1082,7 +1070,7 @@
                 footer_rights: "© 2026. Todos los derechos reservados.",
                 footer_nhis_policy: "Política NHIS",
                 modal_book_title: "¡Solicitud Generada con Éxito!",
-                modal_book_wa: "Confirmar por WhatsApp",
+                modal_book_email: "Enviar Correo",
                 modal_close: "Cerrar",
 
                 mobile_menu_aria: "Abrir Menú",
@@ -1097,8 +1085,7 @@
                 reviews_empty: "Todavía no hay reseñas publicadas. ¡Sea el primero en compartir su experiencia!",
                 reviews_form_title: "Deje su Opinión",
                 reviews_form_desc: "No pedimos su nombre ni contacto. Solo su calificación y su mensaje.",
-                reviews_placeholder: "Cuéntenos su experiencia...",
-                reviews_submit_btn: "Enviar Opinión",
+                reviews_submit_btn: "Dejar mi Opinión",
                 home_reviews_title: "Lo Que Dicen Nuestros Pacientes"
             },
             en: {
@@ -1292,7 +1279,7 @@
                 footer_rights: "© 2026. All rights reserved.",
                 footer_nhis_policy: "NHIS Policy",
                 modal_book_title: "Request Generated Successfully!",
-                modal_book_wa: "Confirm on WhatsApp",
+                modal_book_email: "Send Email",
                 modal_close: "Close",
 
                 mobile_menu_aria: "Open Menu",
@@ -1307,8 +1294,7 @@
                 reviews_empty: "No reviews published yet. Be the first to share your experience!",
                 reviews_form_title: "Leave Your Review",
                 reviews_form_desc: "We don't ask for your name or contact details. Just your rating and your message.",
-                reviews_placeholder: "Tell us about your experience...",
-                reviews_submit_btn: "Submit Review",
+                reviews_submit_btn: "Leave My Review",
                 home_reviews_title: "What Our Patients Say"
             }
         };
@@ -1694,6 +1680,9 @@
         }
 
         // Booking Form Handling
+        // Clinic inbox for form submissions (built at runtime, kept out of the raw HTML).
+        const clinicEmail = ['jeanmichelworks', 'gmail.com'].join('@');
+
         function handleBooking(e) {
             e.preventDefault();
             const name = document.getElementById('patientName').value;
@@ -1704,16 +1693,16 @@
             const nhis = nhisSelectEl.selectedOptions[0].textContent;
             const notes = document.getElementById('patientNotes').value;
 
-            const textMsg = `Hello, I would like to book an appointment at Naaba Akparabilla Medical Centre.\n*Patient:* ${name}\n*Phone:* ${phone}\n*Doctor:* ${doctor}\n*NHIS Status:* ${nhis}\n*Reason:* ${notes}`;
+            const subject = `Solicitud de cita - ${name}`;
+            const body = `Nueva solicitud de cita desde la web:\n\nPaciente: ${name}\nTeléfono: ${phone}\nEspecialista: ${doctor}\nNHIS: ${nhis}\nMotivo: ${notes}`;
+            const mailtoUrl = `mailto:${clinicEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-            const whatsappUrl = `https://wa.me/233243711851?text=${encodeURIComponent(textMsg)}`;
+            document.getElementById('emailConfirmBtn').href = mailtoUrl;
 
-            document.getElementById('whatsappConfirmBtn').href = whatsappUrl;
-            
             if (currentLang === 'es') {
-                document.getElementById('bookingModalText').innerText = `Gracias ${name}. Su solicitud para ${doctor} ha sido registrada. Haga clic para abrir WhatsApp y enviar la confirmación a la recepción del centro (0243-711851).`;
+                document.getElementById('bookingModalText').innerText = `Gracias ${name}. Su solicitud para ${doctor} está lista. Haga clic para abrir su correo y enviarla a la recepción del centro.`;
             } else {
-                document.getElementById('bookingModalText').innerText = `Thank you ${name}. Your appointment request for ${doctor} is prepared. Click below to confirm via WhatsApp with our reception (0243-711851).`;
+                document.getElementById('bookingModalText').innerText = `Thank you ${name}. Your appointment request for ${doctor} is ready. Click below to open your email and send it to our reception.`;
             }
 
             document.getElementById('bookingModal').classList.remove('hidden');
@@ -1724,12 +1713,57 @@
         }
 
         // Patient Reviews (anonymous: rating + message only, no personal data).
-        // Submissions go to the clinic via WhatsApp for manual review; only
-        // reviews the clinic marks as 4-5 stars and positive get added here.
-        const approvedReviews = [
-            // { rating: 5, text: "..." }
-        ];
-        let selectedReviewRating = 0;
+        // Submitted via a Google Form; responses land in a linked Sheet published
+        // as CSV, which we fetch here and auto-filter to 4-5 star reviews only.
+        const REVIEWS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQrjWxqV0n3DjetPh7dw_Lc7AOfqx0hDSRNwYUvwJ7Ib0ZdBgnz3b7SU-MnK-sQ6IwMzTEWKqeB7EzP/pub?gid=1861185852&single=true&output=csv';
+        let approvedReviews = [];
+
+        function parseReviewsCSV(csvText) {
+            const rows = [];
+            let row = [], field = '', inQuotes = false;
+            for (let i = 0; i < csvText.length; i++) {
+                const c = csvText[i];
+                if (inQuotes) {
+                    if (c === '"' && csvText[i + 1] === '"') { field += '"'; i++; }
+                    else if (c === '"') { inQuotes = false; }
+                    else { field += c; }
+                } else {
+                    if (c === '"') inQuotes = true;
+                    else if (c === ',') { row.push(field); field = ''; }
+                    else if (c === '\n' || c === '\r') {
+                        if (c === '\r' && csvText[i + 1] === '\n') i++;
+                        row.push(field); field = '';
+                        rows.push(row); row = [];
+                    } else { field += c; }
+                }
+            }
+            if (field.length || row.length) { row.push(field); rows.push(row); }
+            return rows.filter(r => r.some(cell => cell.trim() !== ''));
+        }
+
+        async function loadReviewsFromSheet() {
+            try {
+                const res = await fetch(REVIEWS_CSV_URL, { cache: 'no-store' });
+                if (!res.ok) return;
+                const rows = parseReviewsCSV(await res.text());
+                if (rows.length < 2) return;
+
+                const headers = rows[0].map(h => h.trim().toLowerCase());
+                let ratingCol = headers.findIndex(h => h.includes('qualif') || h.includes('calif') || h.includes('rating') || h.includes('estrella'));
+                let textCol = headers.findIndex(h => h.includes('review') || h.includes('mensaje') || h.includes('message') || h.includes('opini')) ;
+                if (ratingCol === -1) ratingCol = 1;
+                if (textCol === -1) textCol = 2;
+
+                approvedReviews = rows.slice(1)
+                    .map(r => ({ rating: parseInt(r[ratingCol], 10), text: (r[textCol] || '').trim() }))
+                    .filter(r => r.rating >= 4 && r.text);
+
+                renderApprovedReviews();
+                renderHomeReviewsWidget();
+            } catch (err) {
+                // If the sheet can't be reached, the section simply shows the empty state.
+            }
+        }
 
         let homeReviewIndex = 0;
         let homeReviewInterval = null;
@@ -1807,41 +1841,6 @@
                     <p class="text-slate-600 text-sm leading-relaxed">"${r.text}"</p>
                 </div>
             `).join('');
-        }
-
-        function setReviewRating(n) {
-            selectedReviewRating = n;
-            document.querySelectorAll('#starPicker button').forEach(btn => {
-                const val = parseInt(btn.getAttribute('data-star'), 10);
-                btn.classList.toggle('text-amber-400', val <= n);
-                btn.classList.toggle('text-stone-300', val > n);
-            });
-        }
-
-        function submitReview() {
-            const messageEl = document.getElementById('reviewMessage');
-            const feedback = document.getElementById('reviewFormMsg');
-            const message = messageEl.value.trim();
-
-            if (selectedReviewRating === 0 || !message) {
-                feedback.textContent = currentLang === 'es'
-                    ? 'Por favor seleccione una calificación y escriba su mensaje.'
-                    : 'Please select a rating and write your message.';
-                feedback.className = 'text-sm text-center mt-3 text-red-600';
-                return;
-            }
-
-            const stars = '⭐'.repeat(selectedReviewRating);
-            const waText = `${stars} (${selectedReviewRating}/5)\n"${message}"`;
-            window.open(`https://wa.me/233243711851?text=${encodeURIComponent(waText)}`, '_blank');
-
-            feedback.textContent = currentLang === 'es'
-                ? 'Gracias por su opinión. El equipo la revisará antes de publicarla.'
-                : 'Thank you for your feedback. Our team will review it before publishing.';
-            feedback.className = 'text-sm text-center mt-3 text-emerald-700 font-semibold';
-
-            messageEl.value = '';
-            setReviewRating(0);
         }
 
         // Update Chart Labels on Language Switch
@@ -1960,8 +1959,7 @@
                 }
             });
 
-            renderApprovedReviews();
-            renderHomeReviewsWidget();
+            loadReviewsFromSheet();
 
             // Apply device/browser language now that charts exist
             setLanguage(detectedLang);
