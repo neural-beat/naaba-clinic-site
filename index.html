@@ -139,79 +139,124 @@
                         <i class="fa-solid fa-circle-check"></i> <span data-i18n="hero_badge">Refugio de Atención Médica Segura e Ininterrumpida</span>
                     </div>
                     <!-- Hero Carousel -->
-                    <div id="heroCarouselWrapper" class="relative min-h-[190px] sm:min-h-[160px] overflow-hidden">
+                    <div id="heroCarouselWrapper" class="relative min-h-[220px] sm:min-h-[170px] overflow-hidden">
                         <div id="heroCarouselTrack" class="flex transition-transform duration-700 ease-out">
-                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('')">
-                                <h2 data-i18n="hero_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-                                    Atención Médica Especializada y Humana en Zebilla
-                                </h2>
-                                <p data-i18n="hero_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
-                                    El <strong class="text-white">Naaba Akparabilla Medical Centre</strong> ofrece medicina familiar, programas de tratamiento contra la Tuberculosis (Centro DOT oficial), salud materno-infantil y prevención de riesgos metabólicos para la comunidad de Bawku West y la Región Alta Oriental.
-                                </p>
+                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('')">
+                                <div class="flex-1 min-w-0">
+                                    <h2 data-i18n="hero_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                        Atención Médica Especializada y Humana en Zebilla
+                                    </h2>
+                                    <p data-i18n="hero_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                        El <strong class="text-white">Naaba Akparabilla Medical Centre</strong> ofrece medicina familiar, programas de tratamiento contra la Tuberculosis (Centro DOT oficial), salud materno-infantil y prevención de riesgos metabólicos para la comunidad de Bawku West y la Región Alta Oriental.
+                                    </p>
+                                </div>
+                                <div class="hidden sm:flex w-24 h-24 md:w-28 md:h-28 rounded-full bg-medical-600 text-white items-center justify-center text-4xl md:text-5xl shadow-lg shrink-0">
+                                    <i class="fa-solid fa-hospital-user"></i>
+                                </div>
                             </div>
-                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('triageWidget')">
-                                <h2 data-i18n="hero_slide_triage_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-                                    Triaje Rápido de Síntomas en Segundos
-                                </h2>
-                                <p data-i18n="hero_slide_triage_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
-                                    Seleccione su motivo de consulta y reciba indicación inmediata de a dónde acudir.
-                                </p>
+                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('triageWidget')">
+                                <div class="flex-1 min-w-0">
+                                    <h2 data-i18n="hero_slide_triage_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                        Triaje Rápido de Síntomas en Segundos
+                                    </h2>
+                                    <p data-i18n="hero_slide_triage_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                        Seleccione su motivo de consulta y reciba indicación inmediata de a dónde acudir.
+                                    </p>
+                                </div>
+                                <div class="hidden sm:flex w-24 h-24 md:w-28 md:h-28 rounded-full bg-medical-600 text-white items-center justify-center text-4xl md:text-5xl shadow-lg shrink-0">
+                                    <i class="fa-solid fa-stethoscope"></i>
+                                </div>
                             </div>
-                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('servicios')">
-                                <h2 data-i18n="hero_slide_services_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-                                    Explore Nuestros Servicios
-                                </h2>
-                                <p data-i18n="hero_slide_services_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
-                                    Filtre por especialidad: medicina general, TB/DOT, salud materno-infantil y más.
-                                </p>
+                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('servicios')">
+                                <div class="flex-1 min-w-0">
+                                    <h2 data-i18n="hero_slide_services_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                        Explore Nuestros Servicios
+                                    </h2>
+                                    <p data-i18n="hero_slide_services_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                        Filtre por especialidad: medicina general, TB/DOT, salud materno-infantil y más.
+                                    </p>
+                                </div>
+                                <div class="hidden sm:flex w-24 h-24 md:w-28 md:h-28 rounded-full bg-medical-600 text-white items-center justify-center text-4xl md:text-5xl shadow-lg shrink-0">
+                                    <i class="fa-solid fa-notes-medical"></i>
+                                </div>
                             </div>
-                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('equipo')">
-                                <h2 data-i18n="hero_slide_team_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-                                    Conozca a Nuestro Equipo Médico
-                                </h2>
-                                <p data-i18n="hero_slide_team_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
-                                    Dos especialistas dedicados listos para cuidar de usted y su familia.
-                                </p>
+                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('equipo')">
+                                <div class="flex-1 min-w-0">
+                                    <h2 data-i18n="hero_slide_team_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                        Conozca a Nuestro Equipo Médico
+                                    </h2>
+                                    <p data-i18n="hero_slide_team_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                        Dos especialistas dedicados listos para cuidar de usted y su familia.
+                                    </p>
+                                </div>
+                                <div class="hidden sm:flex w-24 h-24 md:w-28 md:h-28 rounded-full bg-medical-600 text-white items-center justify-center text-4xl md:text-5xl shadow-lg shrink-0">
+                                    <i class="fa-solid fa-user-doctor"></i>
+                                </div>
                             </div>
-                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('estadisticas')">
-                                <h2 data-i18n="hero_slide_stats_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-                                    Datos de Salud Regional
-                                </h2>
-                                <p data-i18n="hero_slide_stats_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
-                                    Vea datos reales de salud de Bawku West y la Región Alta Oriental.
-                                </p>
+                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('estadisticas')">
+                                <div class="flex-1 min-w-0">
+                                    <h2 data-i18n="hero_slide_stats_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                        Datos de Salud Regional
+                                    </h2>
+                                    <p data-i18n="hero_slide_stats_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                        Vea datos reales de salud de Bawku West y la Región Alta Oriental.
+                                    </p>
+                                </div>
+                                <div class="hidden sm:flex w-24 h-24 md:w-28 md:h-28 rounded-full bg-medical-600 text-white items-center justify-center text-4xl md:text-5xl shadow-lg shrink-0">
+                                    <i class="fa-solid fa-chart-simple"></i>
+                                </div>
                             </div>
-                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('herramientas')">
-                                <h2 data-i18n="hero_slide_nhis_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-                                    Verifique su Cobertura NHIS
-                                </h2>
-                                <p data-i18n="hero_slide_nhis_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
-                                    Sepa qué está cubierto antes de su visita — sin cobros ocultos.
-                                </p>
+                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('herramientas')">
+                                <div class="flex-1 min-w-0">
+                                    <h2 data-i18n="hero_slide_nhis_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                        Verifique su Cobertura NHIS
+                                    </h2>
+                                    <p data-i18n="hero_slide_nhis_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                        Sepa qué está cubierto antes de su visita — sin cobros ocultos.
+                                    </p>
+                                </div>
+                                <div class="hidden sm:flex w-24 h-24 md:w-28 md:h-28 rounded-full bg-medical-600 text-white items-center justify-center text-4xl md:text-5xl shadow-lg shrink-0">
+                                    <i class="fa-solid fa-id-card"></i>
+                                </div>
                             </div>
-                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('portal')">
-                                <h2 data-i18n="hero_slide_portal_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-                                    Portal de Conocimiento
-                                </h2>
-                                <p data-i18n="hero_slide_portal_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
-                                    Artículos de salud basados en evidencia, escritos por nuestro equipo médico.
-                                </p>
+                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('portal')">
+                                <div class="flex-1 min-w-0">
+                                    <h2 data-i18n="hero_slide_portal_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                        Portal de Conocimiento
+                                    </h2>
+                                    <p data-i18n="hero_slide_portal_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                        Artículos de salud basados en evidencia, escritos por nuestro equipo médico.
+                                    </p>
+                                </div>
+                                <div class="hidden sm:flex w-24 h-24 md:w-28 md:h-28 rounded-full bg-medical-600 text-white items-center justify-center text-4xl md:text-5xl shadow-lg shrink-0">
+                                    <i class="fa-solid fa-book-medical"></i>
+                                </div>
                             </div>
-                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('resenas')">
-                                <h2 data-i18n="hero_slide_reviews_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-                                    Opiniones de Pacientes
-                                </h2>
-                                <p data-i18n="hero_slide_reviews_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
-                                    Vea lo que dicen otros pacientes, o deje su propia opinión.
-                                </p>
+                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('resenas')">
+                                <div class="flex-1 min-w-0">
+                                    <h2 data-i18n="hero_slide_reviews_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                        Opiniones de Pacientes
+                                    </h2>
+                                    <p data-i18n="hero_slide_reviews_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                        Vea lo que dicen otros pacientes, o deje su propia opinión.
+                                    </p>
+                                </div>
+                                <div class="hidden sm:flex w-24 h-24 md:w-28 md:h-28 rounded-full bg-medical-600 text-white items-center justify-center text-4xl md:text-5xl shadow-lg shrink-0">
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
                             </div>
-                            <div class="hero-slide w-full shrink-0 cursor-pointer" onclick="heroSlideClick('contacto')">
-                                <h2 data-i18n="hero_slide_contact_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-                                    Visítenos o Contáctenos
-                                </h2>
-                                <p data-i18n="hero_slide_contact_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
-                                    Encuentre nuestra ubicación, líneas telefónicas y estatus NHIS.
-                                </p>
+                            <div class="hero-slide w-full shrink-0 cursor-pointer flex items-center gap-6" onclick="heroSlideClick('contacto')">
+                                <div class="flex-1 min-w-0">
+                                    <h2 data-i18n="hero_slide_contact_title" class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                                        Visítenos o Contáctenos
+                                    </h2>
+                                    <p data-i18n="hero_slide_contact_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
+                                        Encuentre nuestra ubicación, líneas telefónicas y estatus NHIS.
+                                    </p>
+                                </div>
+                                <div class="hidden sm:flex w-24 h-24 md:w-28 md:h-28 rounded-full bg-medical-600 text-white items-center justify-center text-4xl md:text-5xl shadow-lg shrink-0">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
