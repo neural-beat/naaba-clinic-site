@@ -8,7 +8,6 @@
     <!-- Application Structure Plan: La aplicación está diseñada como una plataforma web interactiva integrada de triaje, exploración clínica y portal de salud para pacientes del Naaba Akparabilla Medical Centre con soporte multilingüe dinámico (Español / English). Incluye: 1) Encabezado Hero con triaje rápido, acreditaciones (NHIS/HeFRA) y selector global de idioma; 2) Explorador interactivo de Servicios y Síntomas con filtros; 3) Perfiles interactivos del Liderazgo Médico y publicaciones científicas; 4) Herramientas interactivas (Verificador NHIS y Evaluador de Riesgo Cardiometabólico basado en investigación); 5) Dashboard con gráficos interactivos (Chart.js) traducibles sobre la salud regional y demografía de Bawku West; 6) Portal de Conocimiento con artículos de salud preventiva; 7) Formulario interactivo de reserva de citas con enlace directo a WhatsApp y contacto. -->
     <!-- Visualization & Content Choices:
        - Selector de Idiomas -> Toggle dinámico ES/EN -> Cambia textos, placeholders, etiquetas de selects, tooltips y Chart.js en tiempo real -> JS Vanilla.
-       - Datos de Salud Cardiometabólica (Dr. Amoako) -> Comparación de Prevalencias -> Gráfico de Barras Horizontales / Donut (Chart.js en Canvas) -> Filtro interactivo y traducción de ejes -> Chart.js.
        - Distribución Demográfica de Bawku West -> Proporción Rural vs Urbana -> Gráfico de Donut (Chart.js) -> Hover/Tooltip interactivo multilingüe -> Chart.js.
        - Evaluador de Riesgo Metabólico -> Calculadora interactiva -> Inputs numéricos + Feedback instantáneo bilingüe -> JS Vanilla.
        - Buscador de Servicios -> Filtrado por síntomas -> Botones de filtro dinámico -> JS Vanilla.
@@ -171,7 +170,7 @@
                                         Conozca a Nuestro Equipo Médico
                                     </h2>
                                     <p data-i18n="hero_slide_team_desc" class="text-stone-300 text-base md:text-lg leading-relaxed mt-4">
-                                        Dos especialistas dedicados listos para cuidar de usted y su familia.
+                                        Nuestra médica de cabecera, lista para cuidar de usted y su familia.
                                     </p>
                                 </div>
                                 <div class="hidden sm:flex w-24 h-24 md:w-28 md:h-28 rounded-full bg-medical-600 text-white items-center justify-center text-4xl md:text-5xl shadow-lg shrink-0">
@@ -332,7 +331,7 @@
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div class="grid grid-cols-1 gap-8 items-start max-w-2xl mx-auto">
 
                     <!-- Doctor Card 1: Dr. Celia Yamile Rodriguez -->
                     <div class="bg-white rounded-2xl shadow-md border border-stone-200 overflow-hidden">
@@ -374,50 +373,6 @@
                             <div class="flex items-center justify-between pt-4 border-t border-stone-200">
                                 <span data-i18n="doc1_schedule" class="text-sm text-slate-500"><i class="fa-solid fa-stethoscope text-medical-600 mr-1"></i> Atiende en Medicina Familiar y Prenatal</span>
                                 <a href="#reserva" onclick="preselectDoctor('Dra. Celia Yamile Rodriguez')" data-i18n="doc1_btn" class="bg-medical-600 hover:bg-medical-700 text-white font-semibold text-sm px-4 py-2 rounded-lg transition">Agendar con Dra. Rodriguez</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Doctor Card 2: Dr. Moses Ofosu Amoako -->
-                    <div class="bg-white rounded-2xl shadow-md border border-stone-200 overflow-hidden">
-                        <button type="button" onclick="toggleDoctorCard(this)" class="w-full flex items-center justify-between gap-4 p-6 md:p-8 text-left">
-                            <div class="flex items-center gap-4 min-w-0">
-                                <div class="w-16 h-16 rounded-full bg-slate-800 text-white flex items-center justify-center text-2xl font-bold shadow shrink-0">
-                                    <i class="fa-solid fa-user-doctor"></i>
-                                </div>
-                                <div class="min-w-0">
-                                    <h4 class="text-xl font-bold text-brandDark">Dr. Moses Ofosu Amoako</h4>
-                                    <p data-i18n="doc2_spec" class="text-sm text-slate-500">Especialista en Medicina Ocupacional y Metabólica</p>
-                                </div>
-                            </div>
-                            <i class="fa-solid fa-chevron-down text-slate-400 transition-transform shrink-0 doctor-chevron"></i>
-                        </button>
-
-                        <div class="doctor-details hidden px-6 md:px-8 pb-6 md:pb-8">
-                            <div class="flex items-center justify-between gap-4 mb-4">
-                                <p data-i18n="doc2_role" class="text-sm font-semibold text-medical-600">MÉDICO CONSULTOR Y ESPECIALISTA</p>
-                                <span class="bg-emerald-100 text-emerald-800 text-sm px-2.5 py-1 rounded-full font-bold shrink-0">HeFRA Reg.</span>
-                            </div>
-
-                            <p data-i18n="doc2_bio" class="text-slate-600 text-sm leading-relaxed mb-4">
-                                Vinculado académicamente a la Universidad Kwame Nkrumah de Ciencia y Tecnología (KNUST) y al Komfo Anokye Teaching Hospital, el Dr. Amoako aporta liderazgo científico en la prevención de síndromes metabólicos y enfermedades crónicas.
-                            </p>
-
-                            <!-- Academic Research Highlights Collapsible -->
-                            <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 text-sm space-y-2 mb-6">
-                                <p data-i18n="research_title" class="font-bold text-brandDark flex items-center gap-2">
-                                    <i class="fa-solid fa-microscope text-medical-600"></i> Investigaciones Clave Publicadas:
-                                </p>
-                                <ul class="list-disc list-inside text-slate-600 space-y-1.5">
-                                    <li><strong data-i18n="doc2_r1_t">Riesgo Cardiometabólico (JHPN):</strong> <span data-i18n="doc2_r1_d">Análisis de dieta occidentalizada, obesidad abdominal y marcadores de estrés.</span></li>
-                                    <li><strong data-i18n="doc2_r2_t">Biomarcadores Hepáticos (AST/ALT):</strong> <span data-i18n="doc2_r2_d">Relación entre patrones alimentarios, acumulación lipídica y función del hígado.</span></li>
-                                    <li><strong data-i18n="doc2_r3_t">Inseguridad Alimentaria:</strong> <span data-i18n="doc2_r3_d">Impacto de factores nutricionales en la anemia y presión en adultos jóvenes.</span></li>
-                                </ul>
-                            </div>
-
-                            <div class="flex items-center justify-between pt-4 border-t border-stone-200">
-                                <span data-i18n="doc2_schedule" class="text-sm text-slate-500"><i class="fa-solid fa-heart-pulse text-indigo-600 mr-1"></i> Consulta Crónica y Ocupacional</span>
-                                <a href="#reserva" onclick="preselectDoctor('Dr. Moses Ofosu Amoako')" data-i18n="doc2_btn" class="bg-brandDark hover:bg-slate-800 text-white font-semibold text-sm px-4 py-2 rounded-lg transition">Agendar con Dr. Amoako</a>
                             </div>
                         </div>
                     </div>
@@ -553,6 +508,76 @@
                 </div>
 
             </div>
+
+            <!-- Departments & Services (official facility structure) -->
+            <div class="mt-16 pt-16 border-t border-stone-200">
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <h2 data-i18n="depts_subtitle" class="text-sm font-bold text-medical-600 uppercase tracking-widest mb-2">Estructura del Centro</h2>
+                    <h3 data-i18n="depts_title" class="text-3xl font-extrabold text-brandDark">Departamentos y Servicios</h3>
+                    <p data-i18n="depts_desc" class="text-slate-600 mt-2 text-sm md:text-base">
+                        Panorama completo de los departamentos del centro. Los detalles de horarios y disponibilidad se irán actualizando.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Clinical Services -->
+                    <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+                        <div class="w-11 h-11 rounded-lg bg-teal-100 text-teal-700 flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-stethoscope"></i>
+                        </div>
+                        <h4 data-i18n="depts_clinical_title" class="text-lg font-bold text-brandDark mb-3">Servicios Clínicos</h4>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li data-i18n="dept_general_medicine">Medicina General</li>
+                            <li data-i18n="dept_general_surgery">Cirugía General</li>
+                            <li data-i18n="dept_obgyn">Obstetricia y Ginecología</li>
+                            <li data-i18n="dept_paediatrics">Pediatría</li>
+                            <li data-i18n="dept_emergency">Urgencias y Emergencias</li>
+                            <li data-i18n="dept_orthopaedics">Ortopedia (limitado)</li>
+                            <li data-i18n="dept_ophthalmology">Oftalmología (visitas externas)</li>
+                            <li data-i18n="dept_ent">Otorrinolaringología (limitado)</li>
+                            <li data-i18n="dept_dental">Odontología (limitado)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Support Services -->
+                    <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+                        <div class="w-11 h-11 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-kit-medical"></i>
+                        </div>
+                        <h4 data-i18n="depts_support_title" class="text-lg font-bold text-brandDark mb-3">Servicios de Apoyo</h4>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li data-i18n="dept_laboratory">Laboratorio</li>
+                            <li data-i18n="dept_pharmacy">Farmacia</li>
+                            <li data-i18n="dept_radiology">Radiología / Ecografía</li>
+                            <li data-i18n="dept_physiotherapy">Fisioterapia (limitado)</li>
+                            <li data-i18n="dept_nutrition">Dietética y Nutrición</li>
+                            <li data-i18n="dept_records">Registros Médicos</li>
+                            <li data-i18n="dept_housekeeping">Lavandería y Limpieza</li>
+                            <li data-i18n="dept_maintenance">Mantenimiento e Ingeniería</li>
+                            <li data-i18n="dept_ambulance">Ambulancia y Transporte</li>
+                        </ul>
+                    </div>
+
+                    <!-- Community & Primary Health Care -->
+                    <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm">
+                        <div class="w-11 h-11 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-people-group"></i>
+                        </div>
+                        <h4 data-i18n="depts_community_title" class="text-lg font-bold text-brandDark mb-3">Comunidad y Atención Primaria</h4>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li data-i18n="dept_antenatal">Atención Prenatal (ANC)</li>
+                            <li data-i18n="dept_child_welfare">Consulta de Bienestar Infantil</li>
+                            <li data-i18n="dept_outreach">Alcance Comunitario</li>
+                            <li data-i18n="dept_immunisation">Inmunización / PAI</li>
+                            <li data-i18n="dept_family_planning">Planificación Familiar</li>
+                            <li data-i18n="dept_health_education">Educación en Salud</li>
+                            <li data-i18n="dept_tb_dots">Programa TB / DOTS</li>
+                            <li data-i18n="dept_hiv">Clínica VIH/SIDA</li>
+                            <li data-i18n="dept_malaria">Control de Malaria</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Interactive Patient Tools: NHIS Checker & Cardiometabolic Calculator -->
@@ -602,7 +627,7 @@
                     </div>
                 </div>
 
-                <!-- Tool 2: Cardiometabolic Risk Assessment (Based on Dr. Amoako's Research) -->
+                <!-- Tool 2: Cardiometabolic Risk Assessment -->
                 <div class="bg-white p-6 md:p-8 rounded-2xl border border-stone-200 shadow-sm">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-10 h-10 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">
@@ -610,7 +635,7 @@
                         </div>
                         <div>
                             <h4 data-i18n="calc_tool_title" class="text-lg font-bold text-brandDark">Evaluador de Riesgo Metabólico</h4>
-                            <p data-i18n="calc_tool_subtitle" class="text-sm text-slate-500">Basado en hallazgos de investigación del Dr. Amoako</p>
+                            <p data-i18n="calc_tool_subtitle" class="text-sm text-slate-500">Basado en criterios clínicos estándar de obesidad abdominal</p>
                         </div>
                     </div>
 
@@ -658,25 +683,9 @@
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="grid grid-cols-1 gap-8 items-center max-w-xl mx-auto">
 
-                    <!-- Chart 1: Cardiometabolic Indicators -->
-                    <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
-                        <div>
-                            <h4 data-i18n="c1_title" class="text-lg font-bold text-brandDark mb-1">Prevalencia Cardiometabólica en el Norte de Ghana</h4>
-                            <p data-i18n="c1_desc" class="text-sm text-slate-500 mb-4">Datos extraídos de publicaciones de investigación del Dr. Amoako y colaboradores.</p>
-                            
-                            <!-- Chart Canvas Container -->
-                            <div class="chart-container">
-                                <canvas id="metabolicChart"></canvas>
-                            </div>
-                        </div>
-                        <p data-i18n="c1_note" class="text-sm text-slate-500 mt-4 italic bg-stone-50 p-2.5 rounded-lg border border-stone-200">
-                            Nota: La alta frecuencia de obesidad abdominal (57.1%) fundamenta la necesidad de los chequeos preventivos en la clínica.
-                        </p>
-                    </div>
-
-                    <!-- Chart 2: Bawku West Demographics -->
+                    <!-- Chart: Bawku West Demographics -->
                     <div class="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between">
                         <div>
                             <h4 data-i18n="c2_title" class="text-lg font-bold text-brandDark mb-1">Distribución Demográfica de Bawku West</h4>
@@ -719,22 +728,6 @@
                     </div>
                     <div class="px-6 pb-6 pt-0">
                         <button onclick="openBlogModal('hepB')" data-i18n="read_article_btn" class="text-sm font-bold text-medical-600 hover:text-medical-800 flex items-center gap-1">
-                            Leer Artículo Completo <i class="fa-solid fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </article>
-
-                <!-- Article 2 -->
-                <article class="bg-white rounded-xl border border-stone-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between">
-                    <div class="p-6">
-                        <span data-i18n="a2_tag" class="text-sm font-bold text-indigo-700 bg-indigo-100 px-2.5 py-1 rounded-md">Salud Cardiovascular</span>
-                        <h4 data-i18n="a2_title" class="text-lg font-bold text-brandDark mt-3">Hipertensión, Estrés Laboral y Dieta</h4>
-                        <p data-i18n="a2_desc" class="text-slate-600 text-sm mt-2 leading-relaxed">
-                            Derivado de los hallazgos del Dr. Amoako. Explicación de cómo los patrones alimentarios occidentalizados y el estrés diario incrementan la presión arterial.
-                        </p>
-                    </div>
-                    <div class="px-6 pb-6 pt-0">
-                        <button onclick="openBlogModal('hipertension')" data-i18n="read_article_btn" class="text-sm font-bold text-medical-600 hover:text-medical-800 flex items-center gap-1">
                             Leer Artículo Completo <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
@@ -826,7 +819,6 @@
                                 <select id="doctorSelect" class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                                     <option value="Cualquier Especialista Disponible" data-en="Any Available Specialist" data-i18n="doc_opt_any">Cualquier Especialista Disponible</option>
                                     <option value="Dra. Celia Yamile Rodriguez" data-en="Dr. Celia Yamile Rodriguez (Family Medicine / Antenatal)" data-i18n="doc_opt_celia">Dra. Celia Yamile Rodriguez (Med. Familiar / Prenatal)</option>
-                                    <option value="Dr. Moses Ofosu Amoako" data-en="Dr. Moses Ofosu Amoako (Metabolic / Chronic Health)" data-i18n="doc_opt_moses">Dr. Moses Ofosu Amoako (Salud Metabólica / Crónica)</option>
                                 </select>
                             </div>
                             <div>
@@ -1032,7 +1024,7 @@
                 hero_slide_triage_title: "Triaje Rápido de Síntomas en Segundos",
                 hero_slide_triage_desc: "Seleccione su motivo de consulta y reciba indicación inmediata de a dónde acudir.",
                 hero_slide_team_title: "Conozca a Nuestro Equipo Médico",
-                hero_slide_team_desc: "Dos especialistas dedicados listos para cuidar de usted y su familia.",
+                hero_slide_team_desc: "Nuestra médica de cabecera, lista para cuidar de usted y su familia.",
                 hero_slide_stats_title: "Datos de Salud Regional",
                 hero_slide_stats_desc: "Vea datos reales de salud de Bawku West y la Región Alta Oriental.",
                 hero_slide_nhis_title: "Verifique su Cobertura NHIS",
@@ -1106,6 +1098,40 @@
                 s6_b1: "Certificados de aptitud médica",
                 s6_b2: "Plan nutricional laboral",
 
+                depts_subtitle: "Estructura del Centro",
+                depts_title: "Departamentos y Servicios",
+                depts_desc: "Panorama completo de los departamentos del centro. Los detalles de horarios y disponibilidad se irán actualizando.",
+                depts_clinical_title: "Servicios Clínicos",
+                depts_support_title: "Servicios de Apoyo",
+                depts_community_title: "Comunidad y Atención Primaria",
+                dept_general_medicine: "Medicina General",
+                dept_general_surgery: "Cirugía General",
+                dept_obgyn: "Obstetricia y Ginecología",
+                dept_paediatrics: "Pediatría",
+                dept_emergency: "Urgencias y Emergencias",
+                dept_orthopaedics: "Ortopedia (limitado)",
+                dept_ophthalmology: "Oftalmología (visitas externas)",
+                dept_ent: "Otorrinolaringología (limitado)",
+                dept_dental: "Odontología (limitado)",
+                dept_laboratory: "Laboratorio",
+                dept_pharmacy: "Farmacia",
+                dept_radiology: "Radiología / Ecografía",
+                dept_physiotherapy: "Fisioterapia (limitado)",
+                dept_nutrition: "Dietética y Nutrición",
+                dept_records: "Registros Médicos",
+                dept_housekeeping: "Lavandería y Limpieza",
+                dept_maintenance: "Mantenimiento e Ingeniería",
+                dept_ambulance: "Ambulancia y Transporte",
+                dept_antenatal: "Atención Prenatal (ANC)",
+                dept_child_welfare: "Consulta de Bienestar Infantil",
+                dept_outreach: "Alcance Comunitario",
+                dept_immunisation: "Inmunización / PAI",
+                dept_family_planning: "Planificación Familiar",
+                dept_health_education: "Educación en Salud",
+                dept_tb_dots: "Programa TB / DOTS",
+                dept_hiv: "Clínica VIH/SIDA",
+                dept_malaria: "Control de Malaria",
+
                 team_subtitle: "Liderazgo Médico e Investigación",
                 team_title: "Excelencia Académica al Servicio de Zebilla",
                 team_desc: "Esta sección destaca a los profesionales médicos responsables de la dirección clínica y consultiva del centro. Su labor investigativa garantiza tratamientos basados en la evidencia científica adaptados al norte de Ghana.",
@@ -1115,11 +1141,6 @@
                 doc1_schedule: "Atiende en Medicina Familiar y Prenatal",
                 doc1_btn: "Agendar con Dra. Rodriguez",
 
-                doc2_role: "MÉDICO CONSULTOR Y ESPECIALISTA",
-                doc2_spec: "Especialista en Medicina Ocupacional y Metabólica",
-                doc2_bio: "Vinculado académicamente a la Universidad Kwame Nkrumah de Ciencia y Tecnología (KNUST) y al Komfo Anokye Teaching Hospital, el Dr. Amoako aporta liderazgo científico en la prevención de síndromes metabólicos y enfermedades crónicas.",
-                doc2_schedule: "Consulta Crónica y Ocupacional",
-                doc2_btn: "Agendar con Dr. Amoako",
 
                 research_title: "Investigaciones Clave Publicadas:",
                 doc1_r1_t: "Hepatitis B en el Norte de Ghana (2025):",
@@ -1129,12 +1150,6 @@
                 doc1_r3_t: "Salud Materna:",
                 doc1_r3_d: "Factores de riesgo asociados a la anemia en mujeres gestantes en clínicas prenatales.",
 
-                doc2_r1_t: "Riesgo Cardiometabólico (JHPN):",
-                doc2_r1_d: "Análisis de dieta occidentalizada, obesidad abdominal y marcadores de estrés.",
-                doc2_r2_t: "Biomarcadores Hepáticos (AST/ALT):",
-                doc2_r2_d: "Relación entre patrones alimentarios, acumulación lipídica y función del hígado.",
-                doc2_r3_t: "Inseguridad Alimentaria:",
-                doc2_r3_d: "Impacto de factores nutricionales en la anemia y presión en adultos jóvenes.",
 
                 tools_subtitle: "Herramientas Interactivas para el Paciente",
                 tools_title: "Transparencia de Tarifas e Indicadores de Salud",
@@ -1152,7 +1167,7 @@
                 nhis_opt_5: "Control y Seguimiento de Hipertensión",
 
                 calc_tool_title: "Evaluador de Riesgo Metabólico",
-                calc_tool_subtitle: "Basado en hallazgos de investigación del Dr. Amoako",
+                calc_tool_subtitle: "Basado en criterios clínicos estándar de obesidad abdominal",
                 calc_label_gender: "Género",
                 calc_gender_m: "Hombre",
                 calc_gender_f: "Mujer",
@@ -1165,9 +1180,6 @@
                 stats_subtitle: "Datos y Contexto de Salud",
                 stats_title: "Panorámica Demográfica y Epidemiológica",
                 stats_desc: "Esta sección presenta datos visuales cuantitativos derivados de los análisis demográficos del distrito de Bawku West y de las investigaciones científicas publicadas por el liderazgo del centro.",
-                c1_title: "Prevalencia Cardiometabólica en el Norte de Ghana",
-                c1_desc: "Datos extraídos de publicaciones de investigación del Dr. Amoako y colaboradores.",
-                c1_note: "Nota: La alta frecuencia de obesidad abdominal (57.1%) fundamenta la necesidad de los chequeos preventivos en la clínica.",
                 c2_title: "Distribución Demográfica de Bawku West",
                 c2_desc: "Población total: 144,189 habitantes (Censo Oficial - 2,714 km²).",
                 c2_note: "El 84.9% de residentes en zonas rurales requiere que la web actúe como un canal claro de verificación de servicios antes del viaje a Zebilla.",
@@ -1178,9 +1190,6 @@
                 a1_tag: "Salud Hepática",
                 a1_title: "Prevención de la Hepatitis B en la Región Oriental",
                 a1_desc: "Basado en el estudio de la Dra. Rodriguez (2025). Conozca cómo el virus afecta al hígado, las vías de transmisión y la importancia de la vacunación temprana.",
-                a2_tag: "Salud Cardiovascular",
-                a2_title: "Hipertensión, Estrés Laboral y Dieta",
-                a2_desc: "Derivado de los hallazgos del Dr. Amoako. Explicación de cómo los patrones alimentarios occidentalizados y el estrés diario incrementan la presión arterial.",
                 a3_tag: "Salud Materna",
                 a3_title: "Combatiendo la Anemia en el Embarazo",
                 a3_desc: "Guía para madres sobre la suplementación de hierro, los alimentos locales ricos en nutrientes y el seguimiento prenata oportuno en el centro.",
@@ -1197,7 +1206,6 @@
                 form_label_doctor: "Especialista Preferido",
                 doc_opt_any: "Cualquier Especialista Disponible",
                 doc_opt_celia: "Dra. Celia Yamile Rodriguez (Med. Familiar / Prenatal)",
-                doc_opt_moses: "Dr. Moses Ofosu Amoako (Salud Metabólica / Crónica)",
                 form_label_nhis: "¿Posee Seguro NHIS Activo? *",
                 nhis_opt_yes: "Sí - Carnet NHIS Activo",
                 nhis_opt_no: "No / Pago Particular",
@@ -1262,7 +1270,7 @@
                 hero_slide_triage_title: "Quick Symptom Triage in Seconds",
                 hero_slide_triage_desc: "Select your main reason for visit and get instant guidance on where to go.",
                 hero_slide_team_title: "Meet Our Medical Team",
-                hero_slide_team_desc: "Two dedicated specialists ready to care for you and your family.",
+                hero_slide_team_desc: "Our family physician, ready to care for you and your family.",
                 hero_slide_stats_title: "Regional Health Insights",
                 hero_slide_stats_desc: "See real health data for Bawku West and the Upper East Region.",
                 hero_slide_nhis_title: "Check Your NHIS Coverage",
@@ -1336,6 +1344,40 @@
                 s6_b1: "Medical fitness certificates",
                 s6_b2: "Workplace nutritional planning",
 
+                depts_subtitle: "Facility Structure",
+                depts_title: "Departments & Services",
+                depts_desc: "A full overview of the centre's departments. Hours and availability details will be added as they're confirmed.",
+                depts_clinical_title: "Clinical Services",
+                depts_support_title: "Support Services",
+                depts_community_title: "Community & Primary Health Care",
+                dept_general_medicine: "General Medicine",
+                dept_general_surgery: "General Surgery",
+                dept_obgyn: "Obstetrics & Gynaecology",
+                dept_paediatrics: "Paediatrics",
+                dept_emergency: "Accident & Emergency",
+                dept_orthopaedics: "Orthopaedics (limited)",
+                dept_ophthalmology: "Ophthalmology (outreach)",
+                dept_ent: "ENT (limited)",
+                dept_dental: "Dental (limited)",
+                dept_laboratory: "Laboratory Services",
+                dept_pharmacy: "Pharmacy",
+                dept_radiology: "Radiology / Ultrasound",
+                dept_physiotherapy: "Physiotherapy (limited)",
+                dept_nutrition: "Dietary / Nutrition",
+                dept_records: "Medical Records",
+                dept_housekeeping: "Laundry / Housekeeping",
+                dept_maintenance: "Maintenance / Engineering",
+                dept_ambulance: "Ambulance / Transport",
+                dept_antenatal: "Antenatal Care (ANC)",
+                dept_child_welfare: "Child Welfare Clinic",
+                dept_outreach: "Community Outreach",
+                dept_immunisation: "Immunisation / EPI",
+                dept_family_planning: "Family Planning",
+                dept_health_education: "Health Education",
+                dept_tb_dots: "TB / DOTS Programme",
+                dept_hiv: "HIV/AIDS Clinic",
+                dept_malaria: "Malaria Control",
+
                 team_subtitle: "Medical Leadership & Research",
                 team_title: "Academic Excellence Serving Zebilla",
                 team_desc: "This section highlights the medical practitioners leading clinical care at the centre. Their research guarantees evidence-based treatments adapted to Northern Ghana.",
@@ -1345,11 +1387,6 @@
                 doc1_schedule: "Attends Family Medicine & Antenatal Clinic",
                 doc1_btn: "Book with Dr. Rodriguez",
 
-                doc2_role: "CONSULTANT PHYSICIAN & SPECIALIST",
-                doc2_spec: "Specialist in Occupational & Metabolic Medicine",
-                doc2_bio: "Academically affiliated with Kwame Nkrumah University of Science and Technology (KNUST) and Komfo Anokye Teaching Hospital, Dr. Amoako leads scientific efforts in metabolic syndrome and chronic disease prevention.",
-                doc2_schedule: "Chronic & Occupational Care",
-                doc2_btn: "Book with Dr. Amoako",
 
                 research_title: "Key Published Research:",
                 doc1_r1_t: "Hepatitis B in Northern Ghana (2025):",
@@ -1359,12 +1396,6 @@
                 doc1_r3_t: "Maternal Health:",
                 doc1_r3_d: "Risk factors associated with anaemia among pregnant women attending antenatal clinics.",
 
-                doc2_r1_t: "Cardiometabolic Risk (JHPN):",
-                doc2_r1_d: "Analysis of westernized diet, abdominal obesity, and stress biomarkers.",
-                doc2_r2_t: "Hepatic Biomarkers (AST/ALT):",
-                doc2_r2_d: "Association between dietary patterns, lipid accumulation, and liver function.",
-                doc2_r3_t: "Food Insecurity:",
-                doc2_r3_d: "Impact of nutritional factors on blood pressure and anaemia in young adults.",
 
                 tools_subtitle: "Interactive Patient Tools",
                 tools_title: "Tariff Transparency & Health Indicators",
@@ -1382,7 +1413,7 @@
                 nhis_opt_5: "Hypertension Monitoring & Management",
 
                 calc_tool_title: "Metabolic Risk Evaluator",
-                calc_tool_subtitle: "Based on research findings by Dr. Amoako",
+                calc_tool_subtitle: "Based on standard abdominal obesity clinical criteria",
                 calc_label_gender: "Gender",
                 calc_gender_m: "Male",
                 calc_gender_f: "Female",
@@ -1395,9 +1426,6 @@
                 stats_subtitle: "Health Context & Data",
                 stats_title: "Demographic & Epidemiological Overview",
                 stats_desc: "This section presents quantitative data from Bawku West demographic analyses and published peer-reviewed medical research from our medical leadership.",
-                c1_title: "Cardiometabolic Prevalence in Northern Ghana",
-                c1_desc: "Data extracted from published studies by Dr. Amoako and collaborators.",
-                c1_note: "Note: The high frequency of abdominal obesity (57.1%) underscores the need for routine preventive checkups at the clinic.",
                 c2_title: "Demographic Distribution of Bawku West",
                 c2_desc: "Total Population: 144,189 residents (Official Census - 2,714 km²).",
                 c2_note: "84.9% of residents live in rural areas, making our website a crucial service verification portal before traveling to Zebilla.",
@@ -1408,9 +1436,6 @@
                 a1_tag: "Liver Health",
                 a1_title: "Hepatitis B Prevention in Upper East Region",
                 a1_desc: "Based on research by Dr. Rodriguez (2025). Learn how the virus affects liver health, transmission routes, and the importance of early vaccination.",
-                a2_tag: "Cardiovascular Health",
-                a2_title: "Hypertension, Occupational Stress & Diet",
-                a2_desc: "Derived from Dr. Amoako's published findings. Explaining how westernized dietary habits and daily stress increase blood pressure.",
                 a3_tag: "Maternal Health",
                 a3_title: "Combating Anaemia in Pregnancy",
                 a3_desc: "A mother's guide to iron supplementation, nutrient-dense local foods, and timely antenatal checkups at the medical centre.",
@@ -1427,7 +1452,6 @@
                 form_label_doctor: "Preferred Specialist",
                 doc_opt_any: "Any Available Specialist",
                 doc_opt_celia: "Dr. Celia Yamile Rodriguez (Family Medicine / Antenatal)",
-                doc_opt_moses: "Dr. Moses Ofosu Amoako (Metabolic / Chronic Health)",
                 form_label_nhis: "Active NHIS Card? *",
                 nhis_opt_yes: "Yes - Active NHIS Card",
                 nhis_opt_no: "No / Private Payment",
@@ -1477,7 +1501,6 @@
         // Default to Spanish only if the device/browser language is Spanish; otherwise English.
         const detectedLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase().startsWith('es') ? 'es' : 'en';
         let currentLang = 'es';
-        let metabolicChartInstance = null;
         let demographicsChartInstance = null;
         let lastTriageType = null;
         let lastBlogType = null;
@@ -1575,7 +1598,6 @@
 
             if (sectionId === 'estadisticas') {
                 requestAnimationFrame(() => {
-                    if (metabolicChartInstance) metabolicChartInstance.resize();
                     if (demographicsChartInstance) demographicsChartInstance.resize();
                 });
             }
@@ -1612,7 +1634,7 @@
                 } else if (type === 'tb') {
                     res.innerHTML = `<strong><i class="fa-solid fa-lungs"></i> Indicación:</strong> Diríjase a la Unidad DOT para Tuberculosis. Las pruebas de esputo y los esquemas de tratamiento cuentan con subsidio oficial del Estado. Confidencialidad garantizada.`;
                 } else if (type === 'metabolic') {
-                    res.innerHTML = `<strong><i class="fa-solid fa-heart-pulse"></i> Indicación:</strong> Agende una evaluación cardiometabólica. Se recomienda ayuno previo para toma de perfil lipídico y glucosa bajo orientación supervisada por el Dr. Moses Amoako.`;
+                    res.innerHTML = `<strong><i class="fa-solid fa-heart-pulse"></i> Indicación:</strong> Agende una evaluación cardiometabólica. Se recomienda ayuno previo para toma de perfil lipídico y glucosa bajo orientación de nuestro equipo médico.`;
                 }
             } else {
                 if (type === 'general') {
@@ -1622,7 +1644,7 @@
                 } else if (type === 'tb') {
                     res.innerHTML = `<strong><i class="fa-solid fa-lungs"></i> Guidance:</strong> Proceed directly to the TB DOT Unit. Sputum microscopy tests and medications are state-subsidized and confidential.`;
                 } else if (type === 'metabolic') {
-                    res.innerHTML = `<strong><i class="fa-solid fa-heart-pulse"></i> Guidance:</strong> Schedule a cardiometabolic assessment. Fasting prior to your visit is recommended for lipid and glucose profile checks supervised by Dr. Moses Amoako.`;
+                    res.innerHTML = `<strong><i class="fa-solid fa-heart-pulse"></i> Guidance:</strong> Schedule a cardiometabolic assessment. Fasting prior to your visit is recommended for lipid and glucose profile checks with our medical team.`;
                 }
             }
         }
@@ -1837,7 +1859,7 @@
             }
         }
 
-        // Cardiometabolic Risk Calculator (Based on Dr. Amoako's Study)
+        // Cardiometabolic Risk Calculator (abdominal obesity clinical criteria)
         function calculateMetabolicRisk() {
             const gender = document.getElementById('calcGender').value;
             const waist = parseFloat(document.getElementById('calcWaist').value);
@@ -1859,10 +1881,10 @@
                 res.className = 'mt-4 p-4 rounded-xl border text-sm bg-amber-50 border-amber-200 text-amber-900';
                 if (currentLang === 'es') {
                     res.innerHTML = `<p class="font-bold text-sm mb-1"><i class="fa-solid fa-triangle-exclamation"></i> Indicadores de Atención Cardiometabólica Detectados</p>
-                    <p>Su medición indica posible presencia de obesidad abdominal o tensión elevada (condición presente en el 57.1% de pacientes evaluados en estudios regionales del Dr. Amoako). Le recomendamos agendar un chequeo preventivo para medir perfil hepático (AST/ALT), lípidos y glucosa en sangre.</p>`;
+                    <p>Su medición indica posible presencia de obesidad abdominal o tensión elevada. Le recomendamos agendar un chequeo preventivo para medir perfil hepático (AST/ALT), lípidos y glucosa en sangre.</p>`;
                 } else {
                     res.innerHTML = `<p class="font-bold text-sm mb-1"><i class="fa-solid fa-triangle-exclamation"></i> Cardiometabolic Attention Indicators Detected</p>
-                    <p>Your measurements indicate abdominal obesity or elevated blood pressure (observed in 57.1% of patients in regional studies led by Dr. Amoako). We recommend booking a preventive checkup for liver enzyme ratios (AST/ALT), lipid profile, and blood glucose testing.</p>`;
+                    <p>Your measurements indicate possible abdominal obesity or elevated blood pressure. We recommend booking a preventive checkup for liver enzyme ratios (AST/ALT), lipid profile, and blood glucose testing.</p>`;
                 }
             } else {
                 res.className = 'mt-4 p-4 rounded-xl border text-sm bg-emerald-50 border-emerald-200 text-emerald-900';
@@ -1911,36 +1933,6 @@
                                 <li><strong>Serological Screening:</strong> A rapid blood test at Naaba Akparabilla Medical Centre confirms your status.</li>
                                 <li><strong>Vaccination Routine:</strong> Highly effective immunization for non-infected individuals.</li>
                                 <li><strong>Mother-to-Child Prevention:</strong> Essential antenatal screening to prevent vertical transmission during delivery.</li>
-                            </ul>
-                        </div>
-                    `;
-                }
-            } else if (type === 'hipertension') {
-                if (currentLang === 'es') {
-                    container.innerHTML = `
-                        <span class="text-sm font-bold text-indigo-700 bg-indigo-100 px-2.5 py-1 rounded-md">Salud Ocupacional</span>
-                        <h3 class="text-2xl font-bold text-brandDark mt-3 mb-2">Hipertensión y Síndrome Metabólico: El Vínculo con el Estrés</h3>
-                        <p class="text-sm text-slate-500 mb-4">Basado en las publicaciones científicas del Dr. Moses Ofosu Amoako</p>
-                        <div class="text-sm text-slate-700 space-y-3 leading-relaxed">
-                            <p>Los estudios publicados en el <em>Journal of Health Population and Nutrition</em> revelan una prevalencia del 11.0% de síndrome metabólico, con un 29.7% de hipertensión arterial y un 57.1% de adiposidad abdominal en trabajadores expuestos a estrés.</p>
-                            <p><strong>Factores Clave identificados:</strong></p>
-                            <ul class="list-disc list-inside space-y-1">
-                                <li><strong>Adopción de Dieta Occidental:</strong> Sustituir alimentos frescos por procesados eleva marcadores de alteración hepática (AST/ALT).</li>
-                                <li><strong>Estrés Laboral Sostenido:</strong> Mantiene el cortisol elevado, rigidizando arterias y aumentando la presión arterial.</li>
-                            </ul>
-                        </div>
-                    `;
-                } else {
-                    container.innerHTML = `
-                        <span class="text-sm font-bold text-indigo-700 bg-indigo-100 px-2.5 py-1 rounded-md">Occupational Health</span>
-                        <h3 class="text-2xl font-bold text-brandDark mt-3 mb-2">Hypertension & Metabolic Syndrome: The Stress Connection</h3>
-                        <p class="text-sm text-slate-500 mb-4">Based on peer-reviewed research by Dr. Moses Ofosu Amoako</p>
-                        <div class="text-sm text-slate-700 space-y-3 leading-relaxed">
-                            <p>Research in the <em>Journal of Health Population and Nutrition</em> highlights an 11.0% prevalence of metabolic syndrome, 29.7% hypertension rate, and 57.1% abdominal adiposity among working populations in Ghana.</p>
-                            <p><strong>Key Contributing Factors:</strong></p>
-                            <ul class="list-disc list-inside space-y-1">
-                                <li><strong>Westernized Dietary Habits:</strong> Higher intake of processed foods alters liver enzyme ratios (AST/ALT).</li>
-                                <li><strong>Occupational Stress:</strong> Chronically elevated cortisol levels contribute to arterial stiffness and hypertension.</li>
                             </ul>
                         </div>
                     `;
@@ -2145,87 +2137,20 @@
 
         // Update Chart Labels on Language Switch
         function updateChartsLanguage() {
-            if (!metabolicChartInstance || !demographicsChartInstance) return;
+            if (!demographicsChartInstance) return;
 
             if (currentLang === 'es') {
-                metabolicChartInstance.data.labels = [
-                    ['Obesidad', 'Abdominal'],
-                    ['Hipertensión', 'Arterial'],
-                    ['Síndrome', 'Metabólico']
-                ];
-                metabolicChartInstance.data.datasets[0].label = 'Prevalencia (%)';
-
                 demographicsChartInstance.data.labels = ['Población Rural (84.9%)', 'Población Urbana (15.1%)'];
             } else {
-                metabolicChartInstance.data.labels = [
-                    ['Abdominal', 'Obesity'],
-                    ['Arterial', 'Hypertension'],
-                    ['Metabolic', 'Syndrome']
-                ];
-                metabolicChartInstance.data.datasets[0].label = 'Prevalence (%)';
-
                 demographicsChartInstance.data.labels = ['Rural Population (84.9%)', 'Urban Population (15.1%)'];
             }
 
-            metabolicChartInstance.update();
             demographicsChartInstance.update();
         }
 
         // Initialize Chart.js Data Visualizations
         window.addEventListener('DOMContentLoaded', () => {
-            // Chart 1: Metabolic Indicators
-            const ctx1 = document.getElementById('metabolicChart').getContext('2d');
-            metabolicChartInstance = new Chart(ctx1, {
-                type: 'bar',
-                data: {
-                    labels: [
-                        ['Obesidad', 'Abdominal'],
-                        ['Hipertensión', 'Arterial'],
-                        ['Síndrome', 'Metabólico']
-                    ],
-                    datasets: [{
-                        label: 'Prevalencia (%)',
-                        data: [57.1, 29.7, 11.0],
-                        backgroundColor: [
-                            'rgba(13, 148, 136, 0.85)',
-                            'rgba(30, 41, 59, 0.85)',
-                            'rgba(217, 119, 6, 0.85)'
-                        ],
-                        borderColor: [
-                            '#0d9488',
-                            '#1e293b',
-                            '#d97706'
-                        ],
-                        borderWidth: 1.5,
-                        borderRadius: 6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return ' ' + context.dataset.label + ': ' + context.raw + '%';
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 70,
-                            ticks: {
-                                callback: function(value) { return value + '%'; }
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Chart 2: Bawku West Demographics
+            // Bawku West Demographics
             const ctx2 = document.getElementById('demographicsChart').getContext('2d');
             demographicsChartInstance = new Chart(ctx2, {
                 type: 'doughnut',
